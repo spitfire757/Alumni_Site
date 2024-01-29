@@ -39,10 +39,6 @@
         <div>
             <h1>Social Media</h1>
         </div>
-        <div>
-            <iframe src="https://www.facebook.com/groups/217512201641623/media"
-            
-        </div>
     </body>
     
 </html>
