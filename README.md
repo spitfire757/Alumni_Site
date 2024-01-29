@@ -1,6 +1,6 @@
 # Alumni_Site
 Members -
-Brendan, Aj, Nehemie
+Brendan, Aj, Nehemie, Brayden
 
 
 After cloning: 
