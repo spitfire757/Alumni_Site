@@ -4,15 +4,12 @@
         testing
     </head>
     <body>
-        <?php
-            echo "hello world";
-        ?>
         <div>
             <nav>
                 <table>
                     <tr>
                         <td>
-                            <img src = "images/christopher-newport-university-jerry-gammon.jpeg" href = "home.php">
+                            <img src = "Alumni_Site/index/images/christopher-newport-university-jerry-gammon.jpeg" href = "home.php">
                         </td>
                         <td>
                             <a href = "../help.php">Help</a>
@@ -34,7 +31,7 @@
             </nav>
         </div>
         <div>
-            <img src = "images/christopher-newport-university-jerry-gammon.jpeg">
+            <img src = "Alumni_Site/index/images/christopher-newport-university-jerry-gammon.jpeg">
         </div>
         <div>
             <h1>Social Media</h1>
