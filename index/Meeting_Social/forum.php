@@ -9,10 +9,10 @@
                 <table>
                     <tr>
                         <td>
-                            <img src = "Alumni_Site/index/images/christopher-newport-university-jerry-gammon.jpeg" href = "home.php">
+                            <img src = "Alumni_Site/index/images/christopher-newport-university-jerry-gammon.jpeg" href = "../Alumni_Site/index/Interface/help.php">
                         </td>
                         <td>
-                            <a href = "../help.php">Help</a>
+                            <a href = "../Alumni_Site/index/Interface/help.php">Help</a>
                         </td>
                         <td>
                             <a href = "../message.php">Message</a>
@@ -21,7 +21,7 @@
                             <a href = "../forum.php">Forum</a>
                         </td>
                         <td>
-                            <a href = "../calendar.php">Calendar</a>
+                            <a href = "../Alumni_Site/index/Event_Scheduling/calendar.php">Calendar</a>
                         </td>
                         <td>
                             <a href = "../profile.php">Profile</a>
