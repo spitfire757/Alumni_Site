@@ -6,7 +6,6 @@
     <body>
         <?php
             echo "hello world";
-
         ?>
         <div>
             <nav>
