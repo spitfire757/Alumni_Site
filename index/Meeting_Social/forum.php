@@ -1,40 +1,47 @@
 <!DOCTYPE html>
 <html>
     <head>
-        testing
+    <link rel="stylesheet" href="../style/global_style.css">
     </head>
     <body>
         <div>
-            <nav>
-                <table>
-                    <tr>
-                        <td>
-                            <img src = "Alumni_Site/index/images/christopher-newport-university-jerry-gammon.jpeg" href = "../Alumni_Site/index/Interface/help.php">
-                        </td>
-                        <td>
-                            <a href = "../Alumni_Site/index/Interface/help.php">Help</a>
-                        </td>
-                        <td>
-                            <a href = "../message.php">Message</a>
-                        </td>
-                        <td>
-                            <a href = "../forum.php">Forum</a>
-                        </td>
-                        <td>
-                            <a href = ../Alumni_Site/index/Event_Scheduling/calendar.php">Calendar</a>
-                        </td>
-                        <td>
-                            <a href = "../profile.php">Profile</a>
-                        </td>
-                    </tr>
-                </table>
-            </nav>
-        </div>
-        <div>
-            <img src = "Alumni_Site/index/images/christopher-newport-university-jerry-gammon.jpeg">
-        </div>
-        <div>
-            <h1>Social Media</h1>
+            <form action = "forum.php" method = "post">
+                <div>
+                    <h4>Question: Where can I find jobs at?</h4>
+                    <p>The following is a test section of where I can find code</p>
+                </div>
+                <div>
+                    You: <input type="text" name="year"><br>
+                    <button type = "submit" name = "submit" formaction="leap_year.php">Reply</button><br>
+                </div>      
+            </form>
+            <div>
+                <h3>
+                    <?php
+                        $dbhost = "localhost";
+                        $dbuser = "mysql_user@localhost";
+                        $dbpass = "r00tpassw0rd/";
+                        $dbname = "";
+                        
+                        $conn = mysqli_connect($dbhost, $dbuser, $dbpass);
+
+                        $post = $_POST["year"];
+
+                        $sql = "SELECT * FROM `leap_year'";
+
+                        $replies = $cpnn->query($sql);
+
+                        while ($replies->num_rows>0){
+                            echo "hi";
+
+                        }
+
+                        $sql = "INSERT INTO `` VALUES ('".$year."'); ";
+
+                        $conn->query($sql);
+                    ?>
+                </h3>
+            </div>
         </div>
     </body>
     
