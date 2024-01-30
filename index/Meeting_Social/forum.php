@@ -11,7 +11,7 @@
                     <p>The following is a test section of where I can find code</p>
                 </div>
                 <div>
-                    You: <input type="text" name="year"><br>
+                    You: <input type="text" name="reply"><br>
                     <button type = "submit" name = "submit" formaction="leap_year.php">Reply</button><br>
                 </div>      
             </form>
@@ -19,21 +19,20 @@
                 <h3>
                     <?php
                         $dbhost = "localhost";
-                        $dbuser = "mysql_user@localhost";
+                        $dbuser = "mysql_user";
                         $dbpass = "r00tpassw0rd/";
-                        $dbname = "";
+                        $dbname = "DB";
                         
                         $conn = mysqli_connect($dbhost, $dbuser, $dbpass);
 
-                        $post = $_POST["year"];
+                        $post = $_POST["reply"];
 
-                        $sql = "SELECT * FROM `leap_year'";
+                        $sql = "SELECT * FROM 'post'";
 
-                        $replies = $cpnn->query($sql);
+                        $replies = $conn->query($sql);
 
                         while ($replies->num_rows>0){
                             echo "hi";
-
                         }
 
                         $sql = "INSERT INTO `` VALUES ('".$year."'); ";
@@ -44,5 +43,4 @@
             </div>
         </div>
     </body>
-    
 </html>
