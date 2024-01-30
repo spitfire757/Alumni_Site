@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <link rel="stylesheet" href="../style/global_style.css">
+    </head>
     <body>
         <?php
 
