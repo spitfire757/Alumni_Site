@@ -28,6 +28,11 @@
                 </table>
             </nav>
         </div>
+<img src="avatar.png" alt="Avatar" class="avatar">
+<br>
+<form action="edit_profile.php" method="get">
+<button type="submit">Edit Profile</button>
+</form>
 <?php
     echo "<br> Username <br>";
     echo "Password <br>";
