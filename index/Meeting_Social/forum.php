@@ -21,7 +21,7 @@
                             <a href = "../forum.php">Forum</a>
                         </td>
                         <td>
-                            <a href = "../Alumni_Site/index/Event_Scheduling/calendar.php">Calendar</a>
+                            <a href = ../Alumni_Site/index/Event_Scheduling/calendar.php">Calendar</a>
                         </td>
                         <td>
                             <a href = "../profile.php">Profile</a>
