@@ -66,10 +66,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Database configuration
-    $host = '';
-    $db   = '';
-    $user = '';
-    $pass = '';
+    $host = 'localhost';
+    $db   = 'DB';
+    $user = 'mysql_user';
+    $pass = 'r00tpassw0rd/';
     $charset = 'utf8mb4';
 
     // Data Source Name
@@ -79,21 +79,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES   => false,
     ];
-	// Try to generate a new ID for them as well when registering
+
     try {
         // Establish a connection with the database
         $pdo = new PDO($dsn, $user, $pass, $options);
 
         // SQL query to insert the user data into the database
-        $sql = "INSERT INTO users (user, pass) VALUES (?, ?)";
-        $stmt= $pdo->prepare($sql);
-        $stmt->execute([$username, $hashed_password]);
+        $sql = "INSERT INTO post (user, username, password) VALUES (?, ?, ?)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$username, $username, $hashed_password]);
 
         echo "User registered successfully!";
-	header('Location: login.php');
+        header('Location: login.php');
         exit(); // Make sure to exit after setting the header
     } catch (\PDOException $e) {
-        echo "Username is already taken.";
+        echo "Error: " . $e->getMessage();
     }
 }
 ?>
