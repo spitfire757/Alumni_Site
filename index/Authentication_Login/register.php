@@ -85,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
         $pdo = new PDO($dsn, $user, $pass, $options);
 
         // SQL query to insert the user data into the database
-        $sql = "INSERT INTO post (user, username, password) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO test (username, password) VALUES (?, ?)";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$username, $username, $hashed_password]);
 
