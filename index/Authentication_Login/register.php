@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     }
 }
 ?>
-
+	//^^ Testing for DB connection via psudo remote connection 
     <form action="register.php" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br>
