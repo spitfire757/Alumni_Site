@@ -83,7 +83,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     try {
         // Establish a connection with the database
         $pdo = new PDO($dsn, $user, $pass, $options);
-
+	// Need to check if username already exists 
+	if ($username) in 	
         // SQL query to insert the user data into the database
         $sql = "INSERT INTO test (username, password) VALUES (?, ?)";
         $stmt = $pdo->prepare($sql);
@@ -94,10 +95,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
         exit(); // Make sure to exit after setting the header
     } catch (\PDOException $e) {
         echo "Error: " . $e->getMessage();
+	echo "Username Already taken"; 
     }
 }
+
+
 ?>
-	//^^ Testing for DB connection via psudo remote connection 
+
     <form action="register.php" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br>
