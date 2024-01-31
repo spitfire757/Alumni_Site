@@ -73,30 +73,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     $charset = 'utf8mb4';
 
     // Data Source Name
-    $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-    $options = [
-        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES   => false,
-    ];
+// Data Source Name
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
 
-    try {
-        // Establish a connection with the database
-        $pdo = new PDO($dsn, $user, $pass, $options);
-	// Need to check if username already exists 
-	if ($username) in 	
+try {
+    // Establish a connection with the database
+    $pdo = new PDO($dsn, $user, $pass, $options);
+    // Check if the username already exists
+    $checkQuery = "SELECT COUNT(*) as count FROM test WHERE username = ?";
+    $checkStmt = $pdo->prepare($checkQuery);
+    $checkStmt->execute([$username]);
+    $result = $checkStmt->fetch();
+
+    if ($result['count'] > 0) {
+        // Username already exists, handle accordingly (e.g., show an error message)
+        echo "Username already exists. Please choose another username.";
+    } else {
+        // Username doesn't exist, proceed with insertion
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
         // SQL query to insert the user data into the database
-        $sql = "INSERT INTO test (username, password) VALUES (?, ?)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$username,  $hashed_password]);
+        $insertQuery = "INSERT INTO test (username, password) VALUES (?, ?)";
+        $insertStmt = $pdo->prepare($insertQuery);
+        $insertStmt->execute([$username, $hashed_password]);
 
         echo "User registered successfully!";
         header('Location: login.php');
         exit(); // Make sure to exit after setting the header
-    } catch (\PDOException $e) {
-        echo "Error: " . $e->getMessage();
-	echo "Username Already taken"; 
     }
+} catch (\PDOException $e) {
+    echo "Error: " . $e->getMessage();
 }
 
 
