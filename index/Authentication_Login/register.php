@@ -87,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
         // SQL query to insert the user data into the database
         $sql = "INSERT INTO test (username, password) VALUES (?, ?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$username, $username, $hashed_password]);
+        $stmt->execute([$username,  $hashed_password]);
 
         echo "User registered successfully!";
         header('Location: login.php');
