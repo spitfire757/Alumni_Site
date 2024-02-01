@@ -39,6 +39,14 @@
         $( "#datepicker" ).datepicker();
       } );
     </script>
-<p>Date: <input type="text" id="datepicker"></p>
+<p>Select a Date: <input type="text" id="eventDate" name="eventDate"></p>
+
+ <form action= "create_event.php">
+  <label for="appt">Select a time:</label>
+  <input type="time" id="appt" name="appt">
+  <input type="submit">
+</form>
+
+
 </body>
 </html>
