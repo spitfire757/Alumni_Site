@@ -134,6 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     <label for="major">Major:</label>
     <input type="text" id="major" name="major" required><br>
 
-    <label for="major">Intended Graduation Year:</label>
+    <label for="Intended Graduation Year">Intended Graduation Year:</label>
     <input type="text" id="last_name" name="last_name" required><br>   
-
+    <input type="submit" name="register" value="Register">
+</form>
