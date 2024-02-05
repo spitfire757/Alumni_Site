@@ -53,7 +53,7 @@
         input[type="submit"]:hover {
             background-color: #1e90ff; /* Darker blue on hover */
         }
-    </style> 
+    </style>
 </head>
 <body>
 
@@ -88,24 +88,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
         // Establish a connection with the database
         $pdo = new PDO($dsn, $user, $pass, $options);
 
-        // Check if the username already exists
-        $checkQuery = "SELECT COUNT(*) as count FROM email WHERE email = ?";
+        // Check if the email already exists
+        $checkQuery = "SELECT COUNT(*) as count FROM User WHERE email = ?";
         $checkStmt = $pdo->prepare($checkQuery);
         $checkStmt->execute([$email]);
         $result = $checkStmt->fetch();
 
         if ($result['count'] > 0) {
-            // Username already exists, handle accordingly (e.g., show an error message)
-            echo "Email already exists in database. Please choose another email or contat admin.";
+            // Email already exists, handle accordingly (e.g., show an error message)
+            echo "Email already exists in the database. Please choose another email or contact the administrator.";
         } else {
-            // Username doesn't exist, proceed with insertion
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+            // Email doesn't exist, proceed with insertion
+            // Generate a random big int for UserID
+            $userID = rand(PHP_INT_MIN, PHP_INT_MAX);
 
             // SQL query to insert the user data into the database
-            $insertQuery = "INSERT INTO User (email, password, first_name, last_name, major, intended_grad_year) 
-                            VALUES (?, ?, ?, ?, ?, ?)";
+            $insertQuery = "INSERT INTO User (UserID, email, password, Fname, LName, Major, intended_grad_year)
+                            VALUES (?, ?, ?, ?, ?, ?, ?)";
             $insertStmt = $pdo->prepare($insertQuery);
-            $insertStmt->execute([$email, $hashed_password, $firstName, $lastName, $major, $intendedGradYear]);
+            $insertStmt->execute([$userID, $email, $hashed_password, $firstName, $lastName, $major, $intendedGradYear]);
 
             echo "User registered successfully!";
             header('Location: login.php');
@@ -119,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
 
 <form action="register.php" method="post">
     <label for="email">Email:</label>
-    <input type="text" id="username" name="username" required><br>
+    <input type="text" id="email" name="email" required><br>
 
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required><br>
@@ -133,12 +134,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     <label for="major">Major:</label>
     <input type="text" id="major" name="major" required><br>
 
-    <label for="intended_grad_year">Intended Graduation Year:</label>
-    <input type="text" id="intended_grad_year" name="intended_grad_year" required><br>
-
-    <input type="submit" name="register" value="Register">
-</form>
-
-</body>
-</html>
+    <label for="major">Intended Graduation Year:</label>
+    <input type="text" id="last_name" name="last_name" required><br>   
 
