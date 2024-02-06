@@ -38,6 +38,10 @@
                         $sql = "INSERT INTO `` VALUES ('".$year."'); ";
 
                         $conn->query($sql);
+
+                        /*
+
+                        */
                     ?>
                 </h3>
             </div>
