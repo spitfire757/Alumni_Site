@@ -43,9 +43,16 @@
     </script>
 </head>
 <body>
+<h2> Create an Event</h2>
 <p>Select a Date: <input type="text" id="datepicker"></p>
 
 </body>
+<body>
+<form action="create_event.php">
+  <label for="appt">Select a time:</label>
+  <input type="time" id="appt" name="appt">
+  <input type="submit">
+</form>
 
 
 </body>
