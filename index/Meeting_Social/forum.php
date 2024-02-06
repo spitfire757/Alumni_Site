@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>:x
 <html>
     <head>
     <link rel="stylesheet" href="../style/global_style.css">
@@ -27,7 +27,7 @@
 
                         $post = $_POST["reply"];
 
-                        $sql = "SELECT * FROM 'post'";
+                        $sql = "SELECT * FROM Forum";
 
                         $replies = $conn->query($sql);
 

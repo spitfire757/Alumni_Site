@@ -60,7 +60,7 @@
     <h1>Login to Technopoliz</h1>
 
     <form method="POST">
-        <label for="username">Username:</label>
+        <label for="username">Email:</label>
         <input type="text" id="username" name="username" required><br><br>
 
         <label for="password">Password:</label>
@@ -98,7 +98,7 @@
         $inputPassword = $_POST["password"];
 
         // Prepare a SQL statement to select the user's hashed password from the database
-        $sql = "SELECT * FROM User WHERE user = '$inputUsername'";
+        $sql = "SELECT * FROM User WHERE email = '$inputUsername'";
         $result = $conn->query($sql);
 
         if ($result === false) {
@@ -107,7 +107,7 @@
             if ($result->num_rows == 1) {
                 // If the username exists in the database
                 $row = $result->fetch_assoc();
-                $hashedPasswordFromDB = $row["pass"]; // Assuming the column name is 'password'
+                $hashedPasswordFromDB = $row["password"]; // Assuming the column name is 'password'
 		// Verify the input password against the hashed password from the database
                 if (password_verify($inputPassword, $hashedPasswordFromDB)) {
 			// Passwords match, redirect the user to the 'default' page
@@ -125,7 +125,7 @@
                 echo "User not found.";
             }
         }
-    }
+    } 
 
     // Close the database connection
     $conn->close();
