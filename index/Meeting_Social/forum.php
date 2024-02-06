@@ -41,15 +41,15 @@
                         $conn->query($sql);
 
                         */
-                        $message = "testing message";
+                        $message = "dummy text, not in DB. There are four parts to a critical response paragraph:1) an argumentative topic sentence, 2) evidence in the form of quotations or paraphrases for the argument you are making, 3) interpretation of your evidence in relation to the argument, and 4) a strong concluding statement.";
 
                         for( $i = 0; $i < 5; $i++ )
                         {
                             if ($i%2==0){
-                                echo "<p style='text-align: right'>".$message."</p>";
+                                echo "<p style='text-align: right'>".$message."</p><br>";
                             }
                             if ($i%2==1){ // assumes this is not from you
-                                echo "<p style='text-align: left'>".$message."</p>"; 
+                                echo "<p style='text-align: left'>".$message."</p><br>"; 
                             }
                         }
 
