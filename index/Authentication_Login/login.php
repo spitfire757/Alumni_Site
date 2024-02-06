@@ -98,7 +98,7 @@
         $inputPassword = $_POST["password"];
 
         // Prepare a SQL statement to select the user's hashed password from the database
-        $sql = "SELECT * FROM users WHERE user = '$inputUsername'";
+        $sql = "SELECT * FROM User WHERE user = '$inputUsername'";
         $result = $conn->query($sql);
 
         if ($result === false) {

@@ -28,8 +28,10 @@
                 </table>
             </nav>
         </div>
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Datepicker - Default functionality</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -39,13 +41,11 @@
         $( "#datepicker" ).datepicker();
       } );
     </script>
-<p>Select a Date: <input type="text" id="eventDate" name="eventDate"></p>
+</head>
+<body>
+<p>Select a Date: <input type="text" id="datepicker"></p>
 
- <form action= "create_event.php">
-  <label for="appt">Select a time:</label>
-  <input type="time" id="appt" name="appt">
-  <input type="submit">
-</form>
+</body>
 
 
 </body>
