@@ -18,6 +18,7 @@
             <div>
                 <h3>
                     <?php
+                        /*
                         $dbhost = "localhost";
                         $dbuser = "mysql_user";
                         $dbpass = "r00tpassw0rd/";
@@ -39,9 +40,18 @@
 
                         $conn->query($sql);
 
-                        /*
-
                         */
+                        $message = "testing message";
+
+                        for( $i = 0; $i < 5; $i++ )
+                        {
+                            if (i%2==0){
+                                echo "<p style='text-align: right'>".$message."</p>";
+                            }
+                            if (i%2==1){ // assumes this is not from you
+                                echo "<p style='text-align: left'>".$message."</p>"; 
+                            }
+                        }
                     ?>
                 </h3>
             </div>
