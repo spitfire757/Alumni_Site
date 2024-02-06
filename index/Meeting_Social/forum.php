@@ -53,6 +53,9 @@
                             }
                         }
 
+                        $post = $_POST["reply"];
+
+                        echo "<p style='text-align: right'>".$post."</p><br>";
 
                     ?>
                 </h3>
