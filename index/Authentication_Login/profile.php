@@ -34,13 +34,30 @@
 <button type="submit">Edit Profile</button>
 </form>
 <?php
-    echo "<br> Username <br>";
-    echo "Password <br>";
-    echo "Major <br>";
-    echo "Minor <br>";
-    echo "About <br>";
-    echo "Experience <br>";
-    echo "Resume <br>";
+session_start();
+    if (isset($_SESSION['username'])) {
+    // Replace these with your actual database credentials
+    $servername = "localhost";
+    $username = "mysql_user";
+    $password = "r00tpassw0rd/";
+    $dbname = "DB";
+
+    // Establish a connection to the database
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check the connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }	    
+	$currentUser = $_SESSION['username'];
+        echo "<br> Username $currentUser <br>";
+        echo "Password ( Needs to stay hidden) <br>";
+        echo "Major<br>";
+        echo "Minor <br>";
+        echo "About <br>";
+        echo "Experience <br>";
+        echo "Resume <br>";
+}
 ?>
 
 </body>
