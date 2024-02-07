@@ -18,6 +18,12 @@ session_start();
     echo "<br> This is a test script for allowing the current unique user (stored in DB as userID) 	to stay signed in across webpages";
     echo "<br> This page will only show up if a registred user is signed in";
     }
+    // Between here and the else statement will be executed if a user is signed in 
+    // 
+    //
+    //
+    //
+    // Dont edit anything below for now 
     else{
 	    echo "No user signed in, unable to connect to DB, go to sign in page or register";
     }
