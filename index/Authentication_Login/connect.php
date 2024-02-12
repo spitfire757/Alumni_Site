@@ -1,7 +1,6 @@
 <?php
 session_start();
     if (isset($_SESSION['username'])) {
-    // Replace these with your actual database credentials
     $servername = "localhost";
     $username = "mysql_user";
     $password = "r00tpassw0rd/";
@@ -25,6 +24,6 @@ session_start();
     //
     // Dont edit anything below for now 
     else{
-	    echo "No user signed in, unable to connect to DB, go to sign in page or register";
+	    echo "No user signed in, unable to connect to DB, sign in or contact DB admin;
     }
 ?>

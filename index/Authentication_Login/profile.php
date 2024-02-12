@@ -48,17 +48,40 @@ session_start();
     // Check the connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
-    }	    
-	$currentUser = $_SESSION['username'];
-        echo "<br> Username $currentUser <br>";
-        echo "Password ( Needs to stay hidden) <br>";
-        echo "Major<br>";
-        echo "Minor <br>";
-        echo "About <br>";
-        echo "Experience <br>";
-        echo "Resume <br>";
-}
+    }
+    $currentUser = $_SESSION['username'];
+    echo "<br> Username $currentUser <br>";
+
+    // Allow userID to be displayed
+    $sql = "SELECT UserID FROM User WHERE Fname = ?";
+    $stmt = $conn->prepare($sql);
+
+    // Check if the statement was prepared successfully
+    if ($stmt === false) {
+        die("Error in preparing the statement: " . $conn->error);
+    }
+
+    $stmt->bind_param("s", $currentUser);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+     if ($row) {
+        $userID = $row['UserID'];
+        echo "UserID for $currentUser: $userID";
+    } else {
+        echo "User not found";
+    }
+    
+    echo "<br>Password ( Needs to stay hidden) <br>";
+    echo "Major<br>";
+    echo "Minor <br>";
+    echo "About <br>";
+    echo "Experience <br>";
+    echo "Resume <br>";
+    }
 ?>
+	
 
 </body>
 </html>
