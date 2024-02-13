@@ -10,7 +10,8 @@
                     <?php
                         include '/Alumni_Site/index/Authentication_Login/connect.php';
                         $conn = session_start();
-                        echo "hello";
+                        $result = myspli_fetch_array($conn,"SELECT * FROM Forum LIMIT 1");
+                        echo $result;
                     ?>
                     <h4>Question: Where can I find jobs at?</h4>
                     <p>The following is a test section of where I can find code</p>
