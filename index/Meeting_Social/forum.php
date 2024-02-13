@@ -45,7 +45,7 @@
                         echo "<table>";
                         $i = 10;
                         while ($i>0) {
-                            echo "<tr style='text-align: right'>".$message."</tr><br>";
+                            echo "<tr style='text-align: right'>".$message."</tr><br><br>";
                             $i --;
                         }
                         echo "</table>";
