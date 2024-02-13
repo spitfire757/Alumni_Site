@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <?php
 session_start();
+
+$pendingRequests = array(); // Initialize an empty array to store pending requests
 
 if (isset($_SESSION['username'])) {
     $servername = "localhost";
@@ -18,27 +21,25 @@ if (isset($_SESSION['username'])) {
 
     $receiverUsername = $_SESSION['username'];
 
-    // Query pending friend requests
-    $sql = "SELECT * FROM friend_requests WHERE receiver_name = ? AND status = 'pending'";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $receiverUsername);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // Check if the "View Friend Requests" link is clicked
+    if (isset($_GET['view_requests'])) {
+        // Query pending friend requests
+        $sql = "SELECT * FROM friend_requests WHERE receiver_name = ? AND status = 'pending'";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $receiverUsername);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    echo "<h2>Pending Friend Requests</h2>";
-    echo "<ul>";
+        while ($row = $result->fetch_assoc()) {
+            $pendingRequests[] = $row;
+        }
 
-    while ($row = $result->fetch_assoc()) {
-        echo "<li>{$row['sender_username']} wants to connect. <a href='accept_request.php?request_id={$row['request_id']}'>Accept</a></li>";
+        $stmt->close();
     }
-
-    echo "</ul>";
-
-    $stmt->close();
-} else {
-    echo "No user signed in, unable to connect to DB, sign in or contact DB admin";
 }
+
 ?>
+
 
 <head>
     <meta charset="UTF-8">
