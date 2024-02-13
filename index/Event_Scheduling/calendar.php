@@ -28,32 +28,56 @@
                 </table>
             </nav>
         </div>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>jQuery UI Datepicker - Default functionality</title>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script>
-    $( function() {
-        $( "#datepicker" ).datepicker();
-      } );
-    </script>
-</head>
-<body>
-<h2> Create an Event</h2>
-<p>Select a Date: <input type="text" id="datepicker"></p>
+<br>
+<a href = "create_event.php">Create Event</a>
+<h2> Upcoming Events</h2>
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+session_start();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $eventDate = $_POST["date"];
+    $eventTime = $_POST["time"];
+    $eventDetails = $_POST["bio"];
+    $eventDateTimeOffset = $eventDate . " " . $eventTime;
+    $servername = "localhost";
+    $username = "mysql_user";
+    $password = "r00tpassw0rd/";
+    $dbname = "DB";
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    // Insert the event into the database
+    $sql = "INSERT INTO Calendar (Date, Data) VALUES ('$eventDateTimeOffset', '$eventDetails')";
+    if ($conn->query($sql) === TRUE) {
+        echo "Event created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    $conn->close();
+}
+// Display upcoming events
+$servername = "localhost";
+$username = "mysql_user";
+$password = "r00tpassw0rd/";
+$dbname = "DB";
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+$sql = "SELECT * FROM Calendar";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        echo "There is an Event " . $row['Date'] . ", " . $row['Data'] . "<br>";
+    }
+} else {
+    echo "No events currently scheduled";
+}
+$conn->close();
 
-</body>
-<body>
-<form action="create_event.php">
-  <label for="appt">Select a time:</label>
-  <input type="time" id="appt" name="appt">
-  <input type="submit">
-</form>
-
+?>
 
 </body>
 </html>

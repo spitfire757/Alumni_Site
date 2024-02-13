@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login to Technopoliz</title>
+    <title>Login to Alumni Portal</title>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -57,7 +57,7 @@
     </style>
 </head>
 <body>
-    <h1>Login to Technopoliz</h1>
+    <h1>Login to Alumni Portal</h1>
 
     <form method="POST">
         <label for="username">Email:</label>
