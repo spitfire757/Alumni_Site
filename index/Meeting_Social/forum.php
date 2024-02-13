@@ -9,9 +9,7 @@
                 <div>
                     <?php
                         session_start();
-                        echo "Hello before the results are generated";
-                        include '/Alumni_Site/index/Meeting_Social/connect.php';
-                        $conn = OpenCon();
+                        include 'connect.php'; 
                         $sql = "SELECT * FROM Forum LIMIT 1";
                         echo "Connection has been opened";
                         $result = mysqli_query($conn,$sql);
