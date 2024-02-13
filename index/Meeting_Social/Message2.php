@@ -16,9 +16,6 @@ if (isset($_SESSION['username'])) {
         die("Connection failed: " . $conn->connect_error);
     }
     echo "Current User : ",  $_SESSION['username'];
-    echo "<br> This is a test script for allowing the current unique user (stored in DB as userID) to stay signed in across webpages";
-    echo "<br> This page will only show up if a registered user is signed in";
-    echo "<br> Check connection : return a valid connection function:";
 } else {
     echo "No user signed in, unable to connect to DB, sign in or contact DB admin";
 }

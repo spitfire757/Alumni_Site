@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        testing
-    </head>
-    <body>
+<head>
+    <title>Testing</title>
+</head>
+<body>
+    <div>
+        <nav>
+            <table>
+                <a href="../help.php">Help</a>
+                <a href="../message.php">Message</a>
+                <a href="../forum.php">Forum</a>
+                <a href="../calendar.php">Calendar</a>
+                <a href="../profile.php">Profile</a>
+            </table>
+        </nav>
+    </div>
+    <div>
+        <img src="images/christopher-newport-university-jerry-gammon.jpeg">
+    </div>
+    <div>
+        <h1>First Contact</h1>
+    </div>
+    <div>
         <div>
-            <nav>
-                <table>
-                    <a href = "../help.php">Help</a>
-                    <a href = "../message.php">Message</a>
-                    <a href = "../forum.php">Forum</a>
-                    <a href = "../calendar.php">Calendar</a>
-                    <a href = "../profile.php">Profile</a>
-                </table>
-            </nav>
-        </div>
-        <div>
-            <img src = "images/christopher-newport-university-jerry-gammon.jpeg">
-        </div>
-        <div>
-            <h1>First Contact</h1>
-        </div>
-        <div>
-            <div>
-                <table>
-                    <tr>
-                        <p>Account Name<p>
-                        <input></input>
-                    </tr>
-                    <tr>
-                        <p>Account ID<p>
-                        <input></input>
-                    </tr>
-                </table>
+            <form action="request.php" method="post">
                 <table>
                     <tr>
-                        <p>Enter the account name and ID of the who you would like to request to talk to</p>
-                        <button>Submit</button>
+                        <td><label for="accountName">Account Name:</label></td>
+                        <td><input type="text" id="accountName" name="accountName" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="accountID">Account ID:</label></td>
+                        <td><input type="text" id="accountID" name="accountID" required></td>
                     </tr>
                 </table>
-            </div>
+            </form>
         </div>
-    </body>
+    </div>
+</body>
+</html>
+
+
+
 <?php
 session_start();
     if (isset($_SESSION['username'])) {
@@ -58,9 +58,8 @@ session_start();
         die("Connection failed: " . $conn->connect_error);
     }
     echo "Current User : ",  $_SESSION['username'];
-    echo "<br> This is a test script for allowing the current unique user (stored in DB as userID) 	to stay signed in across webpages";
-    echo "<br> This page will only show up if a registred user is signed in";
-    echo "<br> Check connection : return a valid connection function:";
+    echo "Here you can request to message certain accounts";
+      
 
 
     }
