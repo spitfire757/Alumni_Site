@@ -17,10 +17,10 @@
                         $dbname = "DB";
 
                         $conn = new mysqli($servername, $username, $password, $dbname);
-                        
-                        $sql = "SELECT * FROM Forum LIMIT 1";
+
+                        $sql = "SELECT * FROM Forum";
                         echo "Connection has been opened";
-                        $result = $conn->prepare($sql);
+                        $result = mysqli_query($conn,$sql);
 
                         echo $result;
                         echo "Hello after the results are generated";
