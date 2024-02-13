@@ -23,12 +23,11 @@
                         $query = mysqli_query($conn,$sql);
 
                         $forum = (mysqli_fetch_array($query));
-                        
-                        echo $forum[2];
                     ?>
-                    <h4>Question: Where can I find jobs at?</h4>
-                    <p>The following is a test section of where I can find code</p>
+                    <h4><?php echo $forum[1];?></h4>
+                    <p><?php echo $forum[2];?></p>
                 </div>
+
                 <div>
                     You: <input type="text" name="reply"><br>
                     <button type = "submit" name = "submit" formaction="forum.php">Reply</button><br>
