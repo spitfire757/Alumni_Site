@@ -8,11 +8,13 @@
             <form action = "forum.php" method = "post">
                 <div>
                     <?php
+                        echo "Hello before the results are generated";
                         include '/Alumni_Site/index/Meeting_Social/connect.php';
                         $conn = OpenCon();
                         $sql = "SELECT * FROM Forum";
                         $result = mysqli_query($conn,$sql);
                         echo $result;
+                        echo "Hello after the results are generated";
                     ?>
                     <h4>Question: Where can I find jobs at?</h4>
                     <p>The following is a test section of where I can find code</p>
