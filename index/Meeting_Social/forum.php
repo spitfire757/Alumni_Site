@@ -8,9 +8,10 @@
             <form action = "forum.php" method = "post">
                 <div>
                     <?php
-                        include '/Alumni_Site/index/Authentication_Login/connect.php';
-                        $conn = session_start(); 
-                        $result = mysqli_fetch_array($conn,"SELECT * FROM Forum LIMIT 1");
+                        include '/Alumni_Site/index/Meeting_Social/connect.php';
+                        $conn = OpenCon();
+                        $sql = "SELECT * FROM Forum";
+                        $result = mysqli_query($conn,$sql);
                         echo $result;
                     ?>
                     <h4>Question: Where can I find jobs at?</h4>
