@@ -24,6 +24,7 @@ session_start();
     //
     // Dont edit anything below for now 
     else{
-	    echo "No user signed in, unable to connect to DB, sign in or contact DB admin;
+	    echo "No user signed in, unable to connect to DB, sign in or contact DB admin";
     }
+    return $conn;
 ?>
