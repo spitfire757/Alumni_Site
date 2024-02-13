@@ -13,7 +13,7 @@
 
         .tabs {
             display: flex;
-            background-color: #305A8C; /* Updated color code */
+            background-color: #305A8C; /* Updated color code, feel free to change it*/
             color: white;
         }
 
@@ -25,11 +25,43 @@
         }
 
         .tab:hover {
-            background-color: #2A4C7D; /* Adjusted color on hover if needed */
+            background-color: #2A4C7D;
         }
 
         .content {
             padding: 20px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: none; 
+            justify-content: center;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #305A8C;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #2A4C7D;
+        }
+
+        /* Style for input and textarea */
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
         }
     </style>
     <title>Captain's Dock</title>
@@ -38,23 +70,16 @@
 
     <div class="tabs">
         <div class="tab" onclick="showTab('home')">Home</div>
-	<div class="tab" onclick="showTab('helppage')">Help Page</div>
+        <div class="tab" onclick="showTab('helppage')">Help Page</div>
         <div class="tab" onclick="showTab('messages')">Messages</div>
-	<div class="tab" onclick="showTab('forum')">Forum</div>
+        <div class="tab" onclick="showTab('forum')">Forum</div>
         <div class="tab" onclick="showTab('calendar')">Calendar</div>
-	<div class="tab" onclick="showTab('profile')">Profile</div>
-        
+        <div class="tab" onclick="showTab('profile')">Profile</div>
     </div>
 
     <div id="home" class="content">
         <h2>Welcome to the Captain's Dock - Home Page</h2>
         <p>This is the content for the Home Page tab.</p>
-    
-    </div>
-
-    <div class="buttons">
-        <button class="button" onclick="goToPage('firstContact')">First Contact</button>
-        <button class="button" onclick="goToPage('messaging')">Messaging</button>
     </div>
 
     <div id="helppage" class="content" style="display: none;">
@@ -65,8 +90,32 @@
     <div id="messages" class="content" style="display: none;">
         <h2>Captain's Dock - Messages Tab</h2>
         <p>This is the content for the Messages Tab.</p>
-    </div>
+        <div id="firstContactForm" class="content" style="display: none;">
+            <h3>Who are you trying to reach?</h3>
+            <form>
+                <label for="firstName">First Name:</label><br>
+                <input type="text" id="firstName" name="firstName" required><br>
+                <label for="lastName">Last Name:</label><br>
+                <input type="text" id="lastName" name="lastName" required><br>
+                <label for="ID">ID:</label><br>
+                <input type="text" id="ID" name="ID" required><br><br>
+                <label for="message">Enter Message:</label><br>
+                <textarea id="message" name="message" rows="4" required></textarea><br><br>
+                <button class="button" type="submit">Send</button>
+            </form>
+        </div>
 
+        <div id="messagingForm" class="content" style="display: none;">
+            <h3>Who are you trying to contact?</h3>
+            <form>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="message">Enter Message:</label><br>
+                <textarea id="message" name="message" rows="4" required></textarea><br><br>
+                <button class="button" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
 
     <div id="forum" class="content" style="display: none;">
         <h2>Captain's Dock - Forum Tab</h2>
@@ -83,7 +132,6 @@
         <p>This is the content for the Profile Tab.</p>
     </div>
 
-
     <script>
         function showTab(tabId) {
             // Hide all tabs
@@ -94,6 +142,11 @@
 
             // Show the selected tab
             document.getElementById(tabId).style.display = 'block';
+
+            // If the Messages tab is selected, show the first contact form by default
+            if (tabId === 'messages') {
+                document.getElementById('firstContactForm').style.display = 'block';
+            }
         }
     </script>
 
