@@ -10,7 +10,8 @@
                     <?php
                         #session_start();
                         #include 'connect.php';
-
+                        
+                        #After you get the DB to output dummy data, try moving this into the connect.php file
                         $servername = "localhost";
                         $username = "mysql_user";
                         $password = "r00tpassw0rd/";
@@ -19,9 +20,11 @@
                         $conn = new mysqli($servername, $username, $password, $dbname);
 
                         $sql = "SELECT * FROM Forum";
-                        echo "Connection has been opened";
-                        $result = mysqli_query($conn,$sql);
-                        echo "Hello after the results are generated";
+                        $query = mysqli_query($conn,$sql);
+
+                        $forum = (mysqli_fetch_array($query));
+                        
+                        echo $forum[2];
                     ?>
                     <h4>Question: Where can I find jobs at?</h4>
                     <p>The following is a test section of where I can find code</p>
