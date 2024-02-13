@@ -8,11 +8,20 @@
             <form action = "forum.php" method = "post">
                 <div>
                     <?php
-                        session_start();
-                        include 'connect.php'; 
+                        #session_start();
+                        #include 'connect.php';
+
+                        $servername = "localhost";
+                        $username = "mysql_user";
+                        $password = "r00tpassw0rd/";
+                        $dbname = "DB";
+
+                        $conn = new mysqli($servername, $username, $password, $dbname);
+                        
                         $sql = "SELECT * FROM Forum LIMIT 1";
                         echo "Connection has been opened";
-                        $result = mysqli_query($conn,$sql);
+                        $result = $conn->prepare($sql);
+
                         echo $result;
                         echo "Hello after the results are generated";
                     ?>
