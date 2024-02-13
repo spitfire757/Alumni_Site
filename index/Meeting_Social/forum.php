@@ -21,8 +21,6 @@
                         $sql = "SELECT * FROM Forum";
                         echo "Connection has been opened";
                         $result = mysqli_query($conn,$sql);
-
-                        echo $result;
                         echo "Hello after the results are generated";
                     ?>
                     <h4>Question: Where can I find jobs at?</h4>
