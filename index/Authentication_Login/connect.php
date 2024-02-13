@@ -15,7 +15,10 @@ session_start();
     }
     echo "Current User : ",  $_SESSION['username'];
     echo "<br> This is a test script for allowing the current unique user (stored in DB as userID) 	to stay signed in across webpages";
-    echo "<br> This page will only show up if a registred user is signed in";
+    echo "<br> This page will only show up if a registred user is signed in"; 
+    echo "<br> Check connection : return a valid connection function:"; 
+    
+
     }
     // Between here and the else statement will be executed if a user is signed in 
     // 
