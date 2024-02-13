@@ -1,25 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <?php
 session_start();
+
 if (isset($_SESSION['username'])) {
     $servername = "localhost";
     $username = "mysql_user";
     $password = "r00tpassw0rd/";
     $dbname = "DB";
 
-    // Establish a connection to the database
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check the connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    echo "Current User : ",  $_SESSION['username'];
+
+    $receiverUsername = $_SESSION['username'];
+
+    // Query pending friend requests
+    $sql = "SELECT * FROM friend_requests WHERE receiver_name = ? AND status = 'pending'";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $receiverUsername);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    echo "<h2>Pending Friend Requests</h2>";
+    echo "<ul>";
+
+    while ($row = $result->fetch_assoc()) {
+        echo "<li>{$row['sender_username']} wants to connect. <a href='accept_request.php?request_id={$row['request_id']}'>Accept</a></li>";
+    }
+
+    echo "</ul>";
+
+    $stmt->close();
 } else {
     echo "No user signed in, unable to connect to DB, sign in or contact DB admin";
 }
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -151,6 +171,8 @@ if (isset($_SESSION['username'])) {
         <h2>Captain's Dock - Profile Tab</h2>
         <p>This is the content for the Profile Tab.</p>
     </div>
+    <!-- Inside message.php -->
+    <a href="view_requests.php">View Friend Requests</a>
 
     <script>
         function showTab(tabId) {
@@ -169,5 +191,5 @@ if (isset($_SESSION['username'])) {
             }
         }
     </script>
-
 </html>
+
