@@ -8,10 +8,12 @@
             <form action = "forum.php" method = "post">
                 <div>
                     <?php
+                        session_start();
                         echo "Hello before the results are generated";
                         include '/Alumni_Site/index/Meeting_Social/connect.php';
                         $conn = OpenCon();
-                        $sql = "SELECT * FROM Forum";
+                        $sql = "SELECT * FROM Forum LIMIT 1";
+                        echo "Connection has been opened";
                         $result = mysqli_query($conn,$sql);
                         echo $result;
                         echo "Hello after the results are generated";
