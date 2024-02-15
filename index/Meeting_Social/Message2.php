@@ -20,7 +20,7 @@ if (isset($_SESSION['username'])) {
     }
 
     $receiverUsername = $_SESSION['username'];
-
+    echo $receiverUsername;
     // Check if the "View Friend Requests" link is clicked
     if (isset($_GET['view_requests'])) {
         // Query pending friend requests
