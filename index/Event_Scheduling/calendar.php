@@ -42,17 +42,17 @@ $dbname = "DB";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $eventDate = $_POST["date"];
     $eventTime = $_POST["time"];
-    $eventTime += ":00 -5:00";
+    $eventTime += ":00";
     $eventDetails = $_POST["bio"];
-    $eventDateTimeOffset = $eventDate . " " . $eventTime;
-    $eventDateTimeOffset = str_replace("/", "-", $eventDateTimeOffset);
+    $event = $eventDate . " " . $eventTime;
+    $eventDateTime = strtotime($event);
     $userID = 0;
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
     // Insert the event into the database
-    $sql = "INSERT INTO Calendar (User, Date, Data) VALUES ('$userID', '$eventDateTimeOffset', '$eventDetails')";
+    $sql = "INSERT INTO Calendar (User_ID, Date, Data) VALUES ('$userID', '$eventDateTime', '$eventDetails')";
     if ($conn->query($sql) === TRUE) {
         echo "Event created successfully";
     } else {
@@ -69,7 +69,7 @@ $sql = "SELECT * FROM Calendar";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-        echo "There is an Event " . $row['Date'] . ", " . $row['Data'] . " posted by userID: " . $row['User'] . "<br>";
+        echo "There is an Event " . $row['Date'] . ", " . $row['Data'] . " posted by userID: " . $row['User_ID'] . "<br>";
     }
 } else {
     echo "No events currently scheduled";
