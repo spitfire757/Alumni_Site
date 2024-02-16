@@ -36,6 +36,9 @@ if (isset($_SESSION['username'])) {
 
         $stmt->close();
     }
+    // Area for acutal messaging 
+    // 
+
 }
 
 ?>
