@@ -24,7 +24,6 @@
                         $query = mysqli_query($conn,$sql);
 
                         $forum = (mysqli_fetch_array($query));
-                        echo $forum;
                     ?>
                     <h4><?php 
 
@@ -35,7 +34,7 @@
                     echo "".$user[1]." ".$user[2]."";
                     
                     ?></h4>
-                    <p><?php echo $forum[2];?></p>
+                    <p><?php echo $forum[3];?></p>
                 </div>
 
                 <!--
