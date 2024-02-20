@@ -51,8 +51,9 @@
             <?php
 
                 $append_response = '|new|' . $_POST["reply"];
+                echo $append_response;
                 #SQL works in terms of updating code
-                $sql = "UPDATE Forum SET replies = replies + ('".$append_response."') WHERE postID = ('".$forum["postID"]."');";
+                $sql = "UPDATE Forum SET replies = (replies + ".$append_response.") WHERE postID = (".$forum["postID"].");";
                 $result = $conn->query($sql);
                 
             ?>
