@@ -8,7 +8,7 @@
             <form action = "forum.php" method = "post">
                 <div>
                     <?php
-                        #session_start();
+                        session_start();
                         #include 'connect.php';
                         
                         #After you get the DB to output dummy data, try moving this into the connect.php file
@@ -23,6 +23,8 @@
                         $query = mysqli_query($conn,$sql);
 
                         $forum = (mysqli_fetch_array($query));
+
+                        $_SESSION['responses'] = $forum[3];
                     ?>
                     <h4><?php echo $forum[1];?></h4>
                     <p><?php echo $forum[2];?></p>

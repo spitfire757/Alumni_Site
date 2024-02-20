@@ -6,8 +6,8 @@
     <body>
         <div>
             <?php 
-                include 'forum.php';
-                echo $forum[3];
+                session_start();
+                echo $_SESSION['responses'];
             ?>
         </div>
     </body>
