@@ -36,8 +36,16 @@
                 <div>
                     You: <input type="text" name="reply"><br>
                     <button type = "submit" name = "submit" formaction="forum.php">Reply</button><br>
+                    <button type = "submit" name = "submit" formaction="forum-view.php">Refresh</button><br>
                 </div>      
             </form>
+            <?php
+
+                $append_response = $_POST["submit"];
+                $append_response = '|new|'.$append_response;
+                $_SESSION['response'] .= $append_response;
+
+            ?>
             <div>
                 <h3>
                     <?php
