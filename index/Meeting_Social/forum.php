@@ -28,9 +28,7 @@
                     <p><?php echo $forum[2];?></p>
                 </div>
                 <div>
-                    <iframe src = "forum.php">
-                        <h4><?php echo "Hello World";?><h4>
-                    </iframe>
+                    <iframe src = "forum-view.php" height="707" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
 
                 </div>
 
