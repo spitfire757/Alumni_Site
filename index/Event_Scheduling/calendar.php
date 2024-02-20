@@ -32,8 +32,6 @@
 <a href = "create_event.php">Create Event</a>
 <h2> Upcoming Events</h2>
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 session_start();
 $servername = "localhost";
 $username = "mysql_user";
@@ -50,10 +48,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    // Insert the event into the database
     $sql = "INSERT INTO Calendar (User_ID, Date, Data) VALUES ('$userID', '$eventDateTime', '$eventDetails')";
     if ($conn->query($sql) === TRUE) {
-        echo "Event created successfully";
+        echo "Event created successfully <br>";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
