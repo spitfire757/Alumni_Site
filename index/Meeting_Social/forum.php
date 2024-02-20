@@ -42,7 +42,14 @@
             <?php
 
                 $append_response = $_POST["reply"];
+                # Remove that part over sql code below
                 $_SESSION['responses'] .= '|new|'.$append_response;
+                $add = '|new|'.$append_response;
+
+                #SQL Code for appending new replies to the chain
+                $sql = "UPDATE Forum SET message = ".$add." WHERE id = ".$forum[0].";";
+                $result = $conn->query($sql);
+                
             ?>
             <div>
                 <h3>
