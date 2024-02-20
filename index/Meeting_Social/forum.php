@@ -54,7 +54,7 @@
                 echo $append_response;
                 #SQL does not update code correctly
                 $sql = "UPDATE Forum SET replies = '".$append_response."' WHERE postID = ".$forum['postID'].";";
-                $sql = "UPDATE Forum SET replies = 'i want money now XD updated' WHERE postID = 3;";
+                #$sql = "UPDATE Forum SET replies = 'i want money now XD updated' WHERE postID = 3;";
                 $result = $conn->query($sql);
                 
             ?>
