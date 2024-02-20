@@ -29,7 +29,6 @@
                 </div>
                 <div>
                     <iframe src = "forum-view.php" height="707" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
-
                 </div>
 
                 <div>
@@ -63,6 +62,8 @@
                         $conn->query($sql);
 
                         */
+
+                        /*
                         $message = "dummy text, not in DB. There are four parts to a critical response paragraph:1) an argumentative topic sentence, 2) evidence in the form of quotations or paraphrases for the argument you are making, 3) interpretation of your evidence in relation to the argument, and 4) a strong concluding statement.";
                         echo "<table>";
                         $i = 10;
@@ -75,6 +76,7 @@
                         $post = $_POST["reply"];
 
                         echo "<p style='text-align: right'>".$post."</p><br>";
+                        */
                     ?>
                 </h3>
             </div>
