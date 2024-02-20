@@ -23,18 +23,18 @@
                         $sql = "SELECT * FROM Forum";
                         $query = mysqli_query($conn,$sql);
 
-                        $forum = (mysqli_fetch_array($query));
+                        $forum = (mysqli_fetch_assoc($query));
                     ?>
                     <h4><?php 
 
-                    $sql = "SELECT * FROM User WHERE UserID = (".$forum[1].")";
+                    $sql = "SELECT * FROM User WHERE UserID = (".$forum["userID"].")";
                     $query = mysqli_query($conn,$sql);
                     $user = (mysqli_fetch_array($query));
                     
                     echo "".$user[1]." ".$user[2]."";
                     
                     ?></h4>
-                    <p><?php echo $forum[3];?></p>
+                    <p><?php echo $forum["message"];?></p>
                 </div>
 
                 <!--
@@ -51,15 +51,12 @@
             <?php
 
                 $append_response = '|new|' . $_POST["reply"];
-                $forum[3] .= $append_response;
+                $forum["replies"] .= $append_response;
 
-                echo $forum[1];
-                echo $forum[2];
-                echo $forum[3];
-                echo $forum[4];
+                echo $forum["replies"];
                 
                 #SQL works in terms of updating code
-                $sql = "UPDATE Forum SET message = ('".$forum[4]."') WHERE postID = ('".$forum[0]."');";
+                $sql = "UPDATE Forum SET message = ('".$forum["replies"]."') WHERE postID = ('".$forum["postID"]."');";
                 $result = $conn->query($sql);
                 
             ?>
