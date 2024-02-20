@@ -28,7 +28,7 @@
                     <p><?php echo $forum[2];?></p>
                 </div>
                 <div>
-                    <iframe>
+                    <iframe src = "forum.php">
                         <h4><?php echo "Hello World";?><h4>
                     </iframe>
 
