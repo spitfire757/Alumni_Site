@@ -36,7 +36,6 @@
                 <div>
                     You: <input type="text" name="reply"><br>
                     <button type = "submit" name = "submit" formaction="forum.php">Reply</button><br>
-                    <button type = "submit" name = "submit" formaction="forum-view.php">Refresh</button><br>
                 </div>      
             </form>
             <?php
