@@ -50,12 +50,13 @@
             </form>
             <?php
 
-                $append_response = $_POST["reply"];
-                $forum[3] .= '|new|'.$append_response;
+                $append_response = '|new|' . $_POST["reply"];
+                $forum[3] .= $append_response;
 
                 echo $forum[1];
                 echo $forum[2];
                 echo $forum[3];
+                echo $forum[4];
                 
                 #SQL works in terms of updating code
                 $sql = "UPDATE Forum SET message = ('".$forum[4]."') WHERE postID = ('".$forum[0]."');";
