@@ -43,8 +43,7 @@
 
                 $append_response = $_POST["reply"];
                 $append_response = '|new|'.$append_response;
-                $_SESSION['response'] .= $append_response;
-                echo $_SESSION['response'];
+                $_SESSION['responses'] .= $append_response;
             ?>
             <div>
                 <h3>
