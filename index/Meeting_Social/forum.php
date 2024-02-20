@@ -30,7 +30,7 @@
                     <p><?php echo $forum[2];?></p>
                 </div>
                 <div>
-                    <iframe src = "forum-view.php" height="707" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+                    <iframe class = "view" src = "forum-view.php" height="707" width="300" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
                 </div>
 
                 <div>
