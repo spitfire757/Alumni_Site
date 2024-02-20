@@ -40,12 +40,11 @@ $username = "mysql_user";
 $password = "r00tpassw0rd/";
 $dbname = "DB";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $eventDate = $_POST["date"];
+    $eventDate = date('Y-m-d', strtotime($_POST["date"]));
     $eventTime = $_POST["time"];
+    $eventTime = $eventTime . ":00";
     $eventDetails = $_POST["bio"];
-    $event = $eventDate . " " . $eventTime;
-    $eventDateTime = strtotime($event);
-    $eventDateTime = date('d/M/y h:i:s', $eventDateTime); 
+    $eventDateTime = $eventDate . " " . $eventTime;
     $userID = 0;
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error) {
