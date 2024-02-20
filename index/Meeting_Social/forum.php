@@ -7,6 +7,7 @@
         <div>
             <form action = "forum.php" method = "post">
                 <div>
+                    <!-- Loading content onto the page from the DB -->
                     <?php
                         session_start();
                         #include 'connect.php';
@@ -43,7 +44,7 @@
                 $append_response = $_POST["submit"];
                 $append_response = '|new|'.$append_response;
                 $_SESSION['response'] .= $append_response;
-
+                echo $_SESSION['response'];
             ?>
             <div>
                 <h3>
