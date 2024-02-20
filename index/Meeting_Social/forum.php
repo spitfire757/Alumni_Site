@@ -24,8 +24,6 @@
                         $query = mysqli_query($conn,$sql);
 
                         $forum = (mysqli_fetch_array($query));
-
-                        $_SESSION['responses'] = $forum[3];
                     ?>
                     <h4><?php 
 
