@@ -44,7 +44,8 @@
                 $append_response = $_POST["reply"];
                 #SQL Code for appending new replies to the chain
                 $add = $forum[3].'|new|'.$append_response;
-                $sql = "UPDATE Forum SET message = '.$add.' WHERE id = '.$forum[0].';";
+                echo $add; 
+                $sql = "UPDATE Forum SET message = ('".$add."') WHERE postID = ('".$forum[0]."');";
                 $result = $conn->query($sql);
                 
             ?>
