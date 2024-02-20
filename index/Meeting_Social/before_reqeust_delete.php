@@ -46,6 +46,15 @@ if (isset($_SESSION['username'])) {
             die("Error in preparing the statement: " . $conn->error);
         }
 
+        $stmtCheckRequests->bind_param("isis", $receiverUsername, $userID, $receiverUsername, $userID);
+        $stmtCheckRequests->execute();
+        $resultCheckRequests = $stmtCheckRequests->get_result();
+
+        while ($rowCheckRequests = $resultCheckRequests->fetch_assoc()) {
+            $pendingRequests[] = $rowCheckRequests;
+        }
+
+        $stmtCheckRequests->close();
     } else {
         echo "User not found with the provided username.";
     }
