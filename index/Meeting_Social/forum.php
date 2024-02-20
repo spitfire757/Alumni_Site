@@ -58,7 +58,7 @@
                 echo $forum[3];
                 
                 #SQL works in terms of updating code
-                $sql = "UPDATE Forum SET message = ('".$forum[3]."') WHERE postID = ('".$forum[0]."');";
+                $sql = "UPDATE Forum SET message = ('".$forum[4]."') WHERE postID = ('".$forum[0]."');";
                 $result = $conn->query($sql);
                 
             ?>
