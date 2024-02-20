@@ -20,10 +20,12 @@
 
                         $conn = new mysqli($servername, $username, $password, $dbname);
 
-                        $sql = "SELECT * FROM Forum";
+                        $sql = "SELECT * FROM Forum WHERE postID = (3)";
                         $query = mysqli_query($conn,$sql);
 
                         $forum = (mysqli_fetch_assoc($query));
+
+                        $_SESSION['responses'] = $forum;
                     ?>
                     <h4><?php 
 
@@ -37,11 +39,9 @@
                     <p><?php echo $forum["message"];?></p>
                 </div>
 
-                <!--
                 <div>
                     <iframe class = "view" src = "forum-view.php" height="200" width="300" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
                 </div>
--->
 
                 <div>
                     You: <input type="text" name="reply"><br>

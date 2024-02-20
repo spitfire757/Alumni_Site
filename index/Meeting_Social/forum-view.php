@@ -5,9 +5,10 @@
     </head>
     <body>
         <div>
-            <?php 
+            <?php
                 session_start();
-                echo $_SESSION['responses'];
+                $reponses = $_SESSION['responses'];
+                echo $responses["replies"];
             ?>
         </div>
     </body>
