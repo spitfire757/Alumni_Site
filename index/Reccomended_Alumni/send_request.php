@@ -13,20 +13,50 @@ if (isset($_SESSION['username'])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
+    // Get sender's username and ID from session
     $senderUsername = $_SESSION['username'];
+
+    // Get receiver's name and ID from the form submission
     $receiverName = $_POST['accountName'];
     $receiverID = $_POST['accountID'];
 
-    // Insert the request into the database
-    $sql = "INSERT INTO friend_requests (sender_username, receiver_name, receiver_id) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sss", $senderUsername, $receiverName, $receiverID);
-    $stmt->execute();
-    $stmt->close();
+    // Retrieve sender's UserID based on the username
+    $sqlSender = "SELECT UserID FROM User WHERE email = ?";
+    $stmtSender = $conn->prepare($sqlSender);
 
-    echo "Request sent successfully!";
+    if ($stmtSender === false) {
+        die("Error in preparing the statement: " . $conn->error);
+    }
+
+    $stmtSender->bind_param("s", $senderUsername);
+    $stmtSender->execute();
+    $resultSender = $stmtSender->get_result();
+
+    if ($resultSender->num_rows > 0) {
+        $rowSender = $resultSender->fetch_assoc();
+        $senderID = $rowSender['UserID'];
+
+        // Insert the request into the database
+        $sqlInsert = "INSERT INTO friend_requests (sender_username, sender_id, receiver_name, receiver_id) VALUES (?, ?, ?, ?)";
+        $stmtInsert = $conn->prepare($sqlInsert);
+        
+        if ($stmtInsert === false) {
+            die("Error in preparing the statement: " . $conn->error);
+        }
+
+        $stmtInsert->bind_param("ssss", $senderUsername, $senderID, $receiverName, $receiverID);
+        $stmtInsert->execute();
+        $stmtInsert->close();
+
+        echo "Request sent successfully!";
+    } else {
+        echo "Error: User not found for the given email/username: $senderUsername";
+    }
+
+    $stmtSender->close();
+    $conn->close();
 } else {
-    echo "No user signed in, unable to connect to DB, sign in or contact DB admin";
+    echo "No user signed in, unable to connect to DB, sign in, or contact DB admin";
 }
 ?>
 

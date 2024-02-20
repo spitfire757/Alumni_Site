@@ -31,48 +31,97 @@
 <br>
 <a href = "create_event.php">Create Event</a>
 <h2> Upcoming Events</h2>
-<?php
+
+ <?php
 session_start();
-$servername = "localhost";
-$username = "mysql_user";
-$password = "r00tpassw0rd/";
-$dbname = "DB";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $eventDate = date('Y-m-d', strtotime($_POST["date"]));
-    $eventTime = $_POST["time"];
-    $eventTime = $eventTime . ":00";
-    $eventDetails = $_POST["bio"];
-    $eventDateTime = $eventDate . " " . $eventTime;
-    $userID = 0;
+
+if (isset($_SESSION['username'])) {
+    $servername = "localhost";
+    $username = "mysql_user";
+    $password = "r00tpassw0rd/";
+    $dbname = "DB";
+
     $conn = new mysqli($servername, $username, $password, $dbname);
+
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "INSERT INTO Calendar (User_ID, Date, Data) VALUES ('$userID', '$eventDateTime', '$eventDetails')";
-    if ($conn->query($sql) === TRUE) {
-        echo "Event created successfully <br>";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+
+    // Retrieve UserID and other fields based on the email (username)
+    $currentUser = $_SESSION['username'];
+    $sql = "SELECT UserID FROM User WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+
+    // Check if the statement was prepared successfully
+    if ($stmt === false) {
+        die("Error in preparing the statement: " . $conn->error);
     }
+
+    $stmt->bind_param("s", $currentUser);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Check if there are rows returned
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $userID = $row['UserID'];
+        // Store UserID in a session variable
+        $_SESSION['userID'] = $userID;
+    } else {
+        echo "User not found for the given email/username: $currentUser";
+        // You may want to handle this case appropriately, like redirecting to a login page
+    }
+
+    // Close the statement
+    $stmt->close();
+
+    // If the form is submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Get other form data
+        $eventDate = date('Y-m-d', strtotime($_POST["date"]));
+        $eventTime = $_POST["time"];
+        $eventTime = $eventTime . ":00";
+        $eventDetails = $_POST["bio"];
+        $eventDateTime = $eventDate . " " . $eventTime;
+
+        // Use the stored UserID to insert into Calendar table
+        $sql = "INSERT INTO Calendar (User_ID, Date, Data) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+
+        if ($stmt === false) {
+            die("Error in preparing the statement: " . $conn->error);
+        }
+
+        $stmt->bind_param("sss", $_SESSION['userID'], $eventDateTime, $eventDetails);
+        $stmt->execute();
+        $stmt->close();
+
+        echo "Event created successfully <br>";
+    }
+
+    // Close the database connection
     $conn->close();
 }
 
+// Display events
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
 $sql = "SELECT * FROM Calendar";
 $result = $conn->query($sql);
+
 if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
         echo "There is an Event " . $row['Date'] . ", " . $row['Data'] . " posted by userID: " . $row['User_ID'] . "<br>";
     }
 } else {
     echo "No events currently scheduled";
 }
-$conn->close();
 
+$conn->close();
 ?>
 
-</body>
+
 </html>
