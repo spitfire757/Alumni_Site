@@ -27,7 +27,15 @@
 
                         $_SESSION['responses'] = $forum[3];
                     ?>
-                    <h4><?php echo $forum[1];?></h4>
+                    <h4><?php 
+
+                    $sql = "SELECT * FROM User WHERE UserID = (".$forum[1].")";
+                    $query = mysqli_query($conn,$sql);
+                    $user = (mysqli_fetch_array($query));
+                    
+                    echo "".$user[1]." ".$user[2]."";
+                    
+                    ?></h4>
                     <p><?php echo $forum[2];?></p>
                 </div>
                 <div>
@@ -42,9 +50,10 @@
             <?php
 
                 $append_response = $_POST["reply"];
-                #SQL Code for appending new replies to the chain
                 $add = $forum[3].'|new|'.$append_response;
                 echo $add; 
+                
+                #SQL works in terms of updating code
                 $sql = "UPDATE Forum SET message = ('".$add."') WHERE postID = ('".$forum[0]."');";
                 $result = $conn->query($sql);
                 
