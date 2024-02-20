@@ -41,7 +41,7 @@
             </form>
             <?php
 
-                $append_response = $_POST["submit"];
+                $append_response = $_POST["reply"];
                 $append_response = '|new|'.$append_response;
                 $_SESSION['response'] .= $append_response;
                 echo $_SESSION['response'];
