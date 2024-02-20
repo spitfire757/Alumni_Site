@@ -27,6 +27,12 @@
                     <h4><?php echo $forum[1];?></h4>
                     <p><?php echo $forum[2];?></p>
                 </div>
+                <div>
+                    <iframe>
+                        <h4><?php echo "Hello World";?><h4>
+                    </iframe>
+
+                </div>
 
                 <div>
                     You: <input type="text" name="reply"><br>
