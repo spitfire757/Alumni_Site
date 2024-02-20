@@ -38,9 +38,12 @@
                     ?></h4>
                     <p><?php echo $forum[2];?></p>
                 </div>
+
+                <!--
                 <div>
                     <iframe class = "view" src = "forum-view.php" height="200" width="300" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
                 </div>
+-->
 
                 <div>
                     You: <input type="text" name="reply"><br>
