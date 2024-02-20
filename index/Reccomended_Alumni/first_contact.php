@@ -29,20 +29,57 @@ if (isset($_SESSION['username'])) {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    echo "Current User :",  $_SESSION['username'];
+
+    // Get the sender's username and user ID from session
     $senderUsername = $_SESSION['username'];
-    $receiverName = $_POST['accountName'];
-    $receiverID = $_POST['accountID'];
-
-    // Insert the request into the database
-    $sql = "INSERT INTO friend_requests (sender_username, receiver_name, receiver_id) VALUES (?, ?, ?)";
+    // Get receiver's name and ID from the form submission
+    // Retrieve UserID and other fields based on the email (username)
+    $sql = "SELECT UserID, email, Fname, LName FROM User WHERE email = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sss", $senderUsername, $receiverName, $receiverID);
-    $stmt->execute();
-    $stmt->close();
 
-    echo "Request sent successfully!";
-} else {
+    // Check if the statement was prepared successfully
+    if ($stmt === false) {
+        die("Error in preparing the statement: " . $conn->error);
+    }
+
+    $stmt->bind_param("s", $senderUsername);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Check if there are rows returned
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $userID = $row['UserID'];
+        $email = $row['email'];
+        $FName = $row['Fname'];
+        $LName = $row['LName'];
+
+        // Display UserID, Email, and other information as needed
+        echo "UserID for $email: $userID <br>";
+        echo "Email: $email <br>";
+        echo "Name: $FName $LName <br>";
+    }
+
+
+
+
+
+    // Need to double check everything below here, as the response sequence is not passing correctly and a bunch of 
+    // these errors are caused by unkown names 
+    // Double check that all variables pass and check error log from /var/log/apache2/error.log
+    // Double check DB submission once fixed so no values are NULL (check sender_ID)  
+        // Insert the request into the database
+	echo $email;
+	echo $userID;
+        $sql = "INSERT INTO friend_requests (sender_username, sender_id, receiver_name, receiver_id) VALUES (?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssss", $sender_ID, $senderID, $receiverName, $receiverID);
+        $stmt->execute();
+        $stmt->close();
+
+        echo "Request sent successfully!";
+    } 
+ else {
     echo "No user signed in, unable to connect to DB, sign in or contact DB admin";
 }
 ?>
