@@ -19,7 +19,6 @@ if (isset($_SESSION['username'])) {
     }
 
     $receiverUsername = $_SESSION['username'];
-    echo $receiverUsername;
 
     // Retrieve user ID from the current user's username
     $sqlUserID = "SELECT UserID FROM User WHERE email = ?";
@@ -154,13 +153,12 @@ echo "</ul>";
     <div id="messages" class="content" style="display: none;">
         <h2>Captain's Dock - Messages Tab</h2>
         <p>This is the content for the Messages Tab.</p>
-
         <div style="display: flex;">
             <!-- Message box area (left side) -->
             <div id="firstContactForm" style="width: 60%; margin-right: 20px;">
                 <h3>Who are you trying to reach?</h3>
                 <form>
-                    <label for="firstName">Email (Username):</label><br>
+                    <label for="fi rstName">Email (Username):</label><br>
                     <input type="text" id="username" name="Email (Username)" required><br>
                     <label for="ID">ID:</label><br>
                     <input type="text" id="ID" name="ID" required><br><br>
@@ -168,6 +166,19 @@ echo "</ul>";
                     <textarea id="message" name="message" rows="4" required></textarea><br><br>
                     <button class="button" type="submit">Send</button>
                 </form>
+	    <?php
+	        if (isset($_SESSION['username'])) {
+    		    $servername = "localhost";
+    		    $username = "mysql_user";
+                    $password = "r00tpassw0rd/";
+    	            $dbname = "DB" ;
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+                    if ($conn->connect_error) {
+                        die("Connection failed: " . $conn->connect_error);
+		    }
+    		    $senderUsername = $_SESSION['username'];
+		}
+	    ?>
             </div>
 
             <!-- Content from first_contact.php (right side) -->
@@ -204,7 +215,21 @@ if (isset($_SESSION['username'])) {
 
     // Get the sender's username and user ID from session
     $senderUsername = $_SESSION['username'];
-    echo $senderUsername;
+    echo "Current User : ", $senderUsername;
+    //Working on message, checking for current accepted requests first, will check both the reciever and sender username(email) 
+    //So that we can pull any conversation from request_id 
+    $sql = "SELECT sender_username, receiver_name from friend_requests where sender_username = ? or receiver_name = ?";
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        die("Error in preparing the statement: " . $conn->error);
+    }
+    $stmt->bind_param("ss", $currentUser);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+	    $row = $result->fetch_assoc();
+	    echo "Pass";
+    }
 }
 ?>
             </div>
