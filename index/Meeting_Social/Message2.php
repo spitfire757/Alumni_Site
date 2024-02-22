@@ -218,18 +218,18 @@ if (isset($_SESSION['username'])) {
     echo "Current User : ", $senderUsername;
     //Working on message, checking for current accepted requests first, will check both the reciever and sender username(email) 
     //So that we can pull any conversation from request_id 
-    $sql = "SELECT sender_username, receiver_name from friend_requests where sender_username = ? or receiver_name = ?";
-    $stmt = $conn->prepare($sql);
-    if ($stmt === false) {
-        die("Error in preparing the statement: " . $conn->error);
-    }
-    $stmt->bind_param("ss", $currentUser);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($result->num_rows > 0) {
-	    $row = $result->fetch_assoc();
-	    echo "Pass";
-    }
+    //$sql = "SELECT sender_username, receiver_name from friend_requests where sender_username = ? or receiver_name = ?";
+    //$stmt = $conn->prepare($sql);
+    //if ($stmt === false) {
+      //  die("Error in preparing the statement: " . $conn->error);
+    //}
+    //$stmt->bind_param("ss", $currentUser);
+   // $stmt->execute();
+   // $result = $stmt->get_result();
+   // if ($result->num_rows > 0) {
+//	    $row = $result->fetch_assoc();
+//	    echo "Pass";
+   // }
 }
 ?>
             </div>
