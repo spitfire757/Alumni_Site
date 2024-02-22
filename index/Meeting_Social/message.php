@@ -1,128 +1,225 @@
 <!DOCTYPE html>
-<html>
-    <body>
-        <div class = "content">
-        <?php 
-        /*
+<html lang="en">
 
-        Gather informaiton from Database to display
 
-        $dbhost = "localhost";
-        $dbuser = "mysql_user";
-        $dbpass = "r00tpassw0rd/";
-        $dbname = "DB";            
-        $conn = mysqli_connect($dbhost, $dbuser, $dbpass);
+<?php
+session_start();
 
-        0. Database = Messages, Table = Chat/GroupChat 
+$pendingRequests = array(); // Initialize an empty array to store pending requests
 
-        1. Select table (chat) from database (messages) (maybe retrive from side panel from html/another php file?)
+if (isset($_SESSION['username'])) {
+    $servername = "localhost";
+    $username = "mysql_user";
+    $password = "r00tpassw0rd/";
+    $dbname = "DB";
 
-        2. Select all rows from table (chat) that contains
-        - Timestamps (Primary Key) (DateTime)
-        - Sender/Profile (Foreign Key to pull information from another table)(VarChar(32))
-        -  Message Text
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-        3. Output Responses from Oldest to Newest (Top to Bottom)
-        */
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-        $messenger = "Bob Jones";
+    $receiverUsername = $_SESSION['username'];
+    echo $receiverUsername;
 
-        echo "<h2>".$messenger."</h2>";
-    
-        /*
-        for (message in message content){
-            if sender is user:
-                echo "<p style='text-align: right'>.$message.";
-            else: // assumes this is not from you
-                echo "<p style='text-align: left'>.$message.";
+    // Retrieve user ID from the current user's username
+    $sqlUserID = "SELECT UserID FROM User WHERE email = ?";
+    $stmtUserID = $conn->prepare($sqlUserID);
 
-        }
-        */
+    if ($stmtUserID === false) {
+        die("Error in preparing the statement: " . $conn->error);
+    }
 
-        $message = "testing message";
+    $stmtUserID->bind_param("s", $receiverUsername);
+    $stmtUserID->execute();
+    $resultUserID = $stmtUserID->get_result();
 
-        for( $i = 0; $i < 5; $i++ )
-        {
-            if (i%2==0){
-                echo "<p style='text-align: right'>".$message."</p>";
-            }
-            if (i%2==1){ // assumes this is not from you
-                echo "<p style='text-align: left'>".$message."</p>"; 
-            }
+    if ($resultUserID->num_rows > 0) {
+        $rowUserID = $resultUserID->fetch_assoc();
+        $userID = $rowUserID['UserID'];
+
+        // Check if the username or user ID is in any row of the friend_requests table
+        $sqlCheckRequests = "SELECT * FROM friend_requests WHERE (sender_username = ? OR sender_id = ? OR receiver_name = ? OR receiver_id = ?) AND status = 'pending'";
+        $stmtCheckRequests = $conn->prepare($sqlCheckRequests);
+
+        if ($stmtCheckRequests === false) {
+            die("Error in preparing the statement: " . $conn->error);
         }
 
+    } else {
+        echo "User not found with the provided username.";
+    }
 
-        ?>
-        </div>
-        <form action = "forum.php" method = "post">
-            <div>
-                <h4>Name of User Here</h4>
-                <p>The following is a test section of where I can find code</p>
-            </div>
-            <div>
-                You: <input type="text" name="reply"><br>
-                <button type = "submit" name = "submit" formaction="leap_year.php">Reply</button><br>                </div>      
+    $stmtUserID->close();
+    $conn->close();
+}
+
+// Print out the pending requests
+echo "<h2>Pending Friend Requests:</h2>";
+echo "<ul>";
+foreach ($pendingRequests as $request) {
+    echo "<li>";
+    echo "Sender: " . $request['sender_username'] . " (ID: " . $request['sender_id'] . ")";
+    echo "</li>";
+}
+echo "</ul>";
+?>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .tabs {
+            display: flex;
+            background-color: #305A8C; /* Updated color code, feel free to change it*/
+            color: white;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .tab:hover {
+            background-color: #2A4C7D;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: none; 
+            justify-content: center;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #305A8C;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #2A4C7D;
+        }
+
+        /* Style for input and textarea */
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+        }
+    </style>
+    <title>Captain's Dock</title>
+</head>
+<body>
+
+    <div class="tabs">
+        <div class="tab" onclick="showTab('home')">Home</div>
+        <div class="tab" onclick="showTab('helppage')">Help Page</div>
+        <div class="tab" onclick="showTab('messages')">Messages</div>
+        <div class="tab" onclick="showTab('forum')">Forum</div>
+        <div class="tab" onclick="showTab('calendar')">Calendar</div>
+        <div class="tab" onclick="showTab('profile')">Profile</div>
+    </div>
+
+    <div id="home" class="content">
+        <h2>Welcome to the Captain's Dock - Home Page</h2>
+        <p>This is the content for the Home Page tab.</p>
+    </div>
+
+    <div id="helppage" class="content" style="display: none;">
+        <h2>Captain's Dock - Help Page Tab</h2>
+        <p>This is the content for the Help Page Tab.</p>
+    </div>
+
+    <div id="messages" class="content" style="display: none;">
+        <h2>Captain's Dock - Messages Tab</h2>
+        <p>This is the content for the Messages Tab.</p>
+        <div id="firstContactForm" class="content" style="display: none;">
+            <h3>Who are you trying to reach?</h3>
+            <div style="width: 60%; margin-right: 20px;">		
+            <form>
+                <label for="firstName">Email (Username):</label><br>
+                <input type="text" id="username" name="Email (Username)" required><br>
+                <label for="ID">ID:</label><br>
+                <input type="text" id="ID" name="ID" required><br><br>
+                <label for="message">Enter Message:</label><br>
+                <textarea id="message" name="message" rows="4" required></textarea><br><br>
+                <button class="button" type="submit">Send</button>
             </form>
-        <?php
-            /*
-            !Connection to DB 
+	    </div>
+	    <div style="width: 30%;">
+	    <?php include 'first_contact.php'; ?>
+	    </div>	
+        </div>
 
-            $dbhost = "localhost";
-            $dbuser = "mysql_user";
-            $dbpass = "r00tpassw0rd/";
-            $dbname = "DB";
-            
-            $conn = mysqli_connect($dbhost, $dbuser, $dbpass);
-            */
+        <div id="messagingForm" class="content" style="display: none;">
+            <h3>Who are you trying to contact?</h3>
+            <form>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="message">Enter Message:</label><br>
+                <textarea id="message" name="message" rows="4" required></textarea><br><br>
+                <button class="button" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
 
-            /*
-            Functionality
+    <div id="forum" class="content" style="display: none;">
+        <h2>Captain's Dock - Forum Tab</h2>
+        <p>This is the content for the Forum Tab.</p>
+    </div>
 
-            0. Database = Messages, Table = Chat/GroupChat 
+    <div id="calendar" class="content" style="display: none;">
+        <h2>Captain's Dock - Calendar Tab</h2>
+        <p>This is the content for the Calendar Tab.</p>
+    </div>
 
-            1. Select table (chat) from database (messages) (maybe retrive from side panel from html/another php file?)
+    <div id="profile" class="content" style="display: none;">
+        <h2>Captain's Dock - Profile Tab</h2>
+        <p>This is the content for the Profile Tab.</p>
+	<?php include 'profile_content.php'; ?>
+    </div>
+    <!-- Inside message.php -->
+    <a href="view_requests.php">View Friend Requests</a>
 
-            1. Select all rows from table (chat) that contains
-            - Timestamps (Primary Key) (DateTime)
-            - Sender/Profile (Foreign Key to pull information from another table)(VarChar(32))
-            - Message Text
+    <script>
+        function showTab(tabId) {
+            // Hide all tabs
+            var tabs = document.getElementsByClassName('content');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].style.display = 'none';
+            }
 
-            2. Output Responses from Oldest to Newest (Top to Bottom)
+            // Show the selected tab
+            document.getElementById(tabId).style.display = 'block';
 
-            3. If any user inputs thier response and hits send, the you insert the following into the table
-            - Timestamp of Send Button
-            - Sender/Profile information of Sender
-            - Message Text
-
-            ? Questions:
-            - Is there a way in PHP to dynamically update the page/php
-            since this is in an iframe
-            */
-
-            $dbhost = "localhost";
-            $dbuser = "mysql_user";
-            $dbpass = "r00tpassw0rd/";
-            $dbname = "DB";
-                        
-            $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-            $post = $_POST["message"];
-
-            $sql = "SELECT * FROM ''";
-
-            $replies = $conn->query($sql);
-
-                        while ($replies->num_rows>0){
-                            echo "hi";
-                        }
-
-                        $sql = "INSERT INTO `` VALUES ('".$year."'); ";
-
-                        $conn->query($sql);
-
-                        /*
-
-                        */
-        ?>
-    </body>
+            // If the Messages tab is selected, show the first contact form by default
+            if (tabId === 'messages') {
+                document.getElementById('firstContactForm').style.display = 'block';
+            }
+        }
+    </script>
 </html>
+

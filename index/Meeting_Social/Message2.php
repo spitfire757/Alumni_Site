@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <?php
 session_start();
 
@@ -64,7 +63,6 @@ foreach ($pendingRequests as $request) {
 }
 echo "</ul>";
 ?>
-
 
 <head>
     <meta charset="UTF-8">
@@ -132,8 +130,8 @@ echo "</ul>";
     </style>
     <title>Captain's Dock</title>
 </head>
-<body>
 
+<body>
     <div class="tabs">
         <div class="tab" onclick="showTab('home')">Home</div>
         <div class="tab" onclick="showTab('helppage')">Help Page</div>
@@ -156,31 +154,62 @@ echo "</ul>";
     <div id="messages" class="content" style="display: none;">
         <h2>Captain's Dock - Messages Tab</h2>
         <p>This is the content for the Messages Tab.</p>
-        <div id="firstContactForm" class="content" style="display: none;">
-            <h3>Who are you trying to reach?</h3>
-            <form>
-                <label for="firstName">Email (Username):</label><br>
-                <input type="text" id="username" name="Email (Username)" required><br>
-                <label for="ID">ID:</label><br>
-                <input type="text" id="ID" name="ID" required><br><br>
-                <label for="message">Enter Message:</label><br>
-                <textarea id="message" name="message" rows="4" required></textarea><br><br>
-                <button class="button" type="submit">Send</button>
-            </form>
-        </div>
 
-        <div id="messagingForm" class="content" style="display: none;">
-            <h3>Who are you trying to contact?</h3>
-            <form>
-                <label for="email">Email:</label><br>
-                <input type="email" id="email" name="email" required><br><br>
-                <label for="message">Enter Message:</label><br>
-                <textarea id="message" name="message" rows="4" required></textarea><br><br>
-                <button class="button" type="submit">Send</button>
-            </form>
-        </div>
+        <div style="display: flex;">
+            <!-- Message box area (left side) -->
+            <div id="firstContactForm" style="width: 60%; margin-right: 20px;">
+                <h3>Who are you trying to reach?</h3>
+                <form>
+                    <label for="firstName">Email (Username):</label><br>
+                    <input type="text" id="username" name="Email (Username)" required><br>
+                    <label for="ID">ID:</label><br>
+                    <input type="text" id="ID" name="ID" required><br><br>
+                    <label for="message">Enter Message:</label><br>
+                    <textarea id="message" name="message" rows="4" required></textarea><br><br>
+                    <button class="button" type="submit">Send</button>
+                </form>
+            </div>
+
+            <!-- Content from first_contact.php (right side) -->
+            <div style="width: 30%; display: flex; flex-direction: column; align-items: flex-end;">
+<h3> Enter The name and Account ID to request </h3>
+<form action="send_request.php" method="post">
+    <table>
+        <tr>
+            <td><label for="accountName">Account Name:</label></td>
+            <td><input type="text" id="accountName" name="accountName" required></td>
+        </tr>
+        <tr>
+            <td><label for="accountID">Account ID:</label></td>
+            <td><input type="text" id="accountID" name="accountID" required></td>
+        </tr>
+    </table>
+    <button type="submit">Submit</button>
+</form>
+<?php
+
+session_start();
+
+if (isset($_SESSION['username'])) {
+    $servername = "localhost";
+    $username = "mysql_user";
+    $password = "r00tpassw0rd/";
+    $dbname = "DB";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Get the sender's username and user ID from session
+    $senderUsername = $_SESSION['username'];
+    echo $senderUsername;
+}
+?>
+            </div>
+	</div>
     </div>
-
     <div id="forum" class="content" style="display: none;">
         <h2>Captain's Dock - Forum Tab</h2>
         <p>This is the content for the Forum Tab.</p>
@@ -194,6 +223,7 @@ echo "</ul>";
     <div id="profile" class="content" style="display: none;">
         <h2>Captain's Dock - Profile Tab</h2>
         <p>This is the content for the Profile Tab.</p>
+	<?php include 'profile_content.php'; ?>
     </div>
     <!-- Inside message.php -->
     <a href="view_requests.php">View Friend Requests</a>
