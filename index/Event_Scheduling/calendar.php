@@ -111,10 +111,14 @@ if ($conn->connect_error) {
 
 $sql = "SELECT * FROM Calendar";
 $result = $conn->query($sql);
+$todaysDate = date('Y-m-d H:i:s');
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        echo "There is an Event " . $row['Date'] . ", " . $row['Data'] . " posted by userID: " . $row['User_ID'] . "<br>";
+        if($row['Date'] >= $todaysDate){
+            $dateWithoutSeconds = substr($row['Date'], 0, -2);
+            echo "There is an Event " . $dateWithoutSeconds . ", " . $row['Data'] . " posted by userID: " . $row['User_ID'] . "<br>";
+        }
     }
 } else {
     echo "No events currently scheduled";
