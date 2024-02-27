@@ -117,7 +117,13 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         if($row['Date'] >= $todaysDate){
             $dateWithoutSeconds = substr($row['Date'], 0, -2);
-            echo "There is an Event " . $dateWithoutSeconds . ", " . $row['Data'] . " posted by userID: " . $row['User_ID'] . "<br>";
+            $userId = $row['User_ID'];
+            $innerSql = "SELECT fname, lname FROM User WHERE User_ID = $userId";
+            $innerResult = $conn->query($innerSql);
+            $userRow = $innerResult->fetch_assoc();
+            $fname = $userRow['fname'];
+            $lname = $userRow['lname'];
+            echo "There is an Event " . $dateWithoutSeconds . ", " . $row['Data'] . " posted by user: " . $fname . " " . $lname . "<br>";
         }
     }
 } else {
