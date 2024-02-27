@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start();{
     $servername = "localhost";
     $username = "mysql_user";
     $password = "r00tpassw0rd/";
@@ -14,4 +14,5 @@ session_start();
     }
     
     return $conn;
+}
 
