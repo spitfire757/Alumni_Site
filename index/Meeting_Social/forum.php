@@ -5,31 +5,30 @@
     </head>
     <body>
         <div>
+            <div>
+                <!-- Loading content onto the page from the DB -->
+                <?php
+                    session_start();
+                    #include 'connect.php';
+                    #After you get the DB to output dummy data, try moving this into the connect.php file
+                    $servername = "localhost";
+                    $username = "mysql_user";
+                    $password = "r00tpassw0rd/";
+                    $dbname = "DB";
+
+                    $conn = new mysqli($servername, $username, $password, $dbname);
+
+                    $sql = "SELECT * FROM Forum WHERE ForumID = 'qwerty'";
+                    $query = mysqli_query($conn, $sql);
+                    $forum = mysqli_fetch_assoc($query)
+                ?>
+            <!-- Form for the forum -->
+            </div>
             <form action = "forum.php" method = "post">
-                <div>
-                    <!-- Loading content onto the page from the DB -->
-                    <?php
-                        session_start();
-                        #include 'connect.php';
-                        
-                        #After you get the DB to output dummy data, try moving this into the connect.php file
-                        $servername = "localhost";
-                        $username = "mysql_user";
-                        $password = "r00tpassw0rd/";
-                        $dbname = "DB";
-
-                        $conn = new mysqli($servername, $username, $password, $dbname);
-
-                        $sql = "SELECT * FROM Forum WHERE ForumID = 'qwerty'";
-                        $query = mysqli_query($conn, $sql);
-                        $forum = mysqli_fetch_assoc($query)
-                    ?>
-                </div>
-                <div>
-                <!-- Form for the forum -->
                     <!-- This should load the content when selected -->
                     <select name = "thread">
                         <?php
+                            echo "<option value='default'>Select a Thread</option>";
                             echo "<option value=".$forum["ForumID"].">".$forum["Title"]."</option>";
                             echo "<option value='testing'>Testing</option>";
                         ?>
@@ -38,10 +37,8 @@
                     <h2><?php echo $forum["Title"];?></h2>
                     <h3><?php echo $forum["userID"];?></h3>
                     <p><?php echo $forum["Description"];?></p>
-
                     <textarea id="w3review" name="w3review" rows="4" cols="50">Insert Your Response Here</textarea>
-                    <button type = "submit" name = "submit" formaction="forum.php">Add Response</button><br>
-                </div>      
+                    <button type = "submit" name = "submit" formaction="forum.php">Add Response</button><br>      
             </form>
             <?php
                 
