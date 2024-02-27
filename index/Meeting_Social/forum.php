@@ -22,10 +22,9 @@
 
                         $sql = "SELECT * FROM Forum WHERE ForumID = ('abcdefeg')";
                         $query = mysqli_query($conn,$sql);
-
                         $forum = (mysqli_fetch_assoc($query));
-
                         echo $forum;
+
 
                     ?>
                     <h4><?php 
@@ -36,7 +35,7 @@
                         
                         echo "".$user[1]." ".$user[2]."";
                         */
-                        echo $forum["userID"]
+                        echo $forum["userID"];
                     ?></h4>
 
                     <p><?php echo $forum["Description"];?></p>
