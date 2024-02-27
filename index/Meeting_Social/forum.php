@@ -31,6 +31,7 @@
                     <select name = "thread">
                         <?php
                             echo "<option value=".$forum["ForumID"].">".$forum["Title"]."</option>";
+                            echo "<option value='testing'>Testing</option>";
                         ?>
                     </select>
                     <button type = "submit" name = "refresh" formaction="forum.php">Go</button><br>
