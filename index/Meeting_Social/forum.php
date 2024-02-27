@@ -22,8 +22,9 @@
 
                         $sql = "SELECT * FROM Forum WHERE ForumID = ('abcdefeg')";
                         $query = mysqli_query($conn,$sql);
+                        echo "query has been run";
                         $forum = (mysqli_fetch_assoc($query));
-                        echo $forum;
+                        echo "forum has been run";
 
 
                     ?>
