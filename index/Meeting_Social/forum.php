@@ -20,36 +20,27 @@
 
                         $conn = new mysqli($servername, $username, $password, $dbname);
 
-                        $sql = "SELECT * FROM Forum WHERE ForumID = 'qwerty'";
-                        $query = mysqli_query($conn,$sql);
-                        echo "query has been run";
-                        $forum = (mysqli_fetch_assoc($query));
-                        echo "forum has been run";
-                        echo $forum["userID"];
-                        echo $forum["Description"];
-                        echo "everything works";
+                        $sql = "SELECT * FROM Forum";
+                        $query = mysqli_query($conn, $sql);
 
+                        $rows = array();
 
+                        while ($row = mysqli_fetch_assoc($query)) {
+                            $rows[] = $row;
+                        }
                     ?>
-                    <h4><?php 
-                        /*
-                        $sql = "SELECT * FROM User WHERE UserID = (".$forum["userID"].")";
-                        $query = mysqli_query($conn,$sql);
-                        $user = (mysqli_fetch_array($query));
-                        
-                        echo "".$user[1]." ".$user[2]."";
-                        */
-                        echo $forum["userID"];
-                    ?></h4>
-
-                    <p><?php echo $forum["Description"];?></p>
                 </div>
-
-                <!--div>
-                    <iframe class = "view" src = "forum-view.php" height="200" width="300" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
-                </div-->
-
                 <div>
+                    <!-- Form for the forum -->
+                    <select name = "thread">
+                        <?php
+                            $i = 0;
+                            while($i<count($row)){
+                                $forum = $row[$i];
+                                echo "<option value=".$forum["title"].">Volvo</option>";
+                            }
+                        ?>
+                    </select>
                     You: <input type="text" name="reply"><br>
                     <button type = "submit" name = "submit" formaction="forum.php">Reply</button><br>
                 </div>      
@@ -63,7 +54,6 @@
                 #$sql = "UPDATE Forum SET replies = 'i want money now XD updated' WHERE postID = 3;";
                 $result = $conn->query($sql);
                 */
-                echo "testing testing 123";
             ?>
         </div>
     </body>
