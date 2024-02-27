@@ -26,12 +26,14 @@
                     ?>
                 </div>
                 <div>
-                    <!-- Form for the forum -->
-                    <select name = "thread"><br>
+                <!-- Form for the forum -->
+                    <!-- This should load the content when selected -->
+                    <select name = "thread">
                         <?php
                             echo "<option value=".$forum["ForumID"].">".$forum["Title"]."</option>";
                         ?>
                     </select>
+                    <button type = "submit" name = "refresh" formaction="forum.php">Go</button><br>
                     <h2><?php echo $forum["Title"];?></h2>
                     <h3><?php echo $forum["userID"];?></h3>
                     <p><?php echo $forum["Description"];?></p>
@@ -41,8 +43,9 @@
                 </div>      
             </form>
             <?php
+                
+                echo $_POST['submit'];
                 /*
-                $append_response = $forum['replies'] . '|new|' . $_POST['reply'];
                 echo $append_response;
                 #SQL does not update code correctly
                 $sql = "UPDATE Forum SET replies = '".$append_response."' WHERE postID = ".$forum['postID'].";";
