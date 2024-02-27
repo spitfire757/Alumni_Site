@@ -32,11 +32,11 @@
                             echo "<option value=".$forum["ForumID"].">".$forum["Title"]."</option>";
                         ?>
                     </select>
-                    <h2><?php echo $forum["Title"];?></h2><br>
-                    <h3><?php echo $forum["userID"];?></h3><br>
-                    <p><?php echo $forum["Description"];?></p><br>
+                    <h2><?php echo $forum["Title"];?></h2>
+                    <h3><?php echo $forum["userID"];?></h3>
+                    <p><?php echo $forum["Description"];?></p>
 
-                    <textarea id="w3review" name="w3review" rows="4" cols="50">
+                    <textarea id="w3review" name="w3review" rows="4" cols="50">Insert Your Response Here</textarea>
                     <button type = "submit" name = "submit" formaction="forum.php">Add Response</button><br>
                 </div>      
             </form>
