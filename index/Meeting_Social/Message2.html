@@ -34,7 +34,6 @@
 
         .buttons {
             margin-top: 20px;
-            display: none; 
             justify-content: center;
         }
 
@@ -79,7 +78,16 @@
 
     <div id="home" class="content">
         <h2>Welcome to the Captain's Dock - Home Page</h2>
+        <img src="file:///C:/Users/Admin/Desktop/CPSC%20351/Alumni_Site/index/images/christopher-newport-university-jerry-gammon.jpg" alt="Christopher Newport University">
         <p>This is the content for the Home Page tab.</p>
+        <div id="upcoming" class="upcoming-content">
+            <h3>Upcoming Events</h3>
+            <button id="eventButton" class="button" onclick="showNextEvent()">Show Next Event</button>
+            <p id="datePlaceholder"></p>
+            <div class="buttons">
+                <a href="https://cnu.joinhandshake.com/stu/schools/617" target="_blank" class="button">Career Services</a>
+            </div>
+        </div>
     </div>
 
     <div id="helppage" class="content" style="display: none;">
@@ -148,6 +156,23 @@
                 document.getElementById('firstContactForm').style.display = 'block';
             }
         }
+
+        var dates = ["Event 1 - March 1, 2024", "Event 2 - March 15, 2024", "Event 3 - March 30, 2024"];
+        var index = 0;
+
+        function rotateDates() {
+            document.getElementById("datePlaceholder").innerText = dates[index];
+            index = (index + 1) % dates.length;
+        }
+
+        function showNextEvent() {
+            document.getElementById("datePlaceholder").innerText = dates[index];
+            index = (index + 1) % dates.length;
+        }
+
+        // Rotate dates every day (86400000 milliseconds = 1 day)
+        setInterval(rotateDates, 86400000); // 24 hours * 60 minutes * 60 seconds * 1000 milliseconds
+
     </script>
 
 </body>
