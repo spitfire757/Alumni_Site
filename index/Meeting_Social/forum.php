@@ -20,25 +20,16 @@
 
                         $conn = new mysqli($servername, $username, $password, $dbname);
 
-                        $sql = "SELECT * FROM Forum";
+                        $sql = "SELECT * FROM Forum WHERE ForumID = 'qwerty'";
                         $query = mysqli_query($conn, $sql);
-
-                        $rows = array();
-
-                        while ($row = mysqli_fetch_assoc($query)) {
-                            $rows[] = $row;
-                        }
+                        $forum = mysqli_fetch_assoc($query)
                     ?>
                 </div>
                 <div>
                     <!-- Form for the forum -->
                     <select name = "thread">
                         <?php
-                            $i = 0;
-                            while($i<count($row)){
-                                $forum = $row[$i];
-                                echo "<option value=".$forum["title"].">Volvo</option>";
-                            }
+                            echo "<option value=".$forum["Title"].">Volvo</option>";
                         ?>
                     </select>
                     You: <input type="text" name="reply"><br>
