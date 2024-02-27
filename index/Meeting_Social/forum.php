@@ -25,6 +25,8 @@
                         echo "query has been run";
                         $forum = (mysqli_fetch_assoc($query));
                         echo "forum has been run";
+                        echo $forum["userID"];
+                        echo "everything works";
 
 
                     ?>
