@@ -27,13 +27,17 @@
                 </div>
                 <div>
                     <!-- Form for the forum -->
-                    <select name = "thread">
+                    <select name = "thread"><br>
                         <?php
-                            echo "<option value=".$forum["Title"].">Volvo</option>";
+                            echo "<option value=".$forum["ForumID"].">".$forum["Title"]."</option>";
                         ?>
                     </select>
-                    You: <input type="text" name="reply"><br>
-                    <button type = "submit" name = "submit" formaction="forum.php">Reply</button><br>
+                    <h2><?php echo $forum["Title"];?></h2><br>
+                    <h3><?php echo $forum["userID"];?></h3><br>
+                    <p><?php echo $forum["Description"];?></p><br>
+
+                    <textarea id="w3review" name="w3review" rows="4" cols="50">
+                    <button type = "submit" name = "submit" formaction="forum.php">Add Response</button><br>
                 </div>      
             </form>
             <?php
