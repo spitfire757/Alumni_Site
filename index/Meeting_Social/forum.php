@@ -20,12 +20,13 @@
 
                         $conn = new mysqli($servername, $username, $password, $dbname);
 
-                        $sql = "SELECT * FROM Forum WHERE ForumID = ('abcdefeg')";
+                        $sql = "SELECT * FROM Forum WHERE ForumID = 'qwerty'";
                         $query = mysqli_query($conn,$sql);
                         echo "query has been run";
                         $forum = (mysqli_fetch_assoc($query));
                         echo "forum has been run";
                         echo $forum["userID"];
+                        echo $forum["Description"];
                         echo "everything works";
 
 
