@@ -20,10 +20,12 @@
 
                         $conn = new mysqli($servername, $username, $password, $dbname);
 
-                        $sql = "SELECT * FROM Forum WHERE ForumID = ('abcedfeg')";
+                        $sql = "SELECT * FROM Forum WHERE ForumID = ('abcdefeg')";
                         $query = mysqli_query($conn,$sql);
 
                         $forum = (mysqli_fetch_assoc($query));
+
+                        echo $forum;
 
                     ?>
                     <h4><?php 
