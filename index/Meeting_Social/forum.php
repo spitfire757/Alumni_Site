@@ -49,7 +49,7 @@
                     echo $userID;
                     echo $response;
 
-                    $currentDateTime = date("Y-m-d H:i:s");
+                    $currentDateTime = date("d-m-Y h:i:s");
                     echo $currentDateTime;
 
 
