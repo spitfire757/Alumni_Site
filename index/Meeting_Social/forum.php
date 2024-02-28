@@ -28,28 +28,38 @@
                     <!-- This should load the content when selected -->
                     <select name = "thread">
                         <?php
+                            echo "<option value='start'>".$_SESSION["thread"]."</option>";
                             echo "<option value='default'>Select a Thread</option>";
                             echo "<option value=".$forum["ForumID"].">".$forum["Title"]."</option>";
                             echo "<option value='testing'>Testing</option>";
                         ?>
                     </select>
                     <button type = "submit" name = "refresh" formaction="forum.php">Go</button><br>
+     
                     <h2><?php echo $forum["Title"];?></h2>
                     <h3><?php echo $forum["userID"];?></h3>
                     <p><?php echo $forum["Description"];?></p>
-                    <textarea id="w3review" name="w3review" rows="4" cols="50">Insert Your Response Here</textarea>
-                    <button type = "submit" name = "submit" formaction="forum.php">Add Response</button><br>      
+                    <input name = "userID"></input>
+                    <input type="text" name="userID" placeholder="userID" maxlength="64" required>Insert Your UserID Here</input><br>
+                    <textarea id="response" name="response" rows="4" cols="50" maxlength="255" required>Insert Your Response Here</textarea><br>                  
+                    <button type = "submit" name = "submit" formaction="forum.php" required>Reply</button><br>      
             </form>
             <?php
+                if (isset($_POST['submit'])) {
+                    $userID = $_POST['userID'];
+                    $response = $_POST['response'];
+
+                    echo $userID;
+                    echo $response;
+
+                    $currentDateTime = date("Y-m-d H:i:s");
+                    echo $currentDateTime;
+
+                    
+                    $_POST['userID'] = "";
+                    $_POST['response'] = "";
+                }
                 
-                echo $_POST['submit'];
-                /*
-                echo $append_response;
-                #SQL does not update code correctly
-                $sql = "UPDATE Forum SET replies = '".$append_response."' WHERE postID = ".$forum['postID'].";";
-                #$sql = "UPDATE Forum SET replies = 'i want money now XD updated' WHERE postID = 3;";
-                $result = $conn->query($sql);
-                */
             ?>
         </div>
     </body>
