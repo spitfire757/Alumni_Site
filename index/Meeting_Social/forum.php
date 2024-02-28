@@ -37,8 +37,8 @@
                     <h2><?php echo $forum["Title"];?></h2>
                     <h3><?php echo $forum["userID"];?></h3>
                     <p><?php echo $forum["Description"];?></p>
-                    <input type="text" name="userID" placeholder="userID" maxlength="64" required><br>
-                    <textarea id="response" name="response" placeholder="Insert Your Response Here" rows="4" cols="50" maxlength="255" required></textarea><br>                  
+                    <input type="text" name="userID" placeholder="userID" maxlength="64"><br>
+                    <textarea id="response" name="response" placeholder="Insert Your Response Here" rows="4" cols="50" maxlength="255"></textarea><br>                  
                     <button type = "submit" name = "submit" formaction="forum.php" required>Reply</button><br>      
             </form>
             <?php
@@ -51,6 +51,8 @@
 
                     $currentDateTime = date("Y-m-d H:i:s");
                     echo $currentDateTime;
+
+
 
                     
                     $_POST['userID'] = "";
