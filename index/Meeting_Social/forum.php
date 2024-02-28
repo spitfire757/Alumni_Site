@@ -27,12 +27,10 @@
             <form action = "forum.php" method = "post">
                     <!-- This should load the content when selected -->
                     <select name = "thread">
-                        <?php
-                            echo "<option value='start'>".$_SESSION["thread"]."</option>";
-                            echo "<option value='default'>Select a Thread</option>";
-                            echo "<option value=".$forum["ForumID"].">".$forum["Title"]."</option>";
-                            echo "<option value='testing'>Testing</option>";
-                        ?>
+                        <option value="start"><?php echo isset($_SESSION["thread"]) ? $_SESSION["thread"] : ""; ?></option>
+                        <option value="default">Select a Thread</option>
+                        <option value="<?php echo $forum["ForumID"]; ?>"><?php echo $forum["Title"]; ?></option>
+                        <option value="testing">Testing</option>
                     </select>
                     <button type = "submit" name = "refresh" formaction="forum.php">Go</button><br>
      
