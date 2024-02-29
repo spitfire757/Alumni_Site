@@ -23,6 +23,12 @@
 
                     echo $div;
 
+                    if ($div) {
+                        echo $dom->saveHTML($div);
+                    } else {
+                        echo "Element with ID 'select_form' not found.";
+                    }
+
                     $conn = new mysqli($servername, $username, $password, $dbname);
                     /*
                     $sql = "SELECT * FROM Forum WHERE Title = '.$.'";
