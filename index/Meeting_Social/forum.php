@@ -53,6 +53,7 @@
 
                     echo "userID: ".$userID."<br>datetime: ".$dateTime."<br>response: ".$response."<br>forumID: ".$forumID."<br> responseID: ".$responseID."<br>";
                     
+                    /*
                     # Add Response to Response Table
                     $sql = "INSERT INTO Forum_Response VALUES ($responseID,$forumID,$userID,$response,$dateTime);";
                     
@@ -63,6 +64,15 @@
                     }
 
                     $query = mysqli_query($conn, $sql);
+                    */
+                    $sql = "INSERT INTO Forum_Response (responseID, forumID, userID, response, dateTime) VALUES ('$responseID', '$forumID', '$userID', '$response', '$dateTime')";
+
+                    if ($conn->query($sql) === TRUE) {
+                        echo "New record created successfully";
+                    } else {
+                        echo "Error: " . $sql . "<br>" . $conn->error;
+                    }
+
                     
                     $_POST['userID'] = "";
                     $_POST['response'] = "";
