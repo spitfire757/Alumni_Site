@@ -52,7 +52,7 @@
                     $forumID = $forum["ForumID"];
                     
                     # Add Response to Response Table
-                    $sql = "INSERT INTO Forum VALUES ($responseID,$forumID,$userID,$response,$dateTime);";
+                    $sql = "INSERT INTO Forum_Response VALUES ($responseID,$forumID,$userID,$response,$dateTime);";
                     $query = mysqli_query($conn, $sql);
 
                     $_POST['userID'] = "";
