@@ -48,7 +48,7 @@
                     $userID = $_POST['userID'];
                     $response = $_POST['response'];
                     $dateTime = date("d-m-Y h:i:s");
-                    $responseID = substr(hash('sha256',$response),0,32);
+                    $responseID = substr(hash('sha256',$response),0,16);
                     $forumID = $forum["ForumID"];
                     
                     # Add Response to Response Table
