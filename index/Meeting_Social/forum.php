@@ -43,18 +43,19 @@
             </form>
             <?php
                 if (isset($_POST['submit'])) {
+
+                    # Get the elements needed for a new response
                     $userID = $_POST['userID'];
                     $response = $_POST['response'];
-
-                    echo $userID;
-                    echo $response;
-
-                    $currentDateTime = date("d-m-Y h:i:s");
-                    echo $currentDateTime;
-
-
-
+                    $dateTime = date("d-m-Y h:i:s");
+                    $responseID = substr(hash('sha256',$response),0,32);
+                    $forumID = $forum["ForumID"];
                     
+                    # Add Response to Response Table
+                    $sql = "INSERT INTO Forum (responseID, forumID, userID, response, dateTime) VALUES ($responseID,$forumID,$userID,$response,$dateTime);
+                    $query = mysqli_query($conn, $sql);
+
+                    # Reset the on screen fields
                     $_POST['userID'] = "";
                     $_POST['response'] = "";
                 }
