@@ -16,6 +16,8 @@
                     $password = "r00tpassw0rd/";
                     $dbname = "DB";
 
+                    # Use DOM to get title, then sql is like 'SELECT Where title = xxx'
+
                     $conn = new mysqli($servername, $username, $password, $dbname);
 
                     $sql = "SELECT * FROM Forum WHERE ForumID = 'qwerty'";
@@ -26,20 +28,9 @@
             </div>
             <form action = "forum.php" method = "post">
                     <!-- This should load the content when selected -->
-                    <select name = "thread">
-                        <option value="start"><?php echo isset($_SESSION["thread"]) ? $_SESSION["thread"] : ""; ?></option>
-                        <option value="default">Select a Thread</option>
-                        <option value="<?php echo $forum["ForumID"]; ?>"><?php echo $forum["Title"]; ?></option>
-                        <option value="testing">Testing</option>
-                    </select>
-                    <button type = "submit" name = "refresh" formaction="forum.php">Go</button><br>
-     
                     <h2><?php echo $forum["Title"];?></h2>
                     <h3><?php echo $forum["userID"];?></h3>
                     <p><?php echo $forum["Description"];?></p>
-                    <input type="text" name="userID" placeholder="userID" maxlength="64"><br>
-                    <textarea id="response" name="response" placeholder="Insert Your Response Here" rows="4" cols="50" maxlength="255"></textarea><br>                  
-                    <button type = "submit" name = "submit" formaction="forum.php" required>Reply</button><br>      
             </form>
             <?php
                 if (isset($_POST['submit'])) {
