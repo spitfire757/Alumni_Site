@@ -65,7 +65,7 @@
 
                     $query = mysqli_query($conn, $sql);
                     */
-                    $sql = "INSERT INTO Forum_Response (responseID, forumID, userID, response, dateTime) VALUES ('$responseID', '$forumID', '$userID', '$response', '$dateTime')";
+                    $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forumID', '$userID', '$response', '$dateTime')";
 
                     if ($conn->query($sql) === TRUE) {
                         echo "New record created successfully";
