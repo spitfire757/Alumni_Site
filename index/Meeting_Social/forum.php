@@ -47,7 +47,7 @@
                     # Get the elements needed for a new response
                     $userID = $_POST['userID'];
                     $response = $_POST['response'];
-                    $dateTime = date("d-m-Y h:i:s");
+                    $dateTime = date("m-d-Y H:i:s");
                     $responseID = substr(hash('sha256',$response),0,16);
                     $forumID = $forum["ForumID"];
 
