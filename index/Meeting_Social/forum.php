@@ -16,18 +16,26 @@
                     $password = "r00tpassw0rd/";
                     $dbname = "DB";
 
-                    # Use DOM to get title, then sql is like 'SELECT Where title = xxx'
-                    $dom = new DOMDocument();
-                    $dom->load("forum.html");
-                    $div = $dom->getElementById('select_form');
+                    
+                    error_reporting(E_ALL);
+                    ini_set('display_errors', 1);
 
-                    echo $div;
+                    $dom = new DOMDocument();
+                    $loaded = $dom->loadHTMLFile("forum.html");
+
+                    if (!$loaded) {
+                        die("Failed to load HTML file.");
+                    }
+
+                    $div = $dom->getElementById('select_form');
 
                     if ($div) {
                         echo $dom->saveHTML($div);
                     } else {
                         echo "Element with ID 'select_form' not found.";
                     }
+                    
+
 
                     $conn = new mysqli($servername, $username, $password, $dbname);
                     /*
