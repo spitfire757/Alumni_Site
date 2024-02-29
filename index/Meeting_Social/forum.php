@@ -50,6 +50,8 @@
                     $dateTime = date("d-m-Y h:i:s");
                     $responseID = substr(hash('sha256',$response),0,16);
                     $forumID = $forum["ForumID"];
+
+                    echo "userID: ".$userID."<br>datetime: ".$dateTime."<br>response: ".$response."<br>forumID: ".$forumID."<br> responseID: ".$responseID."<br>";
                     
                     # Add Response to Response Table
                     $sql = "INSERT INTO Forum_Response VALUES ($responseID,$forumID,$userID,$response,$dateTime);";
