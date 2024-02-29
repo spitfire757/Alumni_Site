@@ -57,6 +57,12 @@
                     $sql = "INSERT INTO Forum_Response VALUES ('.$responseID.','.$forumID.','.$userID.','.$response.','.$dateTime.');";
                     $query = mysqli_query($conn, $sql);
 
+                    if ($conn->query($sql) === TRUE) {
+                        echo "New record created successfully";
+                    } else {
+                        echo "Error: " . $sql . "<br>" . $conn->error;
+                    }
+                    
                     $_POST['userID'] = "";
                     $_POST['response'] = "";
                 }
