@@ -17,12 +17,18 @@
                     $dbname = "DB";
 
                     # Use DOM to get title, then sql is like 'SELECT Where title = xxx'
+                    $dom = new DOMDocument();
+                    $dom->load("forum.html");
+                    $div = $dom->getElementById('select_form');
+
+                    echo $div;
 
                     $conn = new mysqli($servername, $username, $password, $dbname);
-
-                    $sql = "SELECT * FROM Forum WHERE ForumID = 'qwerty'";
+                    /*
+                    $sql = "SELECT * FROM Forum WHERE Title = '.$.'";
                     $query = mysqli_query($conn, $sql);
                     $forum = mysqli_fetch_assoc($query)
+                    */
                 ?>
             <!-- Form for the forum -->
             </div>
