@@ -54,7 +54,7 @@
                     echo "userID: ".$userID."<br>datetime: ".$dateTime."<br>response: ".$response."<br>forumID: ".$forumID."<br> responseID: ".$responseID."<br>";
                     
                     # Add Response to Response Table
-                    $sql = "INSERT INTO Forum_Response VALUES ('.$responseID.','.$forumID.','.$userID.','.$response.','.$dateTime.');";
+                    $sql = "INSERT INTO Forum_Response VALUES ($responseID,$forumID,$userID,$response,$dateTime);";
                     
                     if ($conn->query($sql) === TRUE) {
                         echo "New record created successfully";
