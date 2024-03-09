@@ -115,21 +115,26 @@ $todaysDate = date('Y-m-d H:i:s');
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        if($row['Date'] >= $todaysDate){
-            $dateWithoutSeconds = substr($row['Date'], 0, -2);
-            $userId = $row['User_ID'];
-            $innerSql = "SELECT fname, lname FROM User WHERE User_ID = $userId";
-            $innerResult = $conn->query($innerSql);
-            $userRow = $innerResult->fetch_assoc();
-            $fname = $userRow['fname'];
-            $lname = $userRow['lname'];
-            echo "There is an Event " . $dateWithoutSeconds . ", " . $row['Data'] . " posted by user: " . $fname . " " . $lname . "<br>";
+            if ($row['Date'] >= $todaysDate) {
+                $dateWithoutSeconds = substr($row['Date'], 0, -2);
+                $userId = $row['User_ID'];
+                $innerSql = "SELECT * FROM User WHERE UserID=?";
+                $stmt = $conn->prepare($innerSql);
+                $stmt->bind_param("i", $userId);
+                $stmt->execute();
+                $innerResult = $stmt->get_result();
+                $userRow = $innerResult->fetch_assoc();
+                $fname = $userRow['fname'];
+                $lname = $userRow['lname'];
+                echo "There is an Event " . $dateWithoutSeconds . ", " . $row['Data'] . " posted by user: ". $fname . " " . $lname . "<br>";
+                $stmt->close();
         }
     }
-} else {
+}
+else {
     echo "No events currently scheduled";
 }
-
+echo "test";
 $conn->close();
 ?>
 
