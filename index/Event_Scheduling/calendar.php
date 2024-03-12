@@ -124,8 +124,8 @@ if ($result->num_rows > 0) {
                 $stmt->execute();
                 $innerResult = $stmt->get_result();
                 $userRow = $innerResult->fetch_assoc();
-                $fname = $userRow['fname'];
-                $lname = $userRow['lname'];
+                $fname = $userRow['Fname'];
+                $lname = $userRow['LName'];
                 echo "There is an Event " . $dateWithoutSeconds . ", " . $row['Data'] . " posted by user: ". $fname . " " . $lname . "<br>";
                 $stmt->close();
         }
@@ -134,7 +134,6 @@ if ($result->num_rows > 0) {
 else {
     echo "No events currently scheduled";
 }
-echo "test";
 $conn->close();
 ?>
 
