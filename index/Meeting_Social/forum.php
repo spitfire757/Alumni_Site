@@ -20,14 +20,14 @@
 
                     $sql = "SELECT * FROM Forum";
                     $query = $conn->query($sql);
-                    
-                    
+                                        
                     while ($row = $query->fetch_assoc()){
                         echo $row["Title"]."<br>";
                         echo $row["Description"]."<br>";
+                        echo $row["ForumID"]."<br>";
+                        echo "<br>";
                     }
 
-                    
                 ?>
             <!-- Form for the forum -->
             </div>
