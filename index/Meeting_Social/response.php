@@ -6,6 +6,8 @@
     <body>
         <div>
             <?php
+                
+
                 echo "title";
                 echo "<button type = 'submit' name = 'refresh' formaction='forum.php'>Go</button><br>";
                 echo "desc<br>";
@@ -17,6 +19,45 @@
                 for ($x = 0; $x <= 10; $x++){
                     echo "responses<br><br>";
                 }
+
+                # Get the elements needed for a new response
+                $userID = $_POST['userID'];
+                $response = $_POST['response'];
+                $dateTime = date("m-d-Y H:i:s");
+                $responseID = substr(hash('sha256',$response),0,16);
+                $forumID = $forum["ForumID"];
+
+                echo "userID: ".$userID."<br>datetime: ".$dateTime."<br>response: ".$response."<br>forumID: ".$forumID."<br> responseID: ".$responseID."<br>";
+                
+                if (isset($_POST['submit'])) {
+
+                    
+                    /*
+                    # Add Response to Response Table
+                    $sql = "INSERT INTO Forum_Response VALUES ($responseID,$forumID,$userID,$response,$dateTime);";
+                    
+                    if ($conn->query($sql) === TRUE) {
+                        echo "New record created successfully";
+                    } else {
+                        echo "Error: " . $sql . "<br>" . $conn->error;
+                    }
+
+                    $query = mysqli_query($conn, $sql);
+                    */
+                    $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forumID', '$userID', '$response', '$dateTime')";
+
+                    if ($conn->query($sql) === TRUE) {
+                        echo "New record created successfully";
+                    } else {
+                        echo "Error: " . $sql . "<br>" . $conn->error;
+                    }
+
+                    
+                    $_POST['userID'] = "";
+                    $_POST['response'] = "";
+                }
+
+
             ?>
         </div>
     </body>
