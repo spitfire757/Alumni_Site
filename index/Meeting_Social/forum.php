@@ -18,12 +18,13 @@
 
                     $conn = new mysqli($servername, $username, $password, $dbname);
 
-                    $sql = "SELECT ForumID, Title FROM Forum";
+                    $sql = "SELECT * FROM Forum";
                     $query = $conn->query($sql);
                     
                     
                     while ($row = $query->fetch_assoc()){
-                        echo $row["Title"];
+                        echo $row["Title"]."<br>";
+                        echo $row["Description"]."<br>";
                     }
 
                     
