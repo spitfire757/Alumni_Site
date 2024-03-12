@@ -158,9 +158,8 @@ echo "</ul>";
             <div id="firstContactForm" style="width: 60%; margin-right: 20px;">
                 <h3>Who are you trying to reach?</h3>
                 <form>
-                    <label for="fi rstName">Email (Username):</label><br>
+                    <label for="firstName">Email (Username):</label><br>
                     <input type="text" id="username" name="Email (Username)" required><br>
-                    <label for="ID">ID:</label><br>
                     <input type="text" id="ID" name="ID" required><br><br>
                     <label for="message">Enter Message:</label><br>
                     <textarea id="message" name="message" rows="4" required></textarea><br><br>
@@ -183,16 +182,12 @@ echo "</ul>";
 
             <!-- Content from first_contact.php (right side) -->
             <div style="width: 30%; display: flex; flex-direction: column; align-items: flex-end;">
-<h3> Enter The name and Account ID to request </h3>
+<h3> Enter the account email </h3>
 <form action="send_request.php" method="post">
     <table>
         <tr>
-            <td><label for="accountName">Account Name:</label></td>
+            <td><label for="accountName">Account Email:</label></td>
             <td><input type="text" id="accountName" name="accountName" required></td>
-        </tr>
-        <tr>
-            <td><label for="accountID">Account ID:</label></td>
-            <td><input type="text" id="accountID" name="accountID" required></td>
         </tr>
     </table>
     <button type="submit">Submit</button>
@@ -213,9 +208,11 @@ if (isset($_SESSION['username'])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Get the sender's username and user ID from session
+    // Get the sender's username and user ID from sessio
     $senderUsername = $_SESSION['username'];
     echo "Current User : ", $senderUsername;
+    echo "FROM HERE DOWN"; 
+
     //Working on message, checking for current accepted requests first, will check both the reciever and sender username(email) 
     //So that we can pull any conversation from request_id 
     //$sql = "SELECT sender_username, receiver_name from friend_requests where sender_username = ? or receiver_name = ?";
