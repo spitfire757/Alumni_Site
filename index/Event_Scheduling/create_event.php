@@ -53,7 +53,7 @@
 
         /* Style for input and textarea */
 input[type="text"], textarea {
-    width: 80%;
+    width: 50%;
 height: 40px;
     padding: 10px;
     margin: 5px 0;
@@ -112,11 +112,11 @@ input[type="date"] {
 
     <h3>Create an Event</h3>
     <form action="calendar.php" method="POST">
-        <label for="datepicker">Enter the Date of your event:<br></label>
+        <label for="datepicker">Enter the date of your event:<br></label>
         <input type="date" id="datepicker" name="date" required><br>
         <label for="time"><br>Enter the time of your event:<br></label>
         <input type="time" id="time" name="time" required><br>
-        <label for="bio"><br>Enter Event Details:<br></label>
+        <label for="bio"><br>Enter event description:<br></label>
         <input type="text" id="bio" name="bio" required><br>
         <input type="submit" value="Create">
     </form>
