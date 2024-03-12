@@ -29,8 +29,8 @@
             </nav>
         </div>
 <br>
-<a href = "create_event.php">Create Event</a>
-<h2> Upcoming Events</h2>
+<a href = "create_event.php"><p style="text-align:center">Click Here to Create an Event</a>
+<h2 align=center> Upcoming Events</h2>
 
  <?php
 session_start();
