@@ -16,41 +16,32 @@
                     $password = "r00tpassw0rd/";
                     $dbname = "DB";
 
-                    
-                    error_reporting(E_ALL);
-                    ini_set('display_errors', 1);
-
-                    $dom = new DOMDocument();
-                    $loaded = $dom->loadHTMLFile("forum.html");
-
-                    if (!$loaded) {
-                        die("Failed to load HTML file.");
-                    }
-
-                    $div = $dom->getElementById('select_form');
-
-                    if ($div) {
-                        echo $dom->saveHTML($div);
-                    } else {
-                        echo "Element with ID 'select_form' not found.";
-                    }
-                    
-
-
                     $conn = new mysqli($servername, $username, $password, $dbname);
-                    /*
-                    $sql = "SELECT * FROM Forum WHERE Title = '.$.'";
+
+                    $sql = "SELECT Title FROM Forum";
                     $query = mysqli_query($conn, $sql);
-                    $forum = mysqli_fetch_assoc($query)
-                    */
+                    $forum = mysqli_fetch_assoc($query);
+
+                    echo $forum;
                 ?>
             <!-- Form for the forum -->
             </div>
             <form action = "forum.php" method = "post">
                     <!-- This should load the content when selected -->
+                    <select name = "thread">
+                        <option value="start"><?php echo isset($_SESSION["thread"]) ? $_SESSION["thread"] : ""; ?></option>
+                        <option value="default">Select a Thread</option>
+                        <option value="<?php echo $forum["ForumID"]; ?>"><?php echo $forum["Title"]; ?></option>
+                        <option value="testing">Testing</option>
+                    </select>
+                    <button type = "submit" name = "refresh" formaction="forum.php">Go</button><br>
+     
                     <h2><?php echo $forum["Title"];?></h2>
                     <h3><?php echo $forum["userID"];?></h3>
                     <p><?php echo $forum["Description"];?></p>
+                    <input type="text" name="userID" placeholder="userID" maxlength="64"><br>
+                    <textarea id="response" name="response" placeholder="Insert Your Response Here" rows="4" cols="50" maxlength="255"></textarea><br>                  
+                    <button type = "submit" name = "submit" formaction="forum.php" required>Reply</button><br>      
             </form>
             <?php
                 if (isset($_POST['submit'])) {
