@@ -116,7 +116,7 @@ $todaysDate = date('Y-m-d H:i:s');
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
             if ($row['Date'] >= $todaysDate) {
-                $dateWithoutSeconds = substr($row['Date'], 0, -2);
+                $dateWithoutSeconds = substr($row['Date'], 0, -3);
                 $userId = $row['User_ID'];
                 $innerSql = "SELECT * FROM User WHERE UserID=?";
                 $stmt = $conn->prepare($innerSql);
@@ -126,7 +126,8 @@ if ($result->num_rows > 0) {
                 $userRow = $innerResult->fetch_assoc();
                 $fname = $userRow['Fname'];
                 $lname = $userRow['LName'];
-                echo "There is an Event " . $dateWithoutSeconds . ", " . $row['Data'] . " posted by user: ". $fname . " " . $lname . "<br>";
+                echo $dateWithoutSeconds . " - " . $row['Data'] . "<br>";
+                echo "Posted by user: ". $fname . " " . $lname . "<br><br>";
                 $stmt->close();
         }
     }
