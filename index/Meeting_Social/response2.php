@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 $servername = "localhost";
@@ -11,6 +12,22 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
+}
+
+// If the form is submitted, add the content to the Forum_Response table
+if(isset($_POST['submit'])) {
+    $responseID = substr(hash('sha256',$response),0,16);
+    $userID = $_POST['userID'];
+    $response = $_POST['response'];
+    $dateTime = date("m-d-Y H:i:s");
+
+    // Insert the response into Forum_Response table
+    $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', '$dateTime')";
+    $result = $conn->query($sql);
+
+    // Redirect to refresh the page
+    header("Location: response2.php");
+    exit();
 }
 
 // Get forumID from session
@@ -49,32 +66,3 @@ while ($row = $result->fetch_assoc()) {
     echo "<p>{$row['Response']}</p>";
     echo "<br>";
 }
-
-if (isset($_POST['submit'])) {
-
-    $responseID = substr(hash('sha256',$response),0,16);
-    $userID = $_POST['userID'];
-    $response = $_POST['response'];
-    $dateTime = date("m-d-Y H:i:s");
-
-    $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', '$dateTime')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-
-    $_POST['userID'] = "";
-    $_POST['response'] = "";
-}
-
-// Link to return to forum.php
-echo "<a href='forum2.php'>Back to Forum</a>";
-
-// Close statements
-$stmt->close();
-$stmt_forum->close();
-
-// Close connection
-$conn->close();

@@ -20,7 +20,7 @@ if(isset($_GET['name'])) {
 }
 
 // Include the CSS file
-echo "<link rel='stylesheet' type='text/css' href='forum_styles.css'>";
+echo "<link rel='stylesheet' type='text/css' href='Alumni_Site/index/style/global_style.css'>";
 
 // Display forum titles and descriptions
 while ($row = mysqli_fetch_assoc($result)) {
@@ -33,4 +33,4 @@ while ($row = mysqli_fetch_assoc($result)) {
 
 // Close connection
 mysqli_close($conn);
-?>
+
