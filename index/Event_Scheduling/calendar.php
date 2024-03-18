@@ -2,6 +2,11 @@
 <html>
     <head>
         <link rel="stylesheet" href="../style/global_style.css">
+<style>
+    .event-details {
+        text-align: center;
+    }
+</style>
     </head>
     <body>
 
@@ -29,13 +34,19 @@
             </nav>
         </div>
 <br>
-<a href = "create_event.php"><p style="text-align:center">Click Here to Create an Event</a>
+
+
+<?php if (isset($_SESSION['userID'])): ?>
+    <p style="text-align:center"><a href="create_event.php">Click Here to Create an Event</a></p>
+<?php endif; ?>
 <h2 align=center> Upcoming Events</h2>
+
 
  <?php
 session_start();
 
 if (isset($_SESSION['username'])) {
+    
     $servername = "localhost";
     $username = "mysql_user";
     $password = "r00tpassw0rd/";
@@ -126,8 +137,12 @@ if ($result->num_rows > 0) {
                 $userRow = $innerResult->fetch_assoc();
                 $fname = $userRow['Fname'];
                 $lname = $userRow['LName'];
-                echo $dateWithoutSeconds . " - " . $row['Data'] . "<br>";
-                echo "Posted by user: ". $fname . " " . $lname . "<br><br>";
+                ?>
+                <div class="event-details">
+                    <?php echo $dateWithoutSeconds . " - " . $row['Data'] . "<br>"; ?>
+                    <?php echo "Posted by user: " . $fname . " " . $lname . "<br><br>"; ?>
+                </div>
+                <?php
                 $stmt->close();
         }
     }
