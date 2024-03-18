@@ -19,12 +19,18 @@ if(isset($_GET['name'])) {
     // Redirect to response2.php
 }
 
+// Include the CSS file
+echo "<link rel='stylesheet' type='text/css' href='forum_styles.css'>";
+
 // Display forum titles and descriptions
 while ($row = mysqli_fetch_assoc($result)) {
     // Link to response.php with forum ID as parameter
-    echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}'>{$row['Title']}</a><br>";
-    echo "<p>{$row['Description']}</p>";
+    echo "<div class='forum-item'>";
+    echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-link'>{$row['Title']}</a><br>";
+    echo "<p class='forum-description'>{$row['Description']}</p>";
+    echo "</div>";
 }
 
 // Close connection
 mysqli_close($conn);
+?>
