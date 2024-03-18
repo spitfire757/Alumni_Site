@@ -54,9 +54,11 @@ echo "<h2>".$forum_Title."</h2><br>";
 echo $forum_Description;
 echo "<hr>";
 
-echo "<br><input type='text' name='userID' placeholder='userID' maxlength='64'><br>
+echo "<form method='post'>
+      <input type='text' name='userID' placeholder='userID' maxlength='64'><br>
       <textarea id='response' name='response' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
-      <button type = 'submit' name = 'submit' formaction='response2.php'>Reply</button><br>";
+      <button type = 'submit' name = 'submit' formaction='response2.php'>Reply</button>
+      </form>";
 
 echo "<hr>";
 
@@ -66,3 +68,5 @@ while ($row = $result->fetch_assoc()) {
     echo "<p>{$row['Response']}</p>";
     echo "<br>";
 }
+
+echo "<a href='forum.html'>Back to Forum</a>";
