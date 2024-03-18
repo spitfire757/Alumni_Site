@@ -33,18 +33,22 @@ if (!$result) {
 }
 
 // Display forum title and description
-echo "<h2>".$forum_Title."<h2><br>";
+echo "<h2>".$forum_Title."</h2><br>";
 echo $forum_Description;
+echo "<hr>";
 
-echo "<input type='text' name='userID' placeholder='userID' maxlength='64'><br>
+echo "<br><input type='text' name='userID' placeholder='userID' maxlength='64'><br>
       <textarea id='response' name='response' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
-      <button type = 'submit' name = 'submit' formaction='forum.php' required>Reply</button><br>";
+      <button type = 'submit' name = 'submit' formaction='response2.php'>Reply</button><br>";
+
+echo "<hr>";
 
 // Display forum responses
 while ($row = $result->fetch_assoc()) {
-    echo "<p>{$row['response_content']}</p>";
-    echo "<p>UserID: {$row['userID']}</p>";
-    echo "<hr>";
+    echo "<h3>{$row['UserID']} • </h3>";
+    echo "<h3>{$row['Datetime']}</h3><br>";
+    echo "<p>{$row['Response']}</p>";
+    echo "<br><br>";
 }
 
 // Link to return to forum.php
