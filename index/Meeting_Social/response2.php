@@ -33,10 +33,9 @@ if(isset($_POST['submit'])) {
     $dateTime = date("m-d-Y H:i:s");
 
     // Insert the response into Forum_Response table
-    $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', '$dateTime');";
+    $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', NOW());";
     echo $sql;
-    $result = $conn->query($sql);
-    echo $result;
+    $result = $conn->query($sql); 
 }
 
 // Fetch data from Response Table for the selected forum
