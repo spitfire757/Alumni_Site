@@ -23,6 +23,7 @@ if(isset($_POST['submit'])) {
 
     // Insert the response into Forum_Response table
     $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', '$dateTime')";
+    echo $sql;
     $result = $conn->query($sql);
 }
 
