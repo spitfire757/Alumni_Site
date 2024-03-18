@@ -15,7 +15,7 @@ $result = mysqli_query($conn, $query);
 // Display forum titles and descriptions
 while ($row = mysqli_fetch_assoc($result)) {
     // Link to response.php with forum ID as parameter
-    echo "<a href='response2.php?forumID={$row['ForumID']}'>{$row['Title']}</a><br>";
+    echo "<a href='response2.php?name={$row['ForumID']}'>{$row['Title']}</a><br>";
     echo "<p>{$row['Description']}</p>";
 }
 

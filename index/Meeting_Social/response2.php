@@ -10,7 +10,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Get forumID from session
 $forumID = $_SESSION["forum"];
-
+echo "testing if response 2 works";
 // Fetch data from Response Table for the selected forum
 $query = "SELECT * FROM Response WHERE ForumID = '$forumID' ORDER BY DateAdded DESC";
 $result = mysqli_query($conn, $query);
