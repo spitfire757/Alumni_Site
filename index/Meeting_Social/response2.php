@@ -1,69 +1,81 @@
-<?php
 
-session_start();
+<!DOCTYPE html PUBLIC>
+    <html>
+        <body>
+            <?php
 
-$servername = "localhost";
-$username = "mysql_user";
-$password = "r00tpassw0rd/";
-$dbname = "DB";
+            session_start();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+            $servername = "localhost";
+            $username = "mysql_user";
+            $password = "r00tpassw0rd/";
+            $dbname = "DB";
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+            $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Get forumID from session
-if(isset($_GET['forumID']) && isset($_GET['forumTitle']) && isset($_GET['forumDescription'])) {
-    $_SESSION["forumID"] = $_GET['forumID'];
-    $_SESSION["forumTitle"] = $_GET['forumTitle'];
-    $_SESSION["forumDescription"] = $_GET['forumDescription'];
-}
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
 
-$forum_ID = $_SESSION["forumID"];
-$forum_Title = $_SESSION["forumTitle"];
-$forum_Description = $_SESSION["forumDescription"];
+            // Get forumID from session
+            if(isset($_GET['forumID']) && isset($_GET['forumTitle']) && isset($_GET['forumDescription'])) {
+                $_SESSION["forumID"] = $_GET['forumID'];
+                $_SESSION["forumTitle"] = $_GET['forumTitle'];
+                $_SESSION["forumDescription"] = $_GET['forumDescription'];
+            }
 
-// If the form is submitted, add the content to the Forum_Response table
-if(isset($_POST['submit'])) {
-    $responseID = substr(hash('sha256',$response),0,16);
-    $userID = $_POST['userID'];
-    $response = $_POST['response'];
-    $dateTime = date("m-d-Y H:i:s");
+            $forum_ID = $_SESSION["forumID"];
+            $forum_Title = $_SESSION["forumTitle"];
+            $forum_Description = $_SESSION["forumDescription"];
 
-    // Insert the response into Forum_Response table
-    $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', NOW());";
-    echo $sql;
-    $result = $conn->query($sql); 
-}
+            // If the form is submitted, add the content to the Forum_Response table
+            if(isset($_POST['submit'])) {
+                $responseID = substr(hash('sha256',$response),0,16);
+                $userID = $_POST['userID'];
+                $response = $_POST['response'];
+                $dateTime = date("m-d-Y H:i:s");
 
-// Fetch data from Response Table for the selected forum
-$query = "SELECT * FROM Forum_Response WHERE ForumID = 'qwerty';";
-$result = $conn->query($query);
+                // Insert the response into Forum_Response table
+                $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', NOW());";
+                $result = $conn->query($sql); 
 
-if (!$result) {
-    echo "Error: " . $conn->error;
-}
 
-// Display forum title and description
-echo "<h2>".$forum_Title."</h2><br>";
-echo $forum_Description;
-echo "<hr>";
+            }
 
-echo "<form aciton = 'response2.php' method='post'>
-      <input type='text' name='userID' placeholder='userID' maxlength='64'><br>
-      <textarea id='response' name='response' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
-      <button type = 'submit' name = 'submit' formaction='response2.php'>Reply</button>
-      </form>";
+            // Fetch data from Response Table for the selected forum
+            $query = "SELECT * FROM Forum_Response WHERE ForumID = 'qwerty';";
+            $result = $conn->query($query);
 
-echo "<hr>";
+            if (!$result) {
+                echo "Error: " . $conn->error;
+            }
 
-// Display forum responses
-while ($row = $result->fetch_assoc()) {
-    echo "<h3>{$row['UserID']} • {$row['Datetime']}</h3>";
-    echo "<p>{$row['Response']}</p>";
-    echo "<br>";
-}
+            // Display forum title and description
+            echo "<h2>".$forum_Title."</h2><br>";
+            echo $forum_Description;
+            echo "<hr>";
+            ?>
 
-echo "<a href='forum.html'>Back to Forum</a>";
+            <form aciton = 'response2.php' method='post'>
+                <input type='text' name='userID' placeholder='userID' maxlength='64'><br>
+                <textarea id='response' name='response' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
+                <button type = 'submit' name = 'submit' formaction='response2.php'>Reply</button>
+            </form>
+
+            <?php
+
+            echo "<hr>";
+
+            // Display forum responses
+            while ($row = $result->fetch_assoc()) {
+                echo "<h3>{$row['UserID']} • {$row['Datetime']}</h3>";
+                echo "<p>{$row['Response']}</p>";
+                echo "<br>";
+            }
+
+            echo "<a href='forum.html'>Back to Forum</a>";
+            ?>
+        </body>
+    </html>
+
