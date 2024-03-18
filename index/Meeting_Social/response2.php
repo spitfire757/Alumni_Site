@@ -25,7 +25,7 @@ $forum_Title = $_SESSION["forumTitle"];
 $forum_Description = $_SESSION["forumDescription"];
 
 // Fetch data from Response Table for the selected forum
-$query = "SELECT * FROM Forum_Response WHERE ForumID = ?";
+$query = "SELECT * FROM Forum_Response WHERE ForumID = '.$forum_ID.'";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $forum_ID);
 $stmt->execute();
@@ -37,10 +37,7 @@ if (!$result) {
 
 // Display forum title and description
 echo "<h2>".$forum_Title."<h2><br>";
-echo "<p>".$fourm."</p><br><br>";
-
-echo "<h2>{$row_forum['title']}</h2>";
-echo "<p>{$row_forum['description']}</p>";
+echo "<p>".$forum_Description."</p><br><br>";
 
 // Display forum responses
 while ($row = $result->fetch_assoc()) {
