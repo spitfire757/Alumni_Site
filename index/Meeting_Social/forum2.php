@@ -1,11 +1,14 @@
 <?php
-// Start session
+
 session_start();
 
-// Include your database connection file
-include 'connection.php';
+$servername = "localhost";
+$username = "mysql_user";
+$password = "r00tpassw0rd/";
+$dbname = "DB";
 
-// Fetch data from Forum Table
+$conn = new mysqli($servername, $username, $password, $dbname);
+
 $query = "SELECT * FROM Forum";
 $result = mysqli_query($conn, $query);
 
