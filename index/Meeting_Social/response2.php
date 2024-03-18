@@ -21,8 +21,8 @@ if(isset($_GET['forumID']) && isset($_GET['forumTitle']) && isset($_GET['forumDe
 }
 
 $forum_ID =  $_SESSION["forumID"];
-echo $_SESSION["forumTitle"];
-echo $_SESSION["forumDescription"];
+$forum_Title = $_SESSION["forumTitle"];
+$forum_Title = $_SESSION["forumDescription"];
 
 // Fetch data from Response Table for the selected forum
 $query = "SELECT * FROM Forum_Response WHERE ForumID = ?";
@@ -54,7 +54,7 @@ while ($row = $result->fetch_assoc()) {
 }
 
 // Link to return to forum.php
-echo "<a href='forum.html'>Back to Forum</a>";
+echo "<a href='forum2.php'>Back to Forum</a>";
 
 // Close statements
 $stmt->close();
