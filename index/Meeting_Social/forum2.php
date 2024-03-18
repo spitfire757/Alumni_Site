@@ -12,12 +12,20 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 $query = "SELECT * FROM Forum";
 $result = mysqli_query($conn, $query);
 
+if(isset($_GET['forumID'])) {
+    // If a forum is selected, save its information in session
+    $forumID = $_GET['forumID'];
+    $_SESSION["forum"] = $forumID;
+    // Redirect to response2.php
+    header("Location: response2.php");
+    exit();
+}
+
 // Display forum titles and descriptions
 while ($row = mysqli_fetch_assoc($result)) {
-    echo "<h2>{$row['Title']}</h2>";
-    echo "<p>{$row['Description']}</p>";
     // Link to response.php with forum ID as parameter
-    echo "<a href='response2.php?forumID={$row['ForumID']}'>Respond Here</a><br><br>";
+    echo "<a href='response2.php?forumID={$row['ForumID']}'{$row['Title']}</a><br>";
+    echo "<p>{$row['Description']}</p>";
 }
 
 // Close connection
