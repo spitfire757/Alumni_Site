@@ -9,9 +9,14 @@ $dbname = "DB";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Get forumID from session
-$forumID = $_SESSION["ForumID"];
+if(isset($_GET['forumID']) && isset($_GET['forumTitle']) && isset($_GET['forumDescription'])) {
+    $_SESSION["forumID"] = $_GET['forumID'];
+    $_SESSION["forumTitle"] = $_GET['forumTitle'];
+    $_SESSION["forumDescription"] = $_GET['forumDescription'];
+}
 
-echo $forumID;
+// Your response2.php code continues...
+
 
 // Fetch data from Response Table for the selected forum
 $query = "SELECT * FROM Response WHERE ForumID = '.$forumID.'";
