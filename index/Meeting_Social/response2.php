@@ -29,7 +29,7 @@ $forum_Title = $_SESSION["forumTitle"];
 $forum_Description = $_SESSION["forumDescription"];
 
 // Fetch data from Response Table for the selected forum
-$query = "SELECT * FROM Forum_Response WHERE ForumID = '$forum_ID';";
+$query = "SELECT * FROM Forum_Response WHERE ForumID = '$forum_ID' ORDER BY Datetime ASC;";
 $result = $conn->query($query);
 
 if (!$result) {
