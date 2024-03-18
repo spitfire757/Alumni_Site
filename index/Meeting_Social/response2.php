@@ -36,6 +36,7 @@ if(isset($_POST['submit'])) {
     $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', '$dateTime');";
     echo $sql;
     $result = $conn->query($sql);
+    echo $result;
 }
 
 // Fetch data from Response Table for the selected forum
