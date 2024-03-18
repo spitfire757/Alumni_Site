@@ -40,7 +40,7 @@
             // Display forum title and description
             echo "<h2>".$forum_Title." </h2>";
             echo $forum_Description;
-            echo "<a href='forum.html'>Back to Forum</a>";
+            echo "<br><a href='forum2.php'>Back to Forum</a>";
             echo "<hr>";
 
             // Display forum responses
@@ -49,6 +49,8 @@
                 echo "<p>{$row['Response']}</p>";
                 echo "<br>";
             }
+
+            echo "<br><a href='forum2.php'>Back to Forum</a>";
 
             echo "<hr>";
             
@@ -62,16 +64,16 @@
 
             <?php
                 // If the form is submitted, add the content to the Forum_Response table
-                if(isset($_POST['submit'])) {
-                    $responseID = substr(hash('sha256',$response),0,16);
-                    $userID = $_POST['userID'];
-                    $response = $_POST['response'];
-                    $dateTime = date("m-d-Y H:i:s");
+                
+                $responseID = substr(hash('sha256',$response),0,16);
+                $userID = $_POST['userID'];
+                $response = $_POST['response'];
+                $dateTime = date("m-d-Y H:i:s");
 
-                    // Insert the response into Forum_Response table
-                    $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', NOW());";
-                    $result = $conn->query($sql); 
-            }
+                // Insert the response into Forum_Response table
+                $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', NOW());";
+                $result = $conn->query($sql); 
+            
             ?>
         </body>
     </html>
