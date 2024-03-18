@@ -15,14 +15,12 @@ if(isset($_GET['forumID']) && isset($_GET['forumTitle']) && isset($_GET['forumDe
     $_SESSION["forumDescription"] = $_GET['forumDescription'];
 }
 
-echo $_SESSION["forumID"];
+$forum_ID =  $_SESSION["forumID"];
 echo $_SESSION["forumTitle"];
 echo $_SESSION["forumDescription"];
-// Your response2.php code continues...
-
 
 // Fetch data from Response Table for the selected forum
-$query = "SELECT * FROM Response WHERE ForumID = '.$forumID.'";
+$query = "SELECT * FROM Response WHERE ForumID = '.$forum_ID.'";
 $result = mysqli_query($conn, $query);
 
 echo "testing if response 2 works";
