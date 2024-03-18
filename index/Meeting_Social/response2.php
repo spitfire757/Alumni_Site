@@ -24,8 +24,6 @@ if(isset($_POST['submit'])) {
     // Insert the response into Forum_Response table
     $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', '$dateTime')";
     $result = $conn->query($sql);
-
-    echo "<script>window.location.href = 'response2.php';</script>";
 }
 
 // Get forumID from session
@@ -52,7 +50,7 @@ echo "<h2>".$forum_Title."</h2><br>";
 echo $forum_Description;
 echo "<hr>";
 
-echo "<form method='post'>
+echo "<form aciton = 'response2.php' method='post'>
       <input type='text' name='userID' placeholder='userID' maxlength='64'><br>
       <textarea id='response' name='response' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
       <button type = 'submit' name = 'submit' formaction='response2.php'>Reply</button>
