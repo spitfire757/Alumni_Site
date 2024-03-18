@@ -26,7 +26,7 @@ $result = mysqli_query($conn, $query);
 echo "testing if response 2 works";
 
 // Display forum title and description
-$query_forum = "SELECT * FROM Forum WHERE ForumID = '$forumID'";
+$query_forum = "SELECT * FROM Forum WHERE ForumID = '.$forumID.'";
 $result_forum = mysqli_query($conn, $query_forum);
 $row_forum = mysqli_fetch_assoc($result_forum);
 echo "<h2>{$row_forum['title']}</h2>";
