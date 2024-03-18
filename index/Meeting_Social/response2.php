@@ -25,7 +25,7 @@ $forum_Title = $_SESSION["forumTitle"];
 $forum_Description = $_SESSION["forumDescription"];
 
 // Fetch data from Response Table for the selected forum
-$query = "SELECT * FROM Forum_Response WHERE ForumID = '.$forum_ID.';";
+$query = "SELECT * FROM Forum_Response WHERE ForumID = 'qwerty';";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $forum_ID);
 $stmt->execute();
