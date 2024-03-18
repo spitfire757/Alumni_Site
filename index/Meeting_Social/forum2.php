@@ -31,6 +31,4 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "</div>";
 }
 
-// Close connection
-mysqli_close($conn);
 

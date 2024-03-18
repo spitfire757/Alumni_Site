@@ -52,7 +52,7 @@
             }
 
             // Display forum title and description
-            echo "<h2>".$forum_Title."</h2><br>";
+            echo "<h2>".$forum_Title." </h2><a href='forum.html'>Back to Forum</a>";
             echo $forum_Description;
             echo "<hr>";
             ?>
@@ -74,7 +74,6 @@
                 echo "<br>";
             }
 
-            echo "<a href='forum.html'>Back to Forum</a>";
             ?>
         </body>
     </html>
