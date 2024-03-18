@@ -54,6 +54,17 @@
 
             echo "<hr>";
             
+            // If the form is submitted, add the content to the Forum_Response table
+                
+            $responseID = substr(hash('sha256',$response),0,16);
+            $userID = $_POST['userID'];
+            $response = $_POST['response'];
+            $dateTime = date("m-d-Y H:i:s");
+
+            // Insert the response into Forum_Response table
+            $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', NOW());";
+            $result = $conn->query($sql); 
+
             ?>
 
             <form aciton = 'response2.php' method='post'>
