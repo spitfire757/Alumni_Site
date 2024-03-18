@@ -45,10 +45,28 @@ echo "<hr>";
 
 // Display forum responses
 while ($row = $result->fetch_assoc()) {
-    echo "<h3>{$row['UserID']} • </h3>";
-    echo "<h3>{$row['Datetime']}</h3><br>";
+    echo "<h3>{$row['UserID']} • {$row['Datetime']}</h3>";
     echo "<p>{$row['Response']}</p>";
-    echo "<br><br>";
+    echo "<br>";
+}
+
+if (isset($_POST['submit'])) {
+
+    $responseID = substr(hash('sha256',$response),0,16);
+    $userID = $_POST['userID'];
+    $response = $_POST['response'];
+    $dateTime = date("m-d-Y H:i:s");
+
+    $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', '$dateTime')";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $_POST['userID'] = "";
+    $_POST['response'] = "";
 }
 
 // Link to return to forum.php
