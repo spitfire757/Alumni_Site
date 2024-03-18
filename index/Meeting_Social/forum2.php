@@ -26,7 +26,7 @@ echo "<link rel='stylesheet' type='text/css' href='forum_styles.css'>";
 while ($row = mysqli_fetch_assoc($result)) {
     // Link to response.php with forum ID as parameter
     echo "<div class='forum-item'>";
-    echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-link'>{$row['Title']}</a><br>";
+    echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-title'>{$row['Title']}</a><br>";
     echo "<p class='forum-description'>{$row['Description']}</p>";
     echo "</div>";
 }
