@@ -8,6 +8,11 @@ $dbname = "DB";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
 // Get forumID from session
 if(isset($_GET['forumID']) && isset($_GET['forumTitle']) && isset($_GET['forumDescription'])) {
     $_SESSION["forumID"] = $_GET['forumID'];
@@ -20,23 +25,29 @@ echo $_SESSION["forumTitle"];
 echo $_SESSION["forumDescription"];
 
 // Fetch data from Response Table for the selected forum
-$query = "SELECT * FROM Forum_Response WHERE ForumID = '.$forum_ID.'";
+$query = "SELECT * FROM Forum_Response WHERE ForumID = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $forum_ID);
+$stmt->execute();
+$result = $stmt->get_result();
 
-echo $query;
-
-$result = mysqli_query($conn, $query);
-
-echo $result;
+if (!$result) {
+    echo "Error: " . $conn->error;
+}
 
 // Display forum title and description
-$query_forum = "SELECT * FROM Forum WHERE ForumID = '.$forumID.'";
-$result_forum = mysqli_query($conn, $query_forum);
-$row_forum = mysqli_fetch_assoc($result_forum);
+$query_forum = "SELECT * FROM Forum WHERE ForumID = ?";
+$stmt_forum = $conn->prepare($query_forum);
+$stmt_forum->bind_param("i", $forum_ID);
+$stmt_forum->execute();
+$result_forum = $stmt_forum->get_result();
+$row_forum = $result_forum->fetch_assoc();
+
 echo "<h2>{$row_forum['title']}</h2>";
 echo "<p>{$row_forum['description']}</p>";
 
 // Display forum responses
-while ($row = mysqli_fetch_assoc($result)) {
+while ($row = $result->fetch_assoc()) {
     echo "<p>{$row['response_content']}</p>";
     echo "<p>UserID: {$row['userID']}</p>";
     echo "<hr>";
@@ -45,5 +56,10 @@ while ($row = mysqli_fetch_assoc($result)) {
 // Link to return to forum.php
 echo "<a href='forum.html'>Back to Forum</a>";
 
+// Close statements
+$stmt->close();
+$stmt_forum->close();
+
 // Close connection
-mysqli_close($conn);
+$conn->close();
+?>
