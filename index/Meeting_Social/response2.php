@@ -26,17 +26,6 @@ $forum_Description = $_SESSION["forumDescription"];
 
 // Fetch data from Response Table for the selected forum
 $query = "SELECT * FROM Forum_Response WHERE ForumID = 'qwerty';";
-echo "1";
-/*
-$stmt = $conn->prepare($query);
-echo "2";
-$stmt->bind_param("i", $forum_ID);
-echo "3";
-$stmt->execute();
-echo "4";
-$result = $stmt->get_result();
-echo "5";
-*/
 $result = $conn->query($query);
 
 if (!$result) {
@@ -45,7 +34,11 @@ if (!$result) {
 
 // Display forum title and description
 echo "<h2>".$forum_Title."<h2><br>";
-echo "<p>".$forum_Description."</p><br><br>";
+echo $forum_Description;
+
+echo "<input type='text' name='userID' placeholder='userID' maxlength='64'><br>
+      <textarea id='response' name='response' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
+      <button type = 'submit' name = 'submit' formaction='forum.php' required>Reply</button><br>";
 
 // Display forum responses
 while ($row = $result->fetch_assoc()) {
