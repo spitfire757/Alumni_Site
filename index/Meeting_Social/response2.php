@@ -20,10 +20,13 @@ echo $_SESSION["forumTitle"];
 echo $_SESSION["forumDescription"];
 
 // Fetch data from Response Table for the selected forum
-$query = "SELECT * FROM Response WHERE ForumID = '.$forum_ID.'";
+$query = "SELECT * FROM Forum_Response WHERE ForumID = '.$forum_ID.'";
+
+echo $query;
+
 $result = mysqli_query($conn, $query);
 
-echo "testing if response 2 works";
+echo $result;
 
 // Display forum title and description
 $query_forum = "SELECT * FROM Forum WHERE ForumID = '.$forumID.'";
