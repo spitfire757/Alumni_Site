@@ -27,6 +27,7 @@ $forum_Description = $_SESSION["forumDescription"];
 // Fetch data from Response Table for the selected forum
 $query = "SELECT * FROM Forum_Response WHERE ForumID = 'qwerty';";
 echo "1";
+/*
 $stmt = $conn->prepare($query);
 echo "2";
 $stmt->bind_param("i", $forum_ID);
@@ -35,6 +36,8 @@ $stmt->execute();
 echo "4";
 $result = $stmt->get_result();
 echo "5";
+*/
+$result = $conn->query($query);
 
 if (!$result) {
     echo "Error: " . $conn->error;
