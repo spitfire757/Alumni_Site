@@ -59,7 +59,7 @@ if(isset($_POST['submit'])) {
     $dateTime = date("Y-m-d H:i:s");
 
     // Insert the response into Forum_Response table
-    $sql = "INSERT INTO Forum_Response (ResponseID, ForumID, UserID, Response, Datetime) VALUES ('$responseID', '$forum_ID', '$userID', '$response', NOW())";
+    $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', NOW())";
     $result = $conn->query($sql); 
 }
 
