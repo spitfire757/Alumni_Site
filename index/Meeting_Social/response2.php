@@ -25,9 +25,7 @@ if(isset($_POST['submit'])) {
     $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', '$dateTime')";
     $result = $conn->query($sql);
 
-    // Redirect to refresh the page
-    header("Location: response2.php");
-    exit();
+    echo "<script>window.location.href = 'response2.php';</script>";
 }
 
 // Get forumID from session
