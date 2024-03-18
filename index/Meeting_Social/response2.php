@@ -14,19 +14,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// If the form is submitted, add the content to the Forum_Response table
-if(isset($_POST['submit'])) {
-    $responseID = substr(hash('sha256',$response),0,16);
-    $userID = $_POST['userID'];
-    $response = $_POST['response'];
-    $dateTime = date("m-d-Y H:i:s");
-
-    // Insert the response into Forum_Response table
-    $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', '$dateTime')";
-    echo $sql;
-    $result = $conn->query($sql);
-}
-
 // Get forumID from session
 if(isset($_GET['forumID']) && isset($_GET['forumTitle']) && isset($_GET['forumDescription'])) {
     $_SESSION["forumID"] = $_GET['forumID'];
@@ -37,6 +24,19 @@ if(isset($_GET['forumID']) && isset($_GET['forumTitle']) && isset($_GET['forumDe
 $forum_ID = $_SESSION["forumID"];
 $forum_Title = $_SESSION["forumTitle"];
 $forum_Description = $_SESSION["forumDescription"];
+
+// If the form is submitted, add the content to the Forum_Response table
+if(isset($_POST['submit'])) {
+    $responseID = substr(hash('sha256',$response),0,16);
+    $userID = $_POST['userID'];
+    $response = $_POST['response'];
+    $dateTime = date("m-d-Y H:i:s");
+
+    // Insert the response into Forum_Response table
+    $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', '$dateTime');";
+    echo $sql;
+    $result = $conn->query($sql);
+}
 
 // Fetch data from Response Table for the selected forum
 $query = "SELECT * FROM Forum_Response WHERE ForumID = 'qwerty';";
