@@ -5,7 +5,7 @@
     </head>
     <body>
         <div>
-            <!-- Loading content onto the page from the DB -->
+            <!-- Loading content from the DB -->
             <?php
                 session_start();
                 #include 'connect.php';
@@ -18,7 +18,12 @@
                 $conn = new mysqli($servername, $username, $password, $dbname);
                 $sql = "SELECT * FROM Forum";
                 $query = $conn->query($sql);
-                
+
+            ?>
+
+            <!-- Putting content onto page with buttons to open forums -->
+            <form action = "response.php" method = "post">
+            <?php
                 while ($row = $query->fetch_assoc()){
                     echo "<h2>".$row["Title"]."</h2>";
                     $id = $row['ForumID'];
@@ -28,9 +33,14 @@
                     echo $row["Description"]."<br>";
                     echo "<br>";
                 }
+            ?>
+            </form>
 
+            <!-- If button is clicked, open that forum -->
+            <?php
                 
-                
+
+
             ?>
         </div>
     </body>
