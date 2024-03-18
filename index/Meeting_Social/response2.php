@@ -15,6 +15,9 @@ if(isset($_GET['forumID']) && isset($_GET['forumTitle']) && isset($_GET['forumDe
     $_SESSION["forumDescription"] = $_GET['forumDescription'];
 }
 
+echo $_SESSION["forumID"];
+echo $_SESSION["forumTitle"];
+echo $_SESSION["forumDescription"];
 // Your response2.php code continues...
 
 
