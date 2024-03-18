@@ -14,11 +14,34 @@ if (isset($_SESSION['username'])) {
     $currentUser = $_SESSION['username'];
     echo "<br> Email(Username): $currentUser <br>";
 
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // Handle form submission
+        $major = $_POST['major'];
+        $minor = $_POST['minor'];
+        $experience = $_POST['experience'];
+
+        // Validate the character limit for Experience
+        if (strlen($experience) > 500) {
+            echo "Error: Experience must not exceed 500 characters.";
+        } else {
+            // Update the user information in the database
+            $updateSql = "UPDATE User SET Major=?, Minor=?, Experience=? WHERE email=?";
+            $updateStmt = $conn->prepare($updateSql);
+
+            if ($updateStmt === false) {
+                die("Error in preparing the update statement: " . $conn->error);
+            }
+
+            $updateStmt->bind_param("ssss", $major, $minor, $experience, $currentUser);
+            $updateStmt->execute();
+            $updateStmt->close();
+        }
+    }
+
     // Retrieve UserID and other fields based on the email (username)
-    $sql = "SELECT UserID, email, Fname, LName FROM User WHERE email = ?";
+    $sql = "SELECT UserID, email, Fname, LName, Major, Minor, Experience FROM User WHERE email = ?";
     $stmt = $conn->prepare($sql);
 
-    // Check if the statement was prepared successfully
     if ($stmt === false) {
         die("Error in preparing the statement: " . $conn->error);
     }
@@ -27,30 +50,41 @@ if (isset($_SESSION['username'])) {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Check if there are rows returned
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $userID = $row['UserID'];
         $email = $row['email'];
         $FName = $row['Fname'];
         $LName = $row['LName'];
-
-        // Display UserID, Email, and other information as needed
+        $major = $row['Major'];
+        $minor = $row['Minor'];
+	$security  = $row['security'];
+	$experience = $row['Experience'];
+	$pset_off = "Your information Such as Name, Major, Minor, and Experience are hidden from searches";
+        $pset_on  = "Your information such as Name, Major, Minor, and Experience will show in searches";	
+	#if ($security is_null()) {
+	#	echo $pset_off;	
+	#}
         echo "UserID for $currentUser: $userID <br>";
         echo "Email: $email <br>";
         echo "Name: $FName $LName <br>";
-        // Add other fields as needed
-        echo "Password (Needs to stay hidden) <br>";
-        echo "Major <br>";
-        echo "Minor <br>";
-        echo "About <br>";
-        echo "Experience <br>";
-        echo "Resume <br>";
+        echo "Major: $major <br>";
+        echo "Minor: $minor <br>";
+        echo "Experience: $experience <br>";
+	echo "Privacy Settings: $security";
+
+        // Display the form for updating information
+        echo "<form method='post' action=''>";
+	echo "<br>";
+        echo "Major: <input type='text' name='major' value='$major'><br>";
+        echo "Minor: <input type='text' name='minor' value='$minor'><br>";
+        echo "Experience: <textarea name='experience'>$experience</textarea><br>";
+        echo "<input type='submit' value='Update'>";
+        echo "</form>";
     } else {
         echo "User not found for the given email/username: $currentUser";
     }
 
-    // Close the database connection
     $stmt->close();
     $conn->close();
 }
