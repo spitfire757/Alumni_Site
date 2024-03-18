@@ -9,7 +9,9 @@ $dbname = "DB";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Get forumID from session
-$forumID = $_SESSION["forum"];
+$forumID = $_SESSION["ForumID"];
+
+echo $forumID;
 
 // Fetch data from Response Table for the selected forum
 $query = "SELECT * FROM Response WHERE ForumID = '.$forumID.'";

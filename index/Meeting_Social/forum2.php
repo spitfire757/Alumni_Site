@@ -19,13 +19,11 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<p>{$row['Description']}</p>";
 }
 
-if(isset($_GET['forumID'])) {
+if(isset($_GET['name'])) {
     // If a forum is selected, save its information in session
-    $forumID = $_GET['forumID'];
-    $_SESSION["forum"] = $forumID;
+    $forumID = $_GET['name'];
+    $_SESSION["ForumID"] = $forumID;
     // Redirect to response2.php
-    header("Location: response2.php");
-    exit();
 }
 
 // Close connection
