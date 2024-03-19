@@ -19,10 +19,14 @@ if ($conn->connect_error) {
 
 // Get forumID from session
 if(isset($_GET['forumID']) && isset($_GET['forumTitle']) && isset($_GET['forumDescription'])) {
-    $forum_ID = $_GET['forumID'];
-    $forum_Title = $_GET['forumTitle'];
-    $forum_Description = $_GET['forumDescription'];
+    $_SESSION["forumID"] = $_GET['forumID'];
+    $_SESSION["forumTitle"] = $_GET['forumTitle'];
+    $_SESSION["forumDescription"] = $_GET['forumDescription'];
 }
+
+$forum_ID = $_SESSION["forumID"];
+$forum_Title = $_SESSION["forumTitle"];
+$forum_Description = $_SESSION["forumDescription"];
 
 // Fetch data from Response Table for the selected forum
 $query = "SELECT * FROM Forum_Response WHERE ForumID = '$forum_ID' ORDER BY Datetime ASC;";
