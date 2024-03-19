@@ -73,6 +73,7 @@ if(isset($_POST['submit'])) {
 }
 
 ?>
+<link rel='stylesheet' type='text/css' href='Alumni_Site/index/style/global_style.css'>
 <form action='response2.php' method='post'>
     <input type='text' name='userID' placeholder='userID' maxlength='64'><br>
     <textarea id='response' name='response' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
