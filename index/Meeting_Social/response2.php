@@ -61,15 +61,6 @@ if(isset($_POST['submit'])) {
     // Insert the response into Forum_Response table
     $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', NOW())";
     $result = $conn->query($sql); 
-
-    // Check if the insert was successful
-    if($result) {
-        // Redirect to refresh the page
-        header("Location: response2.php?forumID=$forum_ID&forumTitle=$forum_Title&forumDescription=$forum_Description");
-        exit();
-    } else {
-        echo "Error: " . $conn->error;
-    }
 }
 
 ?>
