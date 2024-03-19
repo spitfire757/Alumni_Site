@@ -211,7 +211,7 @@ if (isset($_SESSION['username'])) {
     // Get the sender's username and user ID from sessio
     $senderUsername = $_SESSION['username'];
     echo "Current User : ", $senderUsername;
-    echo "FROM HERE DOWN"; 
+    echo "FROM HERE DOWN ISSUES WITH CONTACT"; 
 
     //Working on message, checking for current accepted requests first, will check both the reciever and sender username(email) 
     //So that we can pull any conversation from request_id 
