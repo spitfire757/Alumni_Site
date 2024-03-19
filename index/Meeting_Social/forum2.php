@@ -12,13 +12,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 $query = "SELECT * FROM Forum";
 $result = mysqli_query($conn, $query);
 
-if(isset($_GET['name'])) {
-    // If a forum is selected, save its information in session
-    $forumID = $_GET['name'];
-    $_SESSION["ForumID"] = $forumID;
-    // Redirect to response2.php
-}
-
 // Include the CSS file
 echo "<link rel='stylesheet' type='text/css' href='Alumni_Site/index/style/global_style.css'>";
 
