@@ -36,9 +36,7 @@
 <br>
 
 
-<?php if (isset($_SESSION['userID'])): ?>
-    <p style="text-align:center"><a href="create_event.php">Click Here to Create an Event</a></p>
-<?php endif; ?>
+<p style="text-align:center"><a href="create_event.php">Click Here to Create an Event</a></p>
 <h2 align=center> Upcoming Events</h2>
 
 
