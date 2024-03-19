@@ -105,7 +105,11 @@ if (isset($_SESSION['username'])) {
         $stmt->execute();
         $stmt->close();
 
-        echo "Event created successfully <br>";
+        ?>
+        <div class="event-details">
+            <?php echo "Event Created Succesfully <br><br>"; ?>
+        </div>
+        <?php
     }
 
     // Close the database connection
