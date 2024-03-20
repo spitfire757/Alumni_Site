@@ -65,6 +65,9 @@ if (isset($_SESSION['username'])) {
 	#if ($security is_null()) {
 	#	echo $pset_off;	
 	#}
+	# Need to figure out security setting options for search
+	# And Profile Type 
+	#
         echo "UserID for $currentUser: $userID <br>";
         echo "Email: $email <br>";
         echo "Name: $FName $LName <br>";
