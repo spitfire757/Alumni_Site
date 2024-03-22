@@ -52,15 +52,6 @@ if (isset($_SESSION['username'])) {
     $conn->close();
 }
 
-// Print out the pending requests
-echo "<h2>Pending Friend Requests:</h2>";
-echo "<ul>";
-foreach ($pendingRequests as $request) {
-    echo "<li>";
-    echo "Sender: " . $request['sender_username'] . " (ID: " . $request['sender_id'] . ")";
-    echo "</li>";
-}
-echo "</ul>";
 ?>
 
 <head>

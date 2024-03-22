@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     $lastName = $_POST['last_name'];
     $major = $_POST['major'];
     $intendedGradYear = $_POST['intended_grad_year'];
-
+    $user_type = $_POST['account_type'];
     // Hash the password for security
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -103,10 +103,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
             $userID = rand(PHP_INT_MIN, PHP_INT_MAX);
 
             // SQL query to insert the user data into the database
-            $insertQuery = "INSERT INTO User (UserID, email, password, Fname, LName, Major, intended_grad_year)
-                            VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $insertQuery = "INSERT INTO User (UserID, email, password, Fname, LName, Major, intended_grad_year, type)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $insertStmt = $pdo->prepare($insertQuery);
-            $insertStmt->execute([$userID, $email, $hashed_password, $firstName, $lastName, $major, $intendedGradYear]);
+            $insertStmt->execute([$userID, $email, $hashed_password, $firstName, $lastName, $major, $intendedGradYear, $user_type]);
 
             echo "User registered successfully!";
             header('Location: login.php');
@@ -117,7 +117,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     }
 }
 ?>
-
 <form action="register.php" method="post">
     <label for="email">Email:</label>
     <input type="text" id="email" name="email" required><br>
@@ -131,10 +130,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     <label for="last_name">Last Name:</label>
     <input type="text" id="last_name" name="last_name" required><br>
 
-    <label for="major">Major:</label>
-    <input type="text" id="major" name="major" required><br>
+    <label for="account_type">Account Type:</label>
+    <select id="account_type" name="account_type" required>
+        <option value="">Select Account Type</option>
+        <option value="admin">Admin</option>
+        <option value="faculty">Faculty</option>
+        <option value="student">Student</option>
+        <option value="alumni">Alumni</option>
+    </select><br>
 
-    <label for="Intended Graduation Year">Intended Graduation Year:</label>
-    <input type="text" id="last_name" name="last_name" required><br>   
+    <div id="student_fields" style="display: none;">
+        <label for="major">Major:</label>
+        <input type="text" id="major" name="major"><br>
+
+        <label for="intended_grad_year">Intended Graduation Year:</label>
+        <input type="text" id="intended_grad_year" name="intended_grad_year"><br>
+    </div>
+
     <input type="submit" name="register" value="Register">
+</form>
+
+<script>
+    document.getElementById('account_type').addEventListener('change', function() {
+        var accountType = this.value;
+        if (accountType === 'student' || accountType === 'admin') {
+            document.getElementById('student_fields').style.display = 'block';
+        } else {
+            document.getElementById('student_fields').style.display = 'none';
+        }
+    });
+</script>
+
+
 </form>
