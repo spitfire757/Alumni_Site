@@ -29,9 +29,11 @@ def send_email(sender_email, sender_password, recipient_email, subject, body):
 if __name__ == "__main__":
     # Set up email details
     sender_email = "cnuemaildockauth@yahoo.com"
-    sender_password = ""
+    sender_password = "r00tpassw0rd/\ "
     recipient_email = "cnuemaildockauth@yahoo.com"
-    subject = "LETS GO : PYTHONS EMAIL_SENDER>PY WORKDED!!!!!"
+    # Need to set up application for YAHOO SMTP 
+    application_password = ""
+    subject = "LETS GO : PYTHONS EMAIL_SENDER.PY WORKDED!!!!!"
     body = "This is a test email sent from Python."
 
     # Send email
