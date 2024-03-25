@@ -51,6 +51,10 @@ if (isset($_SESSION['username'])) {
     $stmtUserID->close();
     $conn->close();
 }
+else {
+	// Create a a layout - Won't display information till users is signed in 
+	// Have a sign in and register button that redirects to the register/login tabs 
+} 
 
 ?>
 
@@ -183,6 +187,7 @@ if (isset($_SESSION['username'])) {
     </table>
     <button type="submit">Submit</button>
 </form>
+
 <?php
 
 session_start();
@@ -220,6 +225,7 @@ if (isset($_SESSION['username'])) {
    // }
 }
 ?>
+
             </div>
 	</div>
     </div>
