@@ -122,6 +122,7 @@ if (isset($_SESSION['username'])) {
         echo "</select><br>";
 
         // Image Upload
+	// This need to be html... and CSS 
         echo "<label for='image'>Upload Image:</label>";
         echo "<input type='file' id='image' name='image'><br>";
 
