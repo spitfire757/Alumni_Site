@@ -93,7 +93,7 @@ if (isset($_SESSION['username'])) {
         $eventDetails = $_POST["bio"];
         $eventDateTime = $eventDate . " " . $eventTime;
         $todaysDate = date('Y-m-d H:i:s');
-        if($eventDateTime >= $todaysDate){
+        if($eventDateTime <= $todaysDate){
             echo "Date invalid. Please select a future date<br><br>";
         }
         else{
@@ -136,6 +136,7 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
             if ($row['Date'] >= $todaysDate) {
                 $dateWithoutSeconds = substr($row['Date'], 0, -3);
+                $dateWithoutSeconds = date("F j, Y, g:i a"); 
                 $userId = $row['User_ID'];
                 $innerSql = "SELECT * FROM User WHERE UserID=?";
                 $stmt = $conn->prepare($innerSql);
