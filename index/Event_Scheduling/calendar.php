@@ -42,19 +42,18 @@
 
  <?php
 session_start();
+$servername = "localhost";
+$username = "mysql_user";
+$password = "r00tpassw0rd/";
+$dbname = "DB";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 if (isset($_SESSION['username'])) {
     
     ?>
     <p style="text-align:center"><a href="create_event.php">Click Here to Create an Event</a></p>
     <?php
-    
-    $servername = "localhost";
-    $username = "mysql_user";
-    $password = "r00tpassw0rd/";
-    $dbname = "DB";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
