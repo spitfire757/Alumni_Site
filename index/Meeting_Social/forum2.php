@@ -1,5 +1,5 @@
 <?php
-
+// Connect to SQL Database
 session_start();
 
 $servername = "localhost";
@@ -8,7 +8,7 @@ $password = "r00tpassw0rd/";
 $dbname = "DB";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
-
+// Select All Forums in Forum Table
 $query = "SELECT * FROM Forum";
 $result = mysqli_query($conn, $query);
 
@@ -17,7 +17,7 @@ echo "<link rel='stylesheet' type='text/css' href='Alumni_Site/index/style/globa
 
 // Display forum titles and descriptions
 while ($row = mysqli_fetch_assoc($result)) {
-    // Link to response.php with forum ID as parameter
+    // Link to response.php with Forum Contents in Link for each forum
     echo "<div class='forum-item'>";
     echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-title'>{$row['Title']}</a><br>";
     echo "<p class='forum-description'>{$row['Description']}</p>";
