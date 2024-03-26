@@ -36,7 +36,7 @@
 <br>
 
 
-<p style="text-align:center"><a href="create_event.php">Click Here to Create an Event</a></p>
+
 <h2 align=center> Upcoming Events</h2>
 
 
@@ -44,6 +44,10 @@
 session_start();
 
 if (isset($_SESSION['username'])) {
+    
+    ?>
+    <p style="text-align:center"><a href="create_event.php">Click Here to Create an Event</a></p>
+    <?php
     
     $servername = "localhost";
     $username = "mysql_user";
@@ -61,7 +65,6 @@ if (isset($_SESSION['username'])) {
     $sql = "SELECT UserID FROM User WHERE email = ?";
     $stmt = $conn->prepare($sql);
 
-    // Check if the statement was prepared successfully
     if ($stmt === false) {
         die("Error in preparing the statement: " . $conn->error);
     }
@@ -70,11 +73,9 @@ if (isset($_SESSION['username'])) {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Check if there are rows returned
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $userID = $row['UserID'];
-        // Store UserID in a session variable
         $_SESSION['userID'] = $userID;
     } else {
         echo "User not found for the given email/username: $currentUser";
