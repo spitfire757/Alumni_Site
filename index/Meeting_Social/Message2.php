@@ -51,16 +51,11 @@ if (isset($_SESSION['username'])) {
     $stmtUserID->close();
     $conn->close();
 }
+else {
+	// Create a a layout - Won't display information till users is signed in 
+	// Have a sign in and register button that redirects to the register/login tabs 
+} 
 
-// Print out the pending requests
-echo "<h2>Pending Friend Requests:</h2>";
-echo "<ul>";
-foreach ($pendingRequests as $request) {
-    echo "<li>";
-    echo "Sender: " . $request['sender_username'] . " (ID: " . $request['sender_id'] . ")";
-    echo "</li>";
-}
-echo "</ul>";
 ?>
 
 <head>
@@ -192,6 +187,7 @@ echo "</ul>";
     </table>
     <button type="submit">Submit</button>
 </form>
+
 <?php
 
 session_start();
@@ -211,7 +207,7 @@ if (isset($_SESSION['username'])) {
     // Get the sender's username and user ID from sessio
     $senderUsername = $_SESSION['username'];
     echo "Current User : ", $senderUsername;
-    echo "FROM HERE DOWN"; 
+    echo "FROM HERE DOWN ISSUES WITH CONTACT"; 
 
     //Working on message, checking for current accepted requests first, will check both the reciever and sender username(email) 
     //So that we can pull any conversation from request_id 
@@ -229,6 +225,7 @@ if (isset($_SESSION['username'])) {
    // }
 }
 ?>
+
             </div>
 	</div>
     </div>
