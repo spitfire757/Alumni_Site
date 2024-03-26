@@ -95,7 +95,11 @@ if (isset($_SESSION['username'])) {
         $todaysDate = date('Y-m-d H:i:s');
         $eventDateTime = date("Y-m-d H:i:s", strtotime($eventDateTime));
         if($eventDateTime <= $todaysDate){
-            echo "Date invalid. Please select a future date<br><br>";
+            ?>
+            <div class="event-details">
+                <?php echo "Date invalid. Please select a future date <br><br>"; ?>
+            </div>
+            <?php
         }
         else{
             $sql = "INSERT INTO Calendar (User_ID, Date, Data) VALUES (?, ?, ?)";
@@ -135,7 +139,6 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
             if ($row['Date'] >= $todaysDate) {
                 $dateWithoutSeconds = substr($row['Date'], 0, -3);
-                $displayDate = date("F j, Y, g:i a", $strtotime($dateWithoutSeconds));
                 $userId = $row['User_ID'];
                 $innerSql = "SELECT * FROM User WHERE UserID=?";
                 $stmt = $conn->prepare($innerSql);
@@ -147,7 +150,7 @@ if ($result->num_rows > 0) {
                 $lname = $userRow['LName'];
                 ?>
                 <div class="event-details">
-                    <?php echo $displayDate . " - " . $row['Data'] . "<br>"; ?>
+                    <?php echo $dateWithoutSeconds . " - " . $row['Data'] . "<br>"; ?>
                     <?php echo "Posted by user: " . $fname . " " . $lname . "<br><br>"; ?>
                 </div>
                 <?php
