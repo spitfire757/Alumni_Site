@@ -236,7 +236,7 @@ if (isset($_SESSION['username'])) {
 
     <div id="calendar" class="content" style="display: none;">
         <h2>Captain's Dock - Calendar Tab</h2>
-        <iframe src="Alumni_Site/index/Event_Scheduling/calendar.php" width="100%" height="400px" frameborder="0"></iframe><br>
+        <iframe src="../Event_Scheduling/calendar.php" width="100%" height="400px" frameborder="0"></iframe><br>
 
     </div>
 
