@@ -92,24 +92,30 @@ if (isset($_SESSION['username'])) {
         $eventTime = $eventTime . ":00";
         $eventDetails = $_POST["bio"];
         $eventDateTime = $eventDate . " " . $eventTime;
+        $todaysDate = date('Y-m-d H:i:s');
+        if($eventDateTime >= $todaysDate){
+            echo "Date invalid. Please select a future date<br><br>";
+        }
+        else{
+            // Use the stored UserID to insert into Calendar table
+            $sql = "INSERT INTO Calendar (User_ID, Date, Data) VALUES (?, ?, ?)";
+            $stmt = $conn->prepare($sql);
 
-        // Use the stored UserID to insert into Calendar table
-        $sql = "INSERT INTO Calendar (User_ID, Date, Data) VALUES (?, ?, ?)";
-        $stmt = $conn->prepare($sql);
+            if ($stmt === false) {
+                die("Error in preparing the statement: " . $conn->error);
+            }
 
-        if ($stmt === false) {
-            die("Error in preparing the statement: " . $conn->error);
+            $stmt->bind_param("sss", $_SESSION['userID'], $eventDateTime, $eventDetails);
+            $stmt->execute();
+            $stmt->close();
+
+            ?>
+            <div class="event-details">
+                <?php echo "Event Created Succesfully <br><br>"; ?>
+            </div>
+            <?php
         }
 
-        $stmt->bind_param("sss", $_SESSION['userID'], $eventDateTime, $eventDetails);
-        $stmt->execute();
-        $stmt->close();
-
-        ?>
-        <div class="event-details">
-            <?php echo "Event Created Succesfully <br><br>"; ?>
-        </div>
-        <?php
     }
 
     // Close the database connection
@@ -122,7 +128,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM Calendar";
+$sql = "SELECT * FROM Calendar ORDER BY Date ASC";
 $result = $conn->query($sql);
 $todaysDate = date('Y-m-d H:i:s');
 
