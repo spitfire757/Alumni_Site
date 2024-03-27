@@ -19,7 +19,7 @@ if (isset($_SESSION['username'])) {
     }
 
     $receiverUsername = $_SESSION['username'];
-
+    echo $receiverUsername;
     // Retrieve user ID from the current user's username
     $sqlUserID = "SELECT UserID FROM User WHERE email = ?";
     $stmtUserID = $conn->prepare($sqlUserID);
@@ -46,15 +46,63 @@ if (isset($_SESSION['username'])) {
 
     } else {
         echo "User not found with the provided username.";
-    }
 
     $stmtUserID->close();
     $conn->close();
 }
+}
 else {
-	// Create a a layout - Won't display information till users is signed in 
-	// Have a sign in and register button that redirects to the register/login tabs 
-} 
+	echo "No User Signed in";
+	echo "<!DOCTYPE html>
+            <html lang='en'>
+            <head>
+                <meta charset='UTF-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <style>
+                    body {
+                        overflow: hidden; /* Prevent scrolling */
+                    }
+                    .overlay {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                    .overlay-content {
+                        text-align: center;
+                        background-color: white;
+                        padding: 20px;
+                        border-radius: 5px;
+                    }
+                    .overlay-content button {
+                        margin: 10px;
+                        padding: 10px 20px;
+                        background-color: #305A8C; /* Adjust button color as needed */
+                        color: white;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class='overlay'>
+                    <div class='overlay-content'>
+                        <h2>No User Signed In</h2>
+                        <button onclick=\"window.location.href='/Alumni_Site/index/Authentication_Login/login.php'\">Sign In</button>
+                        <button onclick=\"window.location.href='/Alumni_Site/index/Authentication_Login/register.php'\">Register</button>
+                    </div>
+                </div>
+            </body>
+            </html>";
+    exit; // Stop further execution of PHP code
+}
+
 
 ?>
 
@@ -109,6 +157,21 @@ else {
             background-color: #2A4C7D;
         }
 
+
+        #buttons button {
+            padding: 10px 20px;
+            background-color: #305A8C;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 0 10px;
+    }
+
+        #buttons button:hover {
+            background-color: #2A4C7D;
+    }
+
         /* Style for input and textarea */
         input[type="text"],
         input[type="email"],
@@ -155,24 +218,10 @@ else {
                 <form>
                     <label for="firstName">Email (Username):</label><br>
                     <input type="text" id="username" name="Email (Username)" required><br>
-                    <input type="text" id="ID" name="ID" required><br><br>
                     <label for="message">Enter Message:</label><br>
                     <textarea id="message" name="message" rows="4" required></textarea><br><br>
                     <button class="button" type="submit">Send</button>
                 </form>
-	    <?php
-	        if (isset($_SESSION['username'])) {
-    		    $servername = "localhost";
-    		    $username = "mysql_user";
-                    $password = "r00tpassw0rd/";
-    	            $dbname = "DB" ;
-                    $conn = new mysqli($servername, $username, $password, $dbname);
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-		    }
-    		    $senderUsername = $_SESSION['username'];
-		}
-	    ?>
             </div>
 
             <!-- Content from first_contact.php (right side) -->
@@ -190,7 +239,6 @@ else {
 
 <?php
 
-session_start();
 
 if (isset($_SESSION['username'])) {
     $servername = "localhost";
@@ -265,5 +313,10 @@ if (isset($_SESSION['username'])) {
             }
         }
     </script>
+
+
+
+
+
 </html>
 

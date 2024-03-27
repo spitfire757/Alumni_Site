@@ -38,7 +38,9 @@ if (isset($_SESSION['username'])) {
     $username = "mysql_user";
     $password = "r00tpassw0rd/";
     $dbname = "DB";
-
+    echo "<form method='post' action='signout.php'>";
+    echo "<button type='submit'>Sign Out</button>";
+    echo "</form>";
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn->connect_error) {
@@ -131,7 +133,8 @@ if (isset($_SESSION['username'])) {
         echo "<input type='file' id='pdf' name='pdf'><br>";
 
         echo "<input type='submit' value='Update'>";
-        echo "</form>";
+	echo "</form>";
+
     } else {
         echo "User not found for the given email/username: $currentUser";
     }
