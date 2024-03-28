@@ -12,4 +12,4 @@ if(isset($_POST['submit'])) {
     $forumID = substr(hash('sha256', $_POST['title']), 0, 16);
     $userID = $_POST['userID'];
     $title = $_POST['title'];
-    $
+}
