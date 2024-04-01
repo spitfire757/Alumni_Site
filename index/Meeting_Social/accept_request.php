@@ -32,6 +32,8 @@ if (isset($_SESSION['username'])) {
 } else {
     echo "No user signed in, unable to connect to DB, sign in or contact DB admin";
 }
+header("Location: view_requests.php");
+exit();
 ?>
 <!DOCTYPE html>
 <html lang="en">

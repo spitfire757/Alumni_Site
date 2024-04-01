@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Style for the form */
         form {
             width: 300px; /* Adjust width as needed */
             margin: 0 auto; /* Center the form horizontally */
@@ -38,9 +37,7 @@ if (isset($_SESSION['username'])) {
     $username = "mysql_user";
     $password = "r00tpassw0rd/";
     $dbname = "DB";
-    echo "<form method='post' action='signout.php'>";
-    echo "<button type='submit'>Sign Out</button>";
-    echo "</form>";
+
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn->connect_error) {
@@ -124,7 +121,6 @@ if (isset($_SESSION['username'])) {
         echo "</select><br>";
 
         // Image Upload
-	// This need to be html... and CSS 
         echo "<label for='image'>Upload Image:</label>";
         echo "<input type='file' id='image' name='image'><br>";
 
@@ -133,8 +129,7 @@ if (isset($_SESSION['username'])) {
         echo "<input type='file' id='pdf' name='pdf'><br>";
 
         echo "<input type='submit' value='Update'>";
-	echo "</form>";
-
+        echo "</form>";
     } else {
         echo "User not found for the given email/username: $currentUser";
     }

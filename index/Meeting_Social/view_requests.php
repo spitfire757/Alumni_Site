@@ -32,22 +32,11 @@ if (isset($_SESSION['username'])) {
     echo "</ul>";
 
     $stmt->close();
+
+    // Close the database connection
+    $conn->close();
 } else {
     echo "No user signed in, unable to connect to DB, sign in or contact DB admin";
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Friend Requests</title>
-</head>
-
-<body>
-    <!-- Your HTML content for view_requests.php goes here -->
-</body>
-
-</html>
 

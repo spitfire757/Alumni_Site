@@ -50,9 +50,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "<p>No matching user found for email: $receiverEmail.</p>";
     }
-
-    // Close the database connection
     $conn->close();
+    header("Location: Message2.php?tab=messages");
+    exit();
 }
 ?>
 
