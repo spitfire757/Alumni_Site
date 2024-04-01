@@ -37,7 +37,7 @@ if (isset($_SESSION['username'])) {
         $userID = $rowUserID['UserID'];
 
         // Check if the username or user ID is in any row of the friend_requests table
-        $sqlCheckRequests = "SELECT * FROM friend_requests WHERE (sender_username = ? OR sender_id = ? OR receiver_name = ? OR receiver_id = ?) AND status = 'pending'";
+        $sqlCheckRequests = "SELECT * FROM friend_requests WHERE (sender_username = ? OR receiver_name = ?) AND status = 'pending'";
         $stmtCheckRequests = $conn->prepare($sqlCheckRequests);
 
         if ($stmtCheckRequests === false) {

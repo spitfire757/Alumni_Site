@@ -1,20 +1,22 @@
-<html>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<form action="send_request.php" method="post">
-    <table>
-        <tr>
-            <td><label for="accountName">Account Name:</label></td>
-            <td><input type="text" id="accountName" name="accountName" required></td>
-        </tr>
-    </table>
-    <button type="submit">Submit</button>
-</form>
 <?php
-
 session_start();
 
-if (isset($_SESSION['username'])) {
+// Check if the user is logged in
+if (!isset($_SESSION['username'])) {
+    // Redirect to the login page or handle the case where the user is not logged in
+    header("Location: login.php");
+    exit();
+}
+
+// Check if the form was submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve the currently signed-in user
+    $senderUsername = $_SESSION['username'];
+
+    // Retrieve the email submitted in the form
+    $receiverEmail = $_POST['accountName'];
+
+    // Connect to the database
     $servername = "localhost";
     $username = "mysql_user";
     $password = "r00tpassw0rd/";
@@ -22,14 +24,36 @@ if (isset($_SESSION['username'])) {
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
+    // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Get the sender's username and user ID from session
-    $senderUsername = $_SESSION['username'];
-    // Get receiver's name and ID from the form submission
-    // Retrieve UserID and other fields based on the email (username)
-    $sql = "SELECT UserID, email, Fname, LName FROM User WHERE email = ?";
-    $stmt = $conn->prepare($sql);
-   
+    // SQL query to check if the specified email exists in the "User" table
+    $sql = "SELECT * FROM User WHERE email = '$receiverEmail'";
+    $result = $conn->query($sql);
+
+    // Check if there are any matching rows
+    if ($result->num_rows > 0) {
+        // Fetch the matching user's data
+        $row = $result->fetch_assoc();
+        $receiverUsername = $row['email'];
+
+        // Insert friend request into the "friend_request" table
+        $insertSql = "INSERT INTO friend_requests (sender_username, receiver_name)
+                      VALUES ('$senderUsername', '$receiverUsername')";
+        if ($conn->query($insertSql) === TRUE) {
+            echo "<p>Friend request sent to $receiverUsername ($receiverEmail).</p>";
+        } else {
+            echo "<p>Error sending friend request: " . $conn->error . "</p>";
+        }
+    } else {
+        echo "<p>No matching user found for email: $receiverEmail.</p>";
+    }
+
+    // Close the database connection
+    $conn->close();
+}
+?>
+
+

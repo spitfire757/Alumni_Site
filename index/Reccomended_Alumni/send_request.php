@@ -43,7 +43,7 @@ if (isset($_SESSION['username'])) {
             die("Error in preparing the statement: " . $conn->error);
         }
 
-        $stmtInsert->bind_param("ss", $senderUsername, $senderID, $receiverName, $receiverID);
+        $stmtInsert->bind_param("ss", $senderUsername, $receiverName);
         $stmtInsert->execute();
         $stmtInsert->close();
 

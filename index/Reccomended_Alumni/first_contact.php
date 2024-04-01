@@ -55,7 +55,6 @@ if ($result->num_rows > 0) {
 
     // Get receiver's name and ID from the form submission
     $receiverName = $_POST['accountName'];
-    $receiverID = $_POST['accountID'];
 
     // Insert the request into the database
     $sql = "INSERT INTO friend_requests (sender_username,  receiver_name) VALUES (?, ?)";
@@ -66,7 +65,7 @@ if ($result->num_rows > 0) {
         die("Error in preparing the statement: " . $conn->error);
     }
 
-    $stmt->bind_param("ssss", $senderUsername, $userID, $receiverName, $receiverID);
+    $stmt->bind_param("ss", $senderUsername, $receiverNam);
     $stmt->execute();
     $stmt->close();
 
