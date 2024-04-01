@@ -18,7 +18,6 @@ if (isset($_SESSION['username'])) {
 
     // Get receiver's name and ID from the form submission
     $receiverName = $_POST['accountName'];
-    $receiverID = $_POST['accountID'];
 
     // Retrieve sender's UserID based on the username
     $sqlSender = "SELECT UserID FROM User WHERE email = ?";
@@ -37,14 +36,14 @@ if (isset($_SESSION['username'])) {
         $senderID = $rowSender['UserID'];
 
         // Insert the request into the database
-        $sqlInsert = "INSERT INTO friend_requests (sender_username, sender_id, receiver_name, receiver_id) VALUES (?, ?, ?, ?)";
+        $sqlInsert = "INSERT INTO friend_requests (sender_username,  receiver_name) VALUES (?, ?)";
         $stmtInsert = $conn->prepare($sqlInsert);
         
         if ($stmtInsert === false) {
             die("Error in preparing the statement: " . $conn->error);
         }
 
-        $stmtInsert->bind_param("ssss", $senderUsername, $senderID, $receiverName, $receiverID);
+        $stmtInsert->bind_param("ss", $senderUsername, $senderID, $receiverName, $receiverID);
         $stmtInsert->execute();
         $stmtInsert->close();
 

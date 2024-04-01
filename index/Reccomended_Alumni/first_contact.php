@@ -7,10 +7,6 @@
             <td><label for="accountName">Account Name:</label></td>
             <td><input type="text" id="accountName" name="accountName" required></td>
         </tr>
-        <tr>
-            <td><label for="accountID">Account ID:</label></td>
-            <td><input type="text" id="accountID" name="accountID" required></td>
-        </tr>
     </table>
     <button type="submit">Submit</button>
 </form>
@@ -62,7 +58,7 @@ if ($result->num_rows > 0) {
     $receiverID = $_POST['accountID'];
 
     // Insert the request into the database
-    $sql = "INSERT INTO friend_requests (sender_username, sender_id, receiver_name, receiver_id) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO friend_requests (sender_username,  receiver_name) VALUES (?, ?)";
     $stmt = $conn->prepare($sql);
 
     // Check if the statement was prepared successfully

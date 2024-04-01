@@ -227,7 +227,7 @@ else {
             <!-- Content from first_contact.php (right side) -->
             <div style="width: 30%; display: flex; flex-direction: column; align-items: flex-end;">
 <h3> Enter the account email </h3>
-<form action="send_request.php" method="post">
+<form action="contact.php" method="post">
     <table>
         <tr>
             <td><label for="accountName">Account Email:</label></td>
