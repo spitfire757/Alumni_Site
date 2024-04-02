@@ -1,4 +1,5 @@
 <?php
+echo "here";
 // Connect to SQL Database
 session_start();
 
