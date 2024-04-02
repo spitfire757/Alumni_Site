@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html>
-<body>
 <?php
 
     session_start();
@@ -67,6 +64,9 @@
     echo "<br><a href='forum2.php'>Back to Forum</a>";
     echo "<hr>";
     ?>
+    <!DOCTYPE html>
+    <html>
+    <body>
 
     <!-- Sorting Methods-->
     <form action="response2.php" method="get">
