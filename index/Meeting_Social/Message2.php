@@ -279,7 +279,31 @@ if (isset($_SESSION['username'])) {
     </div>
     <div id="forum" class="content" style="display: none;">
         <h2>Captain's Dock - Forum Tab</h2>
-        <p>This is the content for the Forum Tab.</p>
+        <div class="tab" onclick="showTab('showForums')">Forums</div>
+        <div class="tab" onclick="showTab('createForums')">Create Forum</div>
+        <div id="showForums" class="content" style="display: none;">
+            <iframe src="forum2.php" width="100%" height="400px" frameborder="0"></iframe><br>
+        </div>
+            <div id="createForums" class="content" style="display: none;">                <iframe src="creat_forum.php" width="100%" height="400px" frameborder="0"></iframe><br>
+        </div>
+        <script>
+            function showTab(tabId) {
+                // Hide all tabs
+                var tabs = document.getElementsByClassName('content');
+                for (var i = 0; i < tabs.length; i++) {
+                    tabs[i].style.display = 'none';
+                }
+    
+                // Show the selected tab
+                document.getElementById(tabId).style.display = 'block';
+    
+                // If the Forum tab is selected, show the first contact form by default
+                if (tabId === 'showForums') {
+                    document.getElementById('showForums').style.display = 'block';
+                }
+            }
+    
+        </script>
     </div>
 
     <div id="calendar" class="content" style="display: none;">
