@@ -1,30 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-    <style>
-        /* CSS styles here */
-        .container {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .left, .right {
-            width: 45%;
-        }
-
-        .left form, .right form {
-            margin-bottom: 20px;
-        }
-    </style>
-</head>
-<body>
-
 <?php
 session_start();
-
 if (isset($_SESSION['username'])) {
     $servername = "localhost";
     $username = "mysql_user";
@@ -91,19 +66,35 @@ if (isset($_SESSION['username'])) {
         echo "</div>";
 
         echo "<div class='right'>";
-        // Upload Resume
-        // echo "<label for='resume'>Upload Resume:</label>";
-        // echo "<input type='file' id='resume' name='resume'><br>";
-
-        // Upload Image
-        // echo "<label for='image'>Upload Image:</label>";
-        // echo "<input type='file' id='image' name='image'><br>";
-
-        echo "<input type='submit' value='Update'>";
-        echo "</form>";
+        echo "<input type='submit' name='update' value='Update'>"; // Name the submit button
         echo "</div>";
         echo "</div>";
 
+        if(isset($_POST['update'])){
+            // Handle form submission
+
+            // Retrieve form data
+            $major = $_POST['major'];
+            $minor = $_POST['minor'];
+            $experience = $_POST['experience'];
+            $security = $_POST['securityToggle']; // New security setting
+
+            // Update the user information in the database
+            $updateSql = "UPDATE User SET Major=?, Minor=?, Experience=?, security=? WHERE email=?";
+            $updateStmt = $conn->prepare($updateSql);
+
+            if ($updateStmt === false) {
+                die("Error in preparing the update statement: " . $conn->error);
+            }
+
+            $updateStmt->bind_param("sssss", $major, $minor, $experience, $security, $currentUser);
+            $updateStmt->execute();
+            $updateStmt->close();
+
+            // Redirect after the update is performed
+            header("Location: update.php");
+            exit; // Ensure no further code execution after redirection
+        }
     } else {
         echo "User not found for the given email/username: $currentUser";
     }
@@ -117,6 +108,7 @@ if (isset($_SESSION['username'])) {
 <form action="signout.php" method="post">
     <button type="submit">Sign Out</button>
 </form>
+
 </body>
 </html>
 
