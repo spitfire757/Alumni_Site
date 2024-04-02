@@ -80,5 +80,5 @@ if (isset($_SESSION['username'])) {
     </form>";
 }
 else {
-    echo "Please log in here <a href = 'Alumni_Site/index/Authentication_Login/login.php'>";
+    echo "<p>Please log in here </p><a href = 'Alumni_Site/index/Authentication_Login/login.php'>";
 }
