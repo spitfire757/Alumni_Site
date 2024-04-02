@@ -44,9 +44,18 @@
 
     // Display forum responses
     while ($row = $result->fetch_assoc()) {
-        echo "<h3>{$row['UserID']} • {$row['Datetime']}</h3>";
-        echo "<p>{$row['Response']}</p>";
-        echo "<br>";
+        echo "<tr>";
+        echo "<td>";
+            echo "<button> A </button>";
+            echo $row['votes'];
+            echo "<button> V </button>";
+        echo "</td>";
+        echo "<td>";
+            echo "<h3>{$row['UserID']} • {$row['Datetime']}</h3>";
+            echo "<p>{$row['Response']}</p>";
+            echo "<br>";
+        echo "</td>";
+        echo "</tr>";
     }
 
     echo "<hr>";
