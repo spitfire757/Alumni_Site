@@ -37,7 +37,7 @@ if (isset($_SESSION['username'])) {
         $userID = $rowUserID['UserID'];
 
         // Check if the username or user ID is in any row of the friend_requests table
-        $sqlCheckRequests = "SELECT * FROM friend_requests WHERE (sender_username = ? OR sender_id = ? OR receiver_name = ? OR receiver_id = ?) AND status = 'pending'";
+        $sqlCheckRequests = "SELECT * FROM friend_requests WHERE (sender_username = ? OR receiver_name = ?) AND status = 'pending'";
         $stmtCheckRequests = $conn->prepare($sqlCheckRequests);
 
         if ($stmtCheckRequests === false) {
@@ -183,7 +183,7 @@ else {
             border: 1px solid #ccc;
             border-radius: 4px;
             resize: none;
-        }
+	}
     </style>
     <title>Captain's Dock</title>
 </head>
@@ -196,6 +196,7 @@ else {
         <div class="tab" onclick="showTab('forum')">Forum</div>
         <div class="tab" onclick="showTab('calendar')">Calendar</div>
         <div class="tab" onclick="showTab('profile')">Profile</div>
+	<div class="tab" onclick="showTab('connect')">Connect</div>
     </div>
 
     <div id="home" class="content">
@@ -227,7 +228,7 @@ else {
             <!-- Content from first_contact.php (right side) -->
             <div style="width: 30%; display: flex; flex-direction: column; align-items: flex-end;">
 <h3> Enter the account email </h3>
-<form action="send_request.php" method="post">
+<form action="contact.php" method="post">
     <table>
         <tr>
             <td><label for="accountName">Account Email:</label></td>
@@ -236,6 +237,21 @@ else {
     </table>
     <button type="submit">Submit</button>
 </form>
+<!-- Inside message.php -->
+<!-- Inside message.php -->
+<button id="toggleFriendRequestsBtn" onclick="toggleFriendRequests()">Toggle Friend Requests</button>
+<div id="friendRequestsContainer" style="display:none;">
+    <iframe id="friendRequestsFrame" src="view_requests.php"></iframe>
+</div>
+
+<script>
+    function toggleFriendRequests() {
+        var container = document.getElementById('friendRequestsContainer');
+        container.style.display = container.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
+
+
 
 <?php
 
@@ -255,8 +271,7 @@ if (isset($_SESSION['username'])) {
     // Get the sender's username and user ID from sessio
     $senderUsername = $_SESSION['username'];
     echo "Current User : ", $senderUsername;
-    echo "FROM HERE DOWN ISSUES WITH CONTACT"; 
-
+    // <-- WORKING 4/1/2024 --> 
     //Working on message, checking for current accepted requests first, will check both the reciever and sender username(email) 
     //So that we can pull any conversation from request_id 
     //$sql = "SELECT sender_username, receiver_name from friend_requests where sender_username = ? or receiver_name = ?";
@@ -317,8 +332,12 @@ if (isset($_SESSION['username'])) {
         <p>This is the content for the Profile Tab.</p>
 	<?php include 'profile_content.php'; ?>
     </div>
-    <!-- Inside message.php -->
-    <a href="view_requests.php">View Friend Requests</a>
+
+    <div id="connect" class="content" style="display: none;">
+        <h2>Captain's Dock - connect Tab</h2>
+        <p>This is the content for the Connect Tab.</p>
+        <?php include 'search.php'; ?>
+    </div>
 
     <script>
         function showTab(tabId) {
