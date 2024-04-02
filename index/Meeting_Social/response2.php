@@ -41,7 +41,20 @@
     echo "<p>".$forum_Description."</p>";
     echo "<br><a href='forum2.php'>Back to Forum</a>";
     echo "<hr>";
+    ?>
 
+    <!-- Sorting Methods-->
+    <form action="response2.php" method="get">
+        <select name="sort_by">
+            <option value="datetime_desc">Datetime Added (Newest to Oldest)</option>
+            <option value="datetime_asc">Datetime Added (Oldest to Newest)</option>
+            <option value="popularity_desc">Popularity (Most Upvotes)</option>
+            <option value="popularity_asc">Popularity (Least Upvotes)</option>
+        </select>
+        <button type="submit">Sort</button>
+    </form>
+
+    <?php
     // Display forum responses
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
@@ -101,6 +114,43 @@
         } else {
             echo "Error: " . $conn->error;
         }
+    }
+
+    // Default sorting
+    $sort_by = "Datetime DESC";
+
+    // Check if sorting option is selected
+    if (isset($_GET['sort_by'])) {
+        switch ($_GET['sort_by']) {
+            case 'datetime_desc':
+                $sort_by = "Datetime DESC";
+                break;
+            case 'datetime_asc':
+                $sort_by = "Datetime ASC";
+                break;
+            case 'popularity_desc':
+                $sort_by = "votes DESC";
+                break;
+            case 'popularity_asc':
+                $sort_by = "votes ASC";
+                break;
+            default:
+                $sort_by = "Datetime DESC"; // Default to datetime descending if invalid option
+                break;
+        }
+    }
+
+    // Fetch data from Response Table for the selected forum with sorting
+    $query = "SELECT * FROM Forum_Response WHERE ForumID = '$forum_ID' ORDER BY $sort_by;";
+    $result = $conn->query($query);
+
+    if (!$result) {
+        echo "Error: " . $conn->error;
+    }
+
+    // Display forum responses
+    while ($row = $result->fetch_assoc()) {
+        // Display each response
     }
 ?>
 <link rel='stylesheet' type='text/css' href='Alumni_Site/index/style/global_style.css'>
