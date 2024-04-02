@@ -46,9 +46,11 @@
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
         echo "<td>";
-            echo "<button> A </button>";
-            echo $row['votes'];
-            echo "<button> V </button>";
+            echo "<form method='post'>"; 
+                echo "<button type='submit' name='increase_vote' value='{$row['ResponseID']}'>A</button>";
+                echo $row['votes'];
+                echo "<button type='submit' name='decrease_vote' value='{$row['ResponseID']}'>V</button>";
+            echo "</form>";
         echo "</td>";
         echo "<td>";
             echo "<h3>{$row['UserID']} • {$row['Datetime']}</h3>";
@@ -63,7 +65,7 @@
     // If the form is submitted, add the content to the Forum_Response table
     if(isset($_POST['submit'])) {
         $responseID = substr(hash('sha256', $_POST['response']), 0, 16);
-        $userID = $_POST['userID'];
+        $userID = $_SESSION['username'];
         $response = $_POST['response'];
         $dateTime = date("Y-m-d H:i:s");
 
@@ -80,6 +82,25 @@
             echo "Error: " . $conn->error;
         }
     }
+
+    // Handle vote increment and decrement
+if (isset($_POST['increase_vote']) && isset($_POST['decrease_vote'])) {
+    $responseID = $_POST['increase_vote'] ?? $_POST['decrease_vote'];
+    $vote_type = isset($_POST['increase_vote']) ? 'increase' : 'decrease';
+
+    // Update the votes in the database
+    $sql = "UPDATE Forum_Response SET votes = votes " . ($vote_type === 'increase' ? '+' : '-') . " 1 WHERE ResponseID = '$responseID'";
+    $result = $conn->query($sql);
+
+    // Check if the update was successful
+    if ($result) {
+        // Redirect to refresh the page
+        header("Location: response2.php?forumID=$forum_ID&forumTitle=$forum_Title&forumDescription=$forum_Description");
+        exit();
+    } else {
+        echo "Error: " . $conn->error;
+    }
+}
 ?>
 <link rel='stylesheet' type='text/css' href='Alumni_Site/index/style/global_style.css'>
 <form action='response2.php' method='post'>
