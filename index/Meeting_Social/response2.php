@@ -2,7 +2,7 @@
 <html>
 <body>
 <?php
-if (isset($_SESSION['username'])) {
+
     session_start();
 
     $servername = "localhost";
@@ -71,14 +71,10 @@ if (isset($_SESSION['username'])) {
             echo "Error: " . $conn->error;
         }
     }
-    echo "
-    <link rel='stylesheet' type='text/css' href='Alumni_Site/index/style/global_style.css'>
-    <form action='response2.php' method='post'>
-        <input type='text' name='userID' placeholder='userID' maxlength='64'><br>
-        <textarea id='response' name='response' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
-        <button type='submit' name='submit'>Reply</button>
-    </form>";
-}
-else {
-    echo "<p>Please log in here </p><a href = 'Alumni_Site/index/Authentication_Login/login.php'>";
-}
+?>
+<link rel='stylesheet' type='text/css' href='Alumni_Site/index/style/global_style.css'>
+<form action='response2.php' method='post'>
+    <input type='text' name='userID' placeholder='userID' maxlength='64'><br>
+    <textarea id='response' name='response' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
+    <button type='submit' name='submit'>Reply</button>
+</form>";
