@@ -209,6 +209,8 @@ else {
         <p>This is the content for the Help Page Tab.</p>
     </div>
 
+
+
     <div id="messages" class="content" style="display: none;">
         <h2>Captain's Dock - Messages Tab</h2>
         <p>This is the content for the Messages Tab.</p>
@@ -223,7 +225,11 @@ else {
                     <textarea id="message" name="message" rows="4" required></textarea><br><br>
                     <button class="button" type="submit">Send</button>
                 </form>
-            </div>
+                </div>
+    </div>
+
+
+
 
             <!-- Content from first_contact.php (right side) -->
             <div style="width: 30%; display: flex; flex-direction: column; align-items: flex-end;">
