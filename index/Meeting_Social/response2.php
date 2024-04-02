@@ -47,9 +47,9 @@
         echo "<tr>";
         echo "<td>";
             echo "<form method='post'>"; 
-                echo "<button type='submit' name='increase_vote' value='{$row['ResponseID']}'>A</button>";
+                echo "<button type='submit' name='vote' value='{$row['ResponseID']}_up'>A</button>";
                 echo $row['votes'];
-                echo "<button type='submit' name='decrease_vote' value='{$row['ResponseID']}'>V</button>";
+                echo "<button type='submit' name='vote' value='{$row['ResponseID']}_down'>V</button>";
             echo "</form>";
         echo "</td>";
         echo "<td>";
@@ -84,27 +84,27 @@
     }
 
     // Handle vote increment and decrement
-if (isset($_POST['increase_vote']) && isset($_POST['decrease_vote'])) {
-    $responseID = $_POST['increase_vote'] ?? $_POST['decrease_vote'];
-    $vote_type = isset($_POST['increase_vote']) ? 'increase' : 'decrease';
+    if (isset($_POST['vote'])) {
+        $data = explode('_', $_POST['vote']);
+        $responseID = $data[0];
+        $vote_type = $data[1];
 
-    // Update the votes in the database
-    $sql = "UPDATE Forum_Response SET votes = votes " . ($vote_type === 'increase' ? '+' : '-') . " 1 WHERE ResponseID = '$responseID'";
-    $result = $conn->query($sql);
+        // Update the votes in the database
+        $sql = "UPDATE Forum_Response SET votes = votes " . ($vote_type === 'up' ? '+' : '-') . " 1 WHERE ResponseID = '$responseID'";
+        $result = $conn->query($sql);
 
-    // Check if the update was successful
-    if ($result) {
-        // Redirect to refresh the page
-        header("Location: response2.php?forumID=$forum_ID&forumTitle=$forum_Title&forumDescription=$forum_Description");
-        exit();
-    } else {
-        echo "Error: " . $conn->error;
+        // Check if the update was successful
+        if ($result) {
+            // Redirect to refresh the page
+            header("Location: response2.php?forumID=$forum_ID&forumTitle=$forum_Title&forumDescription=$forum_Description");
+            exit();
+        } else {
+            echo "Error: " . $conn->error;
+        }
     }
-}
 ?>
 <link rel='stylesheet' type='text/css' href='Alumni_Site/index/style/global_style.css'>
 <form action='response2.php' method='post'>
-    <input type='text' name='userID' placeholder='userID' maxlength='64'><br>
     <textarea id='response' name='response' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
     <button type='submit' name='submit'>Reply</button>
-</form>";
+</form>
