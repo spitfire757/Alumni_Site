@@ -14,7 +14,7 @@ $query = "SELECT * FROM Forum";
 $result = mysqli_query($conn, $query);
 ?>
 
-<a href="create_forum.php">
+<a href="Alumni_Site/index/Meeting_Social/create_forum.php">
     <button type = "button">Create a Forum</button>
 </a>
 
