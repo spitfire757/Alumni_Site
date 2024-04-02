@@ -31,6 +31,28 @@
     // Default sorting
     $sort_by = "Datetime DESC";
 
+    // Check if sorting option is selected
+    if (isset($_GET['sort_by'])) {
+        switch ($_GET['sort_by']) {
+            case 'datetime_desc':
+                $sort_by = "Datetime DESC";
+                break;
+            case 'datetime_asc':
+                $sort_by = "Datetime ASC";
+                break;
+            case 'popularity_desc':
+                $sort_by = "votes DESC";
+                break;
+            case 'popularity_asc':
+                $sort_by = "votes ASC";
+                break;
+            default:
+                // Default sorting if invalid option is selected
+                $sort_by = "Datetime DESC";
+                break;
+        }
+    }
+
     // Fetch data from Response Table for the selected forum
     $query = "SELECT * FROM Forum_Response WHERE ForumID = '$forum_ID' ORDER BY $sort_by;";
     $result = $conn->query($query);
@@ -58,22 +80,23 @@
     </form>
 
     <?php
+    echo "<hr>";
+    
     // Display forum responses
     while ($row = $result->fetch_assoc()) {
-        echo "<tr>";
-        echo "<td>";
-            echo "<form method='post'>"; 
-                echo "<button type='submit' name='vote' value='{$row['ResponseID']}_up'>A</button>";
-                echo $row['votes'];
-                echo "<button type='submit' name='vote' value='{$row['ResponseID']}_down'>V</button>";
-            echo "</form>";
-        echo "</td>";
-        echo "<td>";
-            echo "<h3>{$row['UserID']} • {$row['Datetime']}</h3>";
-            echo "<p>{$row['Response']}</p>";
-            echo "<br>";
-        echo "</td>";
-        echo "</tr>";
+        echo "<div style='display: flex; align-items: center;'>";
+        echo "<div style='margin-right: 10px;'>"; // Left column for voting system
+        echo "<form method='post'>";
+        echo "<button type='submit' name='vote[{$row['ResponseID']}]' value='up'>A</button>";
+        echo $row['votes'];
+        echo "<button type='submit' name='vote[{$row['ResponseID']}]' value='down'>V</button>";
+        echo "</form>";
+        echo "</div>";
+        echo "<div>"; // Right column for response content
+        echo "<h3>{$row['UserID']} • {$row['Datetime']}</h3>";
+        echo "<p>{$row['Response']}</p>";
+        echo "</div>";
+        echo "</div>";
     }
 
     echo "<hr>";
@@ -118,42 +141,6 @@
             echo "Error: " . $conn->error;
         }
     }
-
-    // Check if sorting option is selected
-    if (isset($_GET['sort_by'])) {
-        switch ($_GET['sort_by']) {
-            case 'datetime_desc':
-                $sort_by = "Datetime DESC";
-                break;
-            case 'datetime_asc':
-                $sort_by = "Datetime ASC";
-                break;
-            case 'popularity_desc':
-                $sort_by = "votes DESC";
-                break;
-            case 'popularity_asc':
-                $sort_by = "votes ASC";
-                break;
-            default:
-                // Default sorting if invalid option is selected
-                $sort_by = "Datetime DESC";
-                break;
-        }
-    }
-
-    // Fetch data from Response Table for the selected forum with sorting
-    $query = "SELECT * FROM Forum_Response WHERE ForumID = '$forum_ID' ORDER BY $sort_by;";
-    $result = $conn->query($query);
-
-    if (!$result) {
-        echo "Error: " . $conn->error;
-    }
-
-    // Display forum responses
-    while ($row = $result->fetch_assoc()) {
-        // Display each response
-    }
-
 
     // Fetch data from Response Table for the selected forum with sorting
     $query = "SELECT * FROM Forum_Response WHERE ForumID = '$forum_ID' ORDER BY $sort_by;";
