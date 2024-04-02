@@ -7,38 +7,12 @@
         text-align: center;
     }
 </style>
-    </head>
-    <body>
-
-        <div>
-            <nav>
-                <table>
-                    <tr>
-                        <td>
-                            <a href = "../Interface/help.php">Help</a>
-                        </td>
-                        <td>
-                            <a href = "../Meeting_Social/message.php">Message</a>
-                        </td>
-                        <td>
-                            <a href = "../Meeting_Social/forum.php">Forum</a>
-                        </td>
-                        <td>
-                            <a href = "calendar.php">Calendar</a>
-                        </td>
-                        <td>
-                            <a href = "../Authentication_Login/profile.php">Profile</a>
-                        </td>
-                    </tr>
-                </table>
-            </nav>
-        </div>
+</head>
+<body>
 <br>
 
 
-
 <h2 align=center> Upcoming Events</h2>
-
 
  <?php
 session_start();
@@ -97,7 +71,7 @@ if (isset($_SESSION['username'])) {
         if($eventDateTime <= $todaysDate){
             ?>
             <div class="event-details">
-                <?php echo "Date invalid. Please select a future date <br><br>"; ?>
+                <?php echo "<h3>The date you entered was invalid. Please select a date that has not passed. </h3> <br><br>"; ?>
             </div>
             <?php
         }
