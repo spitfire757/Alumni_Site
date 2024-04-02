@@ -87,9 +87,10 @@
         echo "<div style='display: flex; align-items: center;'>";
         echo "<div style='margin-right: 10px;'>"; // Left column for voting system
         echo "<form method='post'>";
-        echo "<button type='submit' name='vote[{$row['ResponseID']}]' value='up'>A</button>";
+        // Each button has a unique name attribute containing the response ID and vote direction
+        echo "<button type='submit' name='vote[{$row['ResponseID']}_up]' value='up'>A</button>";
         echo $row['votes'];
-        echo "<button type='submit' name='vote[{$row['ResponseID']}]' value='down'>V</button>";
+        echo "<button type='submit' name='vote[{$row['ResponseID']}_down]' value='down'>V</button>";
         echo "</form>";
         echo "</div>";
         echo "<div>"; // Right column for response content
@@ -123,28 +124,23 @@
     }
 
     // Handle vote increment and decrement
-    if (isset($_POST['vote'])) {
-        $data = explode('_', $_POST['vote']);
-        $responseID = $data[0];
-        $vote_type = $data[1];
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vote'])) {
+        foreach ($_POST['vote'] as $response_vote => $vote_direction) {
+            $responseID = substr($response_vote, 0, -3); // Extract the response ID from the name attribute
+            $vote_type = substr($response_vote, -3); // Extract the vote direction (up or down)
 
-        // Update the votes in the database
-        $sql = "UPDATE Forum_Response SET votes = votes " . ($vote_type === 'up' ? '+' : '-') . " 1 WHERE ResponseID = '$responseID'";
-        $result = $conn->query($sql);
+            // Update the votes in the database
+            $sql = "UPDATE Forum_Response SET votes = votes " . ($vote_type === '_up' ? '+' : '-') . " 1 WHERE ResponseID = '$responseID'";
+            $result = $conn->query($sql);
 
-        // Check if the update was successful
-        if ($result) {
-            // Redirect to refresh the page
-            header("Location: response2.php?forumID=$forum_ID&forumTitle=$forum_Title&forumDescription=$forum_Description");
-            exit();
-        } else {
-            echo "Error: " . $conn->error;
+            // Check if the update was successful
+            if (!$result) {
+                echo "Error: " . $conn->error;
+            }
         }
+        header("Location: response2.php?forumID=$forum_ID&sort_by=$sort_by");
+        exit();
     }
-
-    // Fetch data from Response Table for the selected forum with sorting
-    $query = "SELECT * FROM Forum_Response WHERE ForumID = '$forum_ID' ORDER BY $sort_by;";
-    $result = $conn->query($query);
 
     if (!$result) {
         echo "Error: " . $conn->error;
