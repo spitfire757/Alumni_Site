@@ -1,5 +1,5 @@
+<link rel='stylesheet' type='text/css' href='Alumni_Site/index/style/global_style.css'>
 <?php
-echo "here";
 // Connect to SQL Database
 session_start();
 
@@ -12,10 +12,13 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 // Select All Forums in Forum Table
 $query = "SELECT * FROM Forum";
 $result = mysqli_query($conn, $query);
+?>
 
-// Include the CSS file
-echo "<link rel='stylesheet' type='text/css' href='Alumni_Site/index/style/global_style.css'>";
+<a href="create_forum.php">
+    <button type = "button">Create a Forum</button>
+</a>
 
+<?php
 // Display forum titles and descriptions
 while ($row = mysqli_fetch_assoc($result)) {
     // Link to response.php with Forum Contents in Link for each forum
@@ -24,5 +27,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "<p class='forum-description'>{$row['Description']}</p>";
     echo "</div>";
 }
+?>
 
 
