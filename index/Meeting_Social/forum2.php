@@ -23,7 +23,7 @@ $result = mysqli_query($conn, $query);
 while ($row = mysqli_fetch_assoc($result)) {
     // Link to response.php with Forum Contents in Link for each forum
     echo "<div class='forum-item'>";
-    echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-title'>{$row['Title']}</a><br>";
+    echo "<a href='response3.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-title'>{$row['Title']}</a><br>";
     echo "<p class='forum-description'>{$row['Description']}</p>";
     echo "</div>";
 }
