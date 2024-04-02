@@ -28,8 +28,11 @@
     $forum_Title = $_SESSION["forumTitle"];
     $forum_Description = $_SESSION["forumDescription"];
 
+    // Default sorting
+    $sort_by = "Datetime DESC";
+
     // Fetch data from Response Table for the selected forum
-    $query = "SELECT * FROM Forum_Response WHERE ForumID = '$forum_ID' ORDER BY Datetime ASC;";
+    $query = "SELECT * FROM Forum_Response WHERE ForumID = '$forum_ID' ORDER BY $sort_by;";
     $result = $conn->query($query);
 
     if (!$result) {
@@ -116,9 +119,6 @@
         }
     }
 
-    // Default sorting
-    $sort_by = "Datetime DESC";
-
     // Check if sorting option is selected
     if (isset($_GET['sort_by'])) {
         switch ($_GET['sort_by']) {
@@ -135,10 +135,25 @@
                 $sort_by = "votes ASC";
                 break;
             default:
-                $sort_by = "Datetime DESC"; // Default to datetime descending if invalid option
+                // Default sorting if invalid option is selected
+                $sort_by = "Datetime DESC";
                 break;
         }
     }
+
+    // Fetch data from Response Table for the selected forum with sorting
+    $query = "SELECT * FROM Forum_Response WHERE ForumID = '$forum_ID' ORDER BY $sort_by;";
+    $result = $conn->query($query);
+
+    if (!$result) {
+        echo "Error: " . $conn->error;
+    }
+
+    // Display forum responses
+    while ($row = $result->fetch_assoc()) {
+        // Display each response
+    }
+
 
     // Fetch data from Response Table for the selected forum with sorting
     $query = "SELECT * FROM Forum_Response WHERE ForumID = '$forum_ID' ORDER BY $sort_by;";
