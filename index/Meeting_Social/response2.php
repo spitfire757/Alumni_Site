@@ -82,14 +82,14 @@
     <?php
     echo "<hr>";
     
-    // Display forum responses
     while ($row = $result->fetch_assoc()) {
         echo "<div style='display: flex; align-items: center;'>";
         echo "<div style='margin-right: 10px;'>"; // Left column for voting system
         echo "<form method='post'>";
-        // Each button has a unique name attribute containing the response ID and vote direction
+        // Upvote button
         echo "<button type='submit' name='vote[{$row['ResponseID']}_up]' value='up' style='padding: 5px;'>↑</button>";
         echo $row['votes'];
+        // Downvote button
         echo "<button type='submit' name='vote[{$row['ResponseID']}_down]' value='down' style='padding: 5px;'>↓</button>";
         echo "</form>";
         echo "</div>";
@@ -131,17 +131,6 @@
             // Extract the vote direction (up or down)
             $vote_type = substr($response_vote, -3);
 
-            // Check if it's a down vote
-            if ($vote_direction == 'down') {
-                // Update the votes in the database
-                $sql = "UPDATE Forum_Response SET votes = votes - 1 WHERE ResponseID = '$responseID'";
-                $result = $conn->query($sql);
-
-                // Check if the update was successful
-                if (!$result) {
-                    echo "Error: " . $conn->error;
-                }
-            }
             // Check if it's an up vote
             if ($vote_direction == 'up') {
                 // Update the votes in the database
@@ -154,8 +143,6 @@
                 }
             }
         }
-        header("Location: response2.php?forumID=$forum_ID&sort_by=$sort_by");
-        exit();
     }
 
     // Handle down vote decrement
@@ -178,10 +165,11 @@
                 }
             }
         }
-        // Redirect after processing votes
-        header("Location: response2.php?forumID=$forum_ID&sort_by=$sort_by");
-        exit();
     }
+
+    // Redirect after processing votes
+    header("Location: response2.php?forumID=$forum_ID&sort_by=$sort_by");
+    exit();
 
 
     if (!$result) {
