@@ -130,7 +130,13 @@
             $vote_type = substr($response_vote, -3); // Extract the vote direction (up or down)
 
             // Define the vote increment/decrement
-            $vote_change = ($vote_direction === 'up') ? 1 : -1;
+            $vote_change = 0;
+            if ($vote_direction == 'up') {
+                $vote_change = 1;
+            }
+            if ($vote_direction == 'down') {
+                $vote_change = -1;
+            }
 
             // Update the votes in the database
             $sql = "UPDATE Forum_Response SET votes = votes + $vote_change WHERE ResponseID = '$responseID'";
@@ -145,7 +151,6 @@
         header("Location: response2.php?forumID=$forum_ID&sort_by=$sort_by");
         exit();
     }
-
 
     if (!$result) {
         echo "Error: " . $conn->error;
