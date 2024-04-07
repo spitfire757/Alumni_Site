@@ -109,7 +109,7 @@
 
     echo "<hr>";
 
-    // If the form is submitted, add the content to the Forum_Response table
+   // If the form is submitted, add the content to the Forum_Response table
     if(isset($_POST['submit'])) {
         $responseID = substr(hash('sha256', $_POST['response']), 0, 16);
         $userID = $username;
