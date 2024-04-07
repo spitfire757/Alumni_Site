@@ -1,5 +1,55 @@
 <?php
 session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['username'])) {
+    $major = $_POST['major'];
+    $minor = $_POST['minor'];
+    $experience = $_POST['experience'];
+    $security = $_POST['securityToggle'];
+
+    // Validate and sanitize your input data here
+
+    $servername = "localhost";
+    $username = "mysql_user";
+    $password = "r00tpassw0rd/";
+    $dbname = "DB";
+
+    // Connect to the database
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $currentUser = $_SESSION['username'];
+
+    // Prepare and execute your update query here
+    $sql = "UPDATE User SET Major=?, Minor=?, Experience=?, security=? WHERE email=?";
+    $stmt = $conn->prepare($sql);
+
+    if ($stmt === false) {
+        die("Error in preparing the statement: " . $conn->error);
+    }
+
+    $stmt->bind_param("sssis", $major, $minor, $experience, $security, $currentUser);
+    $stmt->execute();
+
+    $stmt->close();
+    $conn->close();
+} else {
+    echo "Invalid request or no user signed in, unable to connect to DB, sign in or contact DB admin";
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+<?php
 if (isset($_SESSION['username'])) {
     $servername = "localhost";
     $username = "mysql_user";
@@ -14,7 +64,8 @@ if (isset($_SESSION['username'])) {
     }
 
     $currentUser = $_SESSION['username'];
-    // Retrieve UserID and other fields based on the email (username)
+
+    // Retrieve user information
     $sql = "SELECT UserID, email, Fname, LName, Major, Minor, Experience, security FROM User WHERE email = ?";
     $stmt = $conn->prepare($sql);
 
@@ -51,52 +102,23 @@ if (isset($_SESSION['username'])) {
         echo ($security == 1) ? $pset_on : $pset_off; // Display privacy settings based on the security value
 
         // Display the form for updating information
-        echo "<form method='post' action=''>";
-        echo "<br>";
-        echo "Major: <input type='text' name='major' value='$major'><br>";
-        echo "Minor: <input type='text' name='minor' value='$minor'><br>";
-        echo "Experience: <textarea name='experience'>$experience</textarea><br>";
-
-        // Security Settings Dropdown
-        echo "<label for='securityToggle'>Security Setting:</label>";
-        echo "<select id='securityToggle' name='securityToggle' required>";
-        echo "<option value='0'" . ($security == 0 ? ' selected' : '') . ">On</option>";
-        echo "<option value='1'" . ($security == 1 ? ' selected' : '') . ">Off</option>";
-        echo "</select><br>";
-        echo "</div>";
-
-        echo "<div class='right'>";
-        echo "<input type='submit' name='update' value='Update'>"; // Name the submit button
-        echo "</div>";
-        echo "</div>";
-
-        if(isset($_POST['update'])){
-            // Handle form submission
-
-            // Retrieve form data
-            $major = $_POST['major'];
-            $minor = $_POST['minor'];
-            $experience = $_POST['experience'];
-            $security = $_POST['securityToggle']; // New security setting
-
-            // Update the user information in the database
-            $updateSql = "UPDATE User SET Major=?, Minor=?, Experience=?, security=? WHERE email=?";
-            $updateStmt = $conn->prepare($updateSql);
-
-            if ($updateStmt === false) {
-                die("Error in preparing the update statement: " . $conn->error);
-            }
-
-            $updateStmt->bind_param("sssss", $major, $minor, $experience, $security, $currentUser);
-            $updateStmt->execute();
-            $updateStmt->close();
-
-            // Redirect after the update is performed
-            header("Location: update.php");
-            exit; // Ensure no further code execution after redirection
-        }
-    } else {
-        echo "User not found for the given email/username: $currentUser";
+        ?>
+        <form method='post' action='' id='updateForm'>
+            <br>
+            Major: <input type='text' name='major' id='major' value='<?php echo $major; ?>'><br>
+            Minor: <input type='text' name='minor' id='minor' value='<?php echo $minor; ?>'><br>
+            Experience: <textarea name='experience' id='experience'><?php echo $experience; ?></textarea><br>
+            <label for='securityToggle'>Security Setting:</label>
+            <select id='securityToggle' name='securityToggle' required>
+                <option value='0' <?php echo ($security == 0 ? 'selected' : ''); ?>>On</option>
+                <option value='1' <?php echo ($security == 1 ? 'selected' : ''); ?>>Off</option>
+            </select><br>
+            <button type='button' id='updateBtn'>Update</button>
+        </form>
+        <form method='post' action='signout.php' id='logoutForm'>
+            <button type='submit'>Logout</button>
+        </form>
+        <?php
     }
 
     $stmt->close();
@@ -105,10 +127,28 @@ if (isset($_SESSION['username'])) {
     echo "No user signed in, unable to connect to DB, sign in or contact DB admin";
 }
 ?>
-<form action="signout.php" method="post">
-    <button type="submit">Sign Out</button>
-</form>
 
+<script>
+    document.getElementById('updateBtn').addEventListener('click', function() {
+        var major = document.getElementById('major').value;
+        var minor = document.getElementById('minor').value;
+        var experience = document.getElementById('experience').value;
+        var security = document.getElementById('securityToggle').value;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '<?php echo $_SERVER["PHP_SELF"]; ?>', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                // Refresh the page after successful update
+                location.reload();
+            } else {
+                console.log('Request failed. Status: ' + xhr.status);
+            }
+        };
+        xhr.send('major=' + encodeURIComponent(major) + '&minor=' + encodeURIComponent(minor) + '&experience=' + encodeURIComponent(experience) + '&securityToggle=' + encodeURIComponent(security));
+    });
+</script>
 </body>
 </html>
 
