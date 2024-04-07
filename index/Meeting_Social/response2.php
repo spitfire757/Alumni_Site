@@ -136,7 +136,12 @@
                 // Update the votes in the database
                 $sql = "UPDATE Forum_Response SET votes = votes - 1 WHERE ResponseID = '$responseID'";
                 $result = $conn->query($sql);
-                
+
+                // Check if the update was successful
+                if (!$result) {
+                    echo "Error: " . $conn->error;
+                }
+            }
             // Check if it's an up vote
             if ($vote_direction == 'up') {
                 // Update the votes in the database
