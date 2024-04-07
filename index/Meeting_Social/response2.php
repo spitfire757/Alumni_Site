@@ -123,34 +123,55 @@
         }
     }
 
-    // Handle vote increment and decrement
+    // Handle up vote increment
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vote'])) {
         foreach ($_POST['vote'] as $response_vote => $vote_direction) {
-            $responseID = substr($response_vote, 0, -3); // Extract the response ID from the name attribute
-            $vote_type = substr($response_vote, -3); // Extract the vote direction (up or down)
+            // Extract the response ID from the name attribute
+            $responseID = substr($response_vote, 0, -3);
+            // Extract the vote direction (up or down)
+            $vote_type = substr($response_vote, -3);
 
-            // Define the vote increment/decrement
-            $vote_change = 0;
+            // Check if it's an up vote
             if ($vote_direction == 'up') {
-                $vote_change = 1;
+                // Update the votes in the database
+                $sql = "UPDATE Forum_Response SET votes = votes + 1 WHERE ResponseID = '$responseID'";
+                $result = $conn->query($sql);
+
+                // Check if the update was successful
+                if (!$result) {
+                    echo "Error: " . $conn->error;
+                }
             }
+        }
+        header("Location: response2.php?forumID=$forum_ID&sort_by=$sort_by");
+        exit();
+    }
+
+    // Handle down vote decrement
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vote'])) {
+        foreach ($_POST['vote'] as $response_vote => $vote_direction) {
+            // Extract the response ID from the name attribute
+            $responseID = substr($response_vote, 0, -3);
+            // Extract the vote direction (up or down)
+            $vote_type = substr($response_vote, -3);
+
+            // Check if it's a down vote
             if ($vote_direction == 'down') {
-                $vote_change = -1;
-            }
+                // Update the votes in the database
+                $sql = "UPDATE Forum_Response SET votes = votes - 1 WHERE ResponseID = '$responseID'";
+                $result = $conn->query($sql);
 
-            // Update the votes in the database
-            $sql = "UPDATE Forum_Response SET votes = votes + $vote_change WHERE ResponseID = '$responseID'";
-            $result = $conn->query($sql);
-
-            // Check if the update was successful
-            if (!$result) {
-                echo "Error: " . $conn->error;
+                // Check if the update was successful
+                if (!$result) {
+                    echo "Error: " . $conn->error;
+                }
             }
         }
         // Redirect after processing votes
         header("Location: response2.php?forumID=$forum_ID&sort_by=$sort_by");
         exit();
     }
+
 
     if (!$result) {
         echo "Error: " . $conn->error;
