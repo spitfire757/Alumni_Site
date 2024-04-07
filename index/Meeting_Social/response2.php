@@ -125,7 +125,6 @@
 
     // Handle up vote increment
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vote'])) {
-        echo "up";
         foreach ($_POST['vote'] as $response_vote => $vote_direction) {
             // Extract the response ID from the name attribute
             $responseID = substr($response_vote, 0, -3);
@@ -134,6 +133,7 @@
 
             // Check if it's an up vote
             if ($vote_direction == 'up') {
+                echo "up";
                 // Update the votes in the database
                 $sql = "UPDATE Forum_Response SET votes = votes + 1 WHERE ResponseID = '$responseID'";
                 $result = $conn->query($sql);
@@ -143,22 +143,10 @@
                     echo "Error: " . $conn->error;
                 }
             }
-        }
-    }
-
-    // Handle down vote decrement
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vote'])) {
-        echo "down";
-        foreach ($_POST['vote'] as $response_vote => $vote_direction) {
-            // Extract the response ID from the name attribute
-            $responseID = substr($response_vote, 0, -3);
-            // Extract the vote direction (up or down)
-            $vote_type = substr($response_vote, -3);
-
-            // Check if it's a down vote
-            if ($vote_direction == 'down') {
+            else{
+                echo "down";
                 // Update the votes in the database
-                $sql = "UPDATE Forum_Response SET votes = votes - 1 WHERE ResponseID = '$responseID'";
+                $sql = "UPDATE Forum_Response SET votes = votes + -1 WHERE ResponseID = '$responseID'";
                 $result = $conn->query($sql);
 
                 // Check if the update was successful
