@@ -5,7 +5,7 @@ if (isset($_SESSION['username'])) {
     $username = "mysql_user";
     $password = "r00tpassw0rd/";
     $dbname = "DB";
-
+    
     // Connect to the database
     $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -15,9 +15,10 @@ if (isset($_SESSION['username'])) {
 
     // Retrieve user details for users with security setting equal to 1
     $currentUser = $_SESSION['username'];
+    echo $currentUser; 
     $sql = "SELECT email, Major, Minor, intended_grad_year, Experience FROM User WHERE security = 1 AND email != ?";
     $stmt = $conn->prepare($sql);
-
+	
     if ($stmt === false) {
         die("Error in preparing the statement: " . $conn->error);
     }

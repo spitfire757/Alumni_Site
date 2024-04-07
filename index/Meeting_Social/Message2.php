@@ -226,7 +226,7 @@ else {
                     <button class="button" type="submit">Send</button>
                 </form>
                 </div>
-    </div>
+    <!-- </div> !>
 
 
 
@@ -244,7 +244,6 @@ else {
     <button type="submit">Submit</button>
 </form>
 <!-- Inside message.php -->
-<!-- Inside message.php -->
 <button id="toggleFriendRequestsBtn" onclick="toggleFriendRequests()">Toggle Friend Requests</button>
 <div id="friendRequestsContainer" style="display:none;">
     <iframe id="friendRequestsFrame" src="view_requests.php"></iframe>
@@ -256,8 +255,6 @@ else {
         container.style.display = container.style.display === 'none' ? 'block' : 'none';
     }
 </script>
-
-
 
 <?php
 
@@ -318,7 +315,7 @@ if (isset($_SESSION['username'])) {
     <div id="connect" class="content" style="display: none;">
         <h2>Captain's Dock - connect Tab</h2>
         <p>This is the content for the Connect Tab.</p>
-        <?php include 'search.php'; ?>
+        <?php include 'profile_content.php'; ?>
     </div>
 
     <script>
