@@ -70,6 +70,11 @@
     <html>
     <body>
 
+    <form action='response2.php' method='post'>
+        <textarea id='response' name='response' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
+        <button type='submit' name='submit'>Reply</button>
+    </form>
+
     <!-- Sorting Methods-->
     <form action="response2.php" method="get">
         <select name="sort_by">
