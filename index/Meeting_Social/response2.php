@@ -115,9 +115,10 @@
         $userID = $username;
         $response = $_POST['response'];
         $dateTime = date("Y-m-d H:i:s");
+        $vtes = 0
 
         // Insert the response into Forum_Response table
-        $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', NOW())";
+        $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', NOW(), $vtess)";
         echo $sql;
         $result = $conn->query($sql); 
 
