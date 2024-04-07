@@ -72,7 +72,7 @@
 
     <form action='response2.php' method='post'>
         <textarea id='response' name='response' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
-        <button type='submit' name='submit'>Reply</button>
+        <button type='submit' name='reply'>Reply</button>
     </form>
 
     <!-- Sorting Methods-->
@@ -110,7 +110,7 @@
     echo "<hr>";
 
    // If the form is submitted, add the content to the Forum_Response table
-    if(isset($_POST['submit'])) {
+    if(isset($_POST['reply'])) {
         $responseID = substr(hash('sha256', $_POST['response']), 0, 16);
         $userID = $username;
         $response = $_POST['response'];
