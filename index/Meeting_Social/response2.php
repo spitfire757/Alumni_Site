@@ -9,6 +9,8 @@
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 
+    $username = $_SESSION['username'];
+
     // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -105,7 +107,7 @@
     // If the form is submitted, add the content to the Forum_Response table
     if(isset($_POST['submit'])) {
         $responseID = substr(hash('sha256', $_POST['response']), 0, 16);
-        $userID = $_SESSION['username'];
+        $userID = $username;
         $response = $_POST['response'];
         $dateTime = date("Y-m-d H:i:s");
 
