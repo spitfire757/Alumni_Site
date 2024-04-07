@@ -93,7 +93,7 @@
         echo "<button type='submit' name='vote[{$row['ResponseID']}_down]' value='down'>↓</button>";
         echo "</form>";
         echo "</div>";
-        echo "<div id='Response' style='max-width: 80%; overflow: hidden;>"; // Right column for response content
+        echo "<div id='Response' style='max-width: 80%;'>"; // Right column for response content
         echo "<h3>{$row['UserID']} • {$row['Datetime']}</h3>";
         echo "<p>{$row['Response']}</p>";
         echo "</div>";
