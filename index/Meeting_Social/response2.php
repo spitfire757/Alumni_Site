@@ -129,9 +129,11 @@
             $responseID = substr($response_vote, 0, -3); // Extract the response ID from the name attribute
             $vote_type = substr($response_vote, -3); // Extract the vote direction (up or down)
 
+            // Define the vote increment/decrement
+            $vote_change = ($vote_direction === 'up') ? 1 : -1;
+
             // Update the votes in the database
-            $vote_increment = ($vote_type === '_up') ? 1 : -1;
-            $sql = "UPDATE Forum_Response SET votes = votes + $vote_increment WHERE ResponseID = '$responseID'";
+            $sql = "UPDATE Forum_Response SET votes = votes + $vote_change WHERE ResponseID = '$responseID'";
             $result = $conn->query($sql);
 
             // Check if the update was successful
@@ -139,9 +141,11 @@
                 echo "Error: " . $conn->error;
             }
         }
+        // Redirect after processing votes
         header("Location: response2.php?forumID=$forum_ID&sort_by=$sort_by");
         exit();
     }
+
 
     if (!$result) {
         echo "Error: " . $conn->error;
