@@ -118,7 +118,7 @@
         $vtes = 0;
 
         // Insert the response into Forum_Response table
-        $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', NOW(), $vtess);";
+        $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', NOW(), $vtes);";
         echo $sql;
         $result = $conn->query($sql); 
 
