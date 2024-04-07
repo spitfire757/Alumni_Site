@@ -125,6 +125,7 @@
 
     // Handle up vote increment
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vote'])) {
+        echo "up";
         foreach ($_POST['vote'] as $response_vote => $vote_direction) {
             // Extract the response ID from the name attribute
             $responseID = substr($response_vote, 0, -3);
@@ -147,6 +148,7 @@
 
     // Handle down vote decrement
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vote'])) {
+        echo "down";
         foreach ($_POST['vote'] as $response_vote => $vote_direction) {
             // Extract the response ID from the name attribute
             $responseID = substr($response_vote, 0, -3);
