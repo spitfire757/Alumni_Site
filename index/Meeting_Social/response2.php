@@ -88,9 +88,9 @@
         echo "<div style='margin-right: 10px;'>"; // Left column for voting system
         echo "<form method='post'>";
         // Each button has a unique name attribute containing the response ID and vote direction
-        echo "<button type='submit' name='vote[{$row['ResponseID']}_up]' value='up'>↑</button>";
+        echo "<button type='submit' name='vote[{$row['ResponseID']}_up]' value='up' style='padding: 5px;'>↑</button>";
         echo $row['votes'];
-        echo "<button type='submit' name='vote[{$row['ResponseID']}_down]' value='down'>↓</button>";
+        echo "<button type='submit' name='vote[{$row['ResponseID']}_down]' value='down' style='padding: 5px;'>↓</button>";
         echo "</form>";
         echo "</div>";
         echo "<div id='Response' style='max-width: 80%;'>"; // Right column for response content
@@ -130,7 +130,8 @@
             $vote_type = substr($response_vote, -3); // Extract the vote direction (up or down)
 
             // Update the votes in the database
-            $sql = "UPDATE Forum_Response SET votes = CASE WHEN '$vote_type' = '_up' THEN votes + 1 WHEN '$vote_type' = '_down' THEN votes - 1 END WHERE ResponseID = '$responseID'";
+            $vote_increment = ($vote_type === '_up') ? 1 : -1;
+            $sql = "UPDATE Forum_Response SET votes = votes + $vote_increment WHERE ResponseID = '$responseID'";
             $result = $conn->query($sql);
 
             // Check if the update was successful
@@ -141,7 +142,6 @@
         header("Location: response2.php?forumID=$forum_ID&sort_by=$sort_by");
         exit();
     }
-
 
     if (!$result) {
         echo "Error: " . $conn->error;
