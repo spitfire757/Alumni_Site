@@ -131,6 +131,12 @@
             // Extract the vote direction (up or down)
             $vote_type = substr($response_vote, -3);
 
+            // Check if it's a down vote
+            if ($vote_direction == 'down') {
+                // Update the votes in the database
+                $sql = "UPDATE Forum_Response SET votes = votes - 1 WHERE ResponseID = '$responseID'";
+                $result = $conn->query($sql);
+                
             // Check if it's an up vote
             if ($vote_direction == 'up') {
                 // Update the votes in the database
