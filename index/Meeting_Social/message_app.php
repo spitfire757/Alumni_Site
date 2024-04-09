@@ -40,7 +40,6 @@ if (isset($_SESSION['username'])) {
     }
 
     // Close connection
-    // $conn->close();
 } else {
     echo "User is not logged in.";
 }
@@ -65,6 +64,7 @@ if (isset($_SESSION['username'])) {
             echo "<h3>Your Connections:</h3>";
             echo "<ul>";
             foreach ($connections as $connection) {
+                $id = $connection['id']; // Get the ID associated with the connection
                 // Determine the email of the other user in the connection
                 $otherUserEmail = ($connection['user_1'] == $currentUserEmail) ? $connection['user_2'] : $connection['user_1'];
 
@@ -80,8 +80,8 @@ if (isset($_SESSION['username'])) {
                     $lastName = "Unknown";
                 }
 
-                // Display email and associated first and last names
-                echo "<li>Email: $otherUserEmail - Name: $firstName $lastName</li>";
+                // Display email, associated first and last names, and the ID
+                echo "<li>ID: $id - Email: $otherUserEmail - Name: $firstName $lastName</li>";
             }
             echo "</ul>";
         }
