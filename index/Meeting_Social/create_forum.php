@@ -16,7 +16,6 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    
     ?>
     <hr>
     <h3>Create Forum</h3>
