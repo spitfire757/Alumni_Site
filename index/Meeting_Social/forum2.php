@@ -14,7 +14,7 @@ $query = "SELECT * FROM Forum";
 $result = mysqli_query($conn, $query);
 ?>
 <hr>
-<a href="Alumni_Site/index/Meeting_Social/create_forum.php">
+<a href="create_forum.php">
     <button type="button">Create a Forum</button>
 </a>
 <hr>
@@ -47,6 +47,7 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
 
     // SQL query to retrieve forums based on search criteria
     $sql = "SELECT * FROM Forum WHERE $search_criteria LIKE '%$search_query%'";
+    echo $sql;
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
