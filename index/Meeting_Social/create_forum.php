@@ -8,7 +8,7 @@
     $password = "r00tpassw0rd/";
     $dbname = "DB";
     ?>
-    <form action='creat_forum.php' method='post'>
+    <form action='create_forum.php' method='post'>
         <input type='text' name='title' placeholder='Title' maxlength='64'><br>
         <textarea name='description' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
         <button type='submit' name='reply'>Reply</button>
