@@ -112,7 +112,7 @@ $todaysDate = date('Y-m-d H:i:s');
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
             if ($row['Date'] >= $todaysDate) {
-                $date = substr($row['Date']);
+                $date = new DateTime($row['Date']);
                 $formattedDate = $date->format('F j, Y g:iA');
                 $userId = $row['User_ID'];
                 $innerSql = "SELECT * FROM User WHERE UserID=?";

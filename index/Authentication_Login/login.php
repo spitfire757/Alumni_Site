@@ -114,7 +114,7 @@
 		    session_start();
 	    	    $_SESSION['username'] = $inputUsername;
 		    echo"Successful";
-                    header("Location: http://54.204.96.13/Alumni_Site/index/Meeting_Social/Message2.php#Profile");
+                    header("Location: http://54.204.96.13/Alumni_Site/index/Meeting_Social/Message2.php");
 
                     exit();
                 } else {
