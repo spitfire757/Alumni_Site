@@ -14,22 +14,22 @@
         <table>
             <tr>
                 <td>
-                    <a href="https://cnu.edu/its/">CNU IT</a>
+                    <a href="https://cnu.edu/its/" target="_blank">CNU IT</a>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <a href="https://cnu.edu">Account Help</a>
+                    <a href="https://cnu.edu" target="_blank">Account Help</a>
                 </td>
             </tr>
             <tr>
                 <td>
-                <a href="https://cnu.edu/its/">CNU IT</a>
+                <a href="https://cnu.edu/help/" target="_blank">CNU Help</a>
                 </td>
             </tr>
             <tr>
                 <td>
-                <a href="https://cnu.edu">Account Help</a>
+                <a href="https://confluence.cnu.edu" target="_blank">Confluence</a>
             </td>
             </tr>
         </table>
