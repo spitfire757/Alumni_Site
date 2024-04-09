@@ -94,10 +94,8 @@
         echo "<div style='margin-right: 10px;'>"; // Left column for voting system
         echo "<form method='post'>";
         // Upvote button
-        echo "<button type='submit' name='vote[{$row['ResponseID']}_up]' value='up' style='padding: 5px;'>↑</button>";
+        echo "<button type='submit' name='vote[{$row['ResponseID']}_up]' value='up' style='padding: 20px;'>↑</button>";
         echo $row['votes'];
-        // Downvote button
-        echo "<button type='submit' name='vote[{$row['ResponseID']}_down]' value='down' style='padding: 5px;'>↓</button>";
         echo "</form>";
         echo "</div>";
         echo "<div id='Response' style='max-width: 80%;'>"; // Right column for response content
@@ -149,17 +147,6 @@
                 $sql = "UPDATE Forum_Response SET votes = votes + 1 WHERE ResponseID = '$responseID'";
                 $result = $conn->query($sql);
 
-                // Check if the update was successful
-                if (!$result) {
-                    echo "Error: " . $conn->error;
-                }
-            }
-            else{
-                echo "down";
-                // Update the votes in the database
-                $sql = "UPDATE Forum_Response SET votes = votes + -1 WHERE ResponseID = '$responseID'";
-                $result = $conn->query($sql);
-                echo "updated";
                 // Check if the update was successful
                 if (!$result) {
                     echo "Error: " . $conn->error;
