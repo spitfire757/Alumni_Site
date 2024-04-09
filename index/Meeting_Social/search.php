@@ -57,7 +57,7 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
 } else {
     // Default display: All forums
     $sql = "SELECT * FROM User";
-    echo "made it to defualt";
+    echo $sql;
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
