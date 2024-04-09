@@ -206,7 +206,7 @@ else {
 
     <div id="helppage" class="content" style="display: none;">
         <h2>Captain's Dock - Help Page Tab</h2>
-        <p>This is the content for the Help Page Tab.</p>
+<iframe src="help.php" width="100%" height="800px" frameborder="0"></iframe><br>
     </div>
 
 
@@ -311,7 +311,7 @@ if (isset($_SESSION['username'])) {
   <div id="search" class="content" style="display: none;">
         <h2>Welcome to the Captain's Dock - Connect Page</h2>
         <p>This is the content for the connect  Page tab.</p>
-	<?php include 'search.php'; ?> 
+        <iframe src="search.php" width="100%" height="800px" frameborder="0"></iframe><br>
     </div>
 
 
@@ -324,7 +324,6 @@ if (isset($_SESSION['username'])) {
     <div id="connect" class="content" style="display: none;">
         <h2>Captain's Dock - Connect Tab</h2>
         <p>This is the content for the Connect Tab.</p>
-        <iframe src="search.php" width="100%" height="800px" frameborder="0"></iframe><br>
         <?php include 'profile_content.php'; ?>
     </div>
 

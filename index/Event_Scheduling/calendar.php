@@ -9,7 +9,6 @@
 </style>
 </head>
 <body>
-<br>
 
 
 <h2 align=center> Upcoming Events</h2>
@@ -71,7 +70,7 @@ if (isset($_SESSION['username'])) {
         if($eventDateTime <= $todaysDate){
             ?>
             <div class="event-details">
-                <?php echo "<h3>The date you entered was invalid. Please select a date that has not passed. </h3> <br><br>"; ?>
+                <?php echo "<h3>The date you entered was invalid. Please select a date that has not passed. </h3> <br>"; ?>
             </div>
             <?php
         }
