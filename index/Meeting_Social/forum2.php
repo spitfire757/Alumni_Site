@@ -22,8 +22,8 @@ $result = mysqli_query($conn, $query);
     <input type="text" name="search_query" placeholder="Search...">
     <select name="search_criteria">
         <option value="title">Title</option>
-        <option value="description">Description</option>
-        <option value="author">Author</option>
+        <option value="Description">Description</option>
+        <option value="userID">Author</option>
     </select>
     <button type="submit">Search</button>
     <button type="submit" name="clear_search">Clear Search</button>
