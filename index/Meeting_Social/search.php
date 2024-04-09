@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_SESSION['username'])) {
+#if (isset($_SESSION['username'])) {
     $servername = "localhost";
     $username = "mysql_user";
     $password = "r00tpassw0rd/";
@@ -45,8 +45,8 @@ if (isset($_SESSION['username'])) {
 
     $stmt->close();
     $conn->close();
-} else {
-    echo "No user signed in.";
-}
+#} else {
+#    echo "No user signed in.";
+#}
 ?>
 

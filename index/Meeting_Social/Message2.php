@@ -313,8 +313,9 @@ if (isset($_SESSION['username'])) {
     </div>
 
     <div id="connect" class="content" style="display: none;">
-        <h2>Captain's Dock - connect Tab</h2>
+        <h2>Captain's Dock - Connect Tab</h2>
         <p>This is the content for the Connect Tab.</p>
+        <iframe src="search.php" width="100%" height="800px" frameborder="0"></iframe><br>
         <?php include 'profile_content.php'; ?>
     </div>
 
