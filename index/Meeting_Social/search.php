@@ -44,7 +44,7 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
         while ($row = $result->fetch_assoc()) {
             // Display forum details
             echo "<div class='user-item'>";
-            echo "<a href='view_user.php?forumID={$row['UserID']}&forumTitle={$row['Fname']}&forumDescription={$row['Lname']}' class='forum-title'>{$row['email']} • {$row['UserID']}</a>";
+            echo "<a href='view_user.php?forumID={$row['UserID']}> {$row['Fname']} {$row['LName']}</a>";
             #echo "<p class='user-description'>{$row['Description']}</p>";
             echo "</div>";
         }
@@ -65,7 +65,7 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
         while ($row = $result->fetch_assoc()) {
             // Display forum details
             echo "<div class='user-item'>";
-            echo "<a href='view_user.php?forumID={$row['UserID']}&forumTitle={$row['Fname']}&forumDescription={$row['Lname']}' class='forum-title'>{$row['email']} • {$row['UserID']}</a>";
+            echo "<a href='view_user.php?forumID={$row['UserID']}> {$row['Fname']} {$row['LName']}</a>";
             #echo "<p class='user-description'>{$row['Description']}</p>";
             echo "</div>";
         }
