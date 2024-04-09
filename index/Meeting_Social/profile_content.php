@@ -29,9 +29,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['username'])) {
     if ($stmt === false) {
         die("Error in preparing the statement: " . $conn->error);
     }
-
+   
     $stmt->bind_param("sssis", $major, $minor, $experience, $security, $currentUser);
     $stmt->execute();
+    
+    
+    // Upload and process image file
+    $targetDir = "uploads/"; // Directory where images will be stored
+    $targetFile = $targetDir . basename($_FILES["image"]["name"]); // Path to the uploaded file
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+
+    // Check if image file is a actual image or fake image
+    if(isset($_POST["submit"])) {
+        $check = getimagesize($_FILES["image"]["tmp_name"]);
+        if($check !== false) {
+            echo "File is an image - " . $check["mime"] . ".";
+            $uploadOk = 1;
+        } else {
+            echo "File is not an image.";
+            $uploadOk = 0;
+        }
+    }
+    // Check file size
+    if ($_FILES["image"]["size"] > 500000) {
+        echo "Sorry, your file is too large.";
+        $uploadOk = 0;
+    }
+    // Allow certain file formats
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+    && $imageFileType != "gif" ) {
+        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $uploadOk = 0;
+    }
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+	// if everything is ok, try to upload file
+    } else {
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+            echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
+            // Save file path to database for the user
+            // Update the query to include the file path
+            // $sql = "UPDATE User SET Major=?, Minor=?, Experience=?, security=?, picture=? WHERE email=?";
+            // Bind parameters and execute query
+            // ...
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+        }
+    }
+
 
     $stmt->close();
     $conn->close();
@@ -102,22 +149,28 @@ if (isset($_SESSION['username'])) {
 
         // Display the form for updating information
         ?>
-        <form method='post' action='' id='updateForm'>
-            <br>
-            Major: <input type='text' name='major' id='major' value='<?php echo $major; ?>'><br>
-            Minor: <input type='text' name='minor' id='minor' value='<?php echo $minor; ?>'><br>
-            Experience: <textarea name='experience' id='experience'><?php echo $experience; ?></textarea><br>
-            <label for='securityToggle'>Security Setting:</label>
-            <select id='securityToggle' name='securityToggle' required>
-                <option value='0' <?php echo ($security == 0 ? 'selected' : ''); ?>>On</option>
-                <option value='1' <?php echo ($security == 1 ? 'selected' : ''); ?>>Off</option>
-            </select><br>
-            <button type='button' id='updateBtn'>Update</button>
-        </form>
-        <form method='post' action='signout.php' id='logoutForm'>
-            <button type='submit'>Logout</button>
-        </form>
-        <?php
+<form method='post' action='' id='updateForm' enctype="multipart/form-data">
+    <!-- Image upload field -->
+    Image: <input type="file" name="image" id="image"><br>
+    <br>
+    <!-- Other form fields -->
+    Major: <input type='text' name='major' id='major' value='<?php echo $major; ?>'><br>
+    Minor: <input type='text' name='minor' id='minor' value='<?php echo $minor; ?>'><br>
+    Experience: <textarea name='experience' id='experience'><?php echo $experience; ?></textarea><br>
+    <label for='securityToggle'>Security Setting:</label>
+    <select id='securityToggle' name='securityToggle' required>
+        <option value='0' <?php echo ($security == 0 ? 'selected' : ''); ?>>On</option>
+        <option value='1' <?php echo ($security == 1 ? 'selected' : ''); ?>>Off</option>
+    </select><br>
+    <!-- Update button -->
+    <button type='button' id='updateBtn'>Update</button>
+</form>
+<form method='post' action='signout.php' id='logoutForm'>
+    <!-- Logout button -->
+    <button type='submit'>Logout</button>
+</form>
+
+	<?php
     }
 
     $stmt->close();
