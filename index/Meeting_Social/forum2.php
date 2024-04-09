@@ -14,21 +14,21 @@ $query = "SELECT * FROM Forum";
 $result = mysqli_query($conn, $query);
 ?>
 <hr>
-    <a href="Alumni_Site/index/Meeting_Social/create_forum.php">
-        <button type = "button">Create a Forum</button>
-    </a>
+<a href="Alumni_Site/index/Meeting_Social/create_forum.php">
+    <button type="button">Create a Forum</button>
+</a>
 <hr>
-    <form action="forum2.php" method="get">
-        <input type="text" name="search_query" placeholder="Search...">
-        <select name="search_criteria">
-            <option value="title">Title</option>
-            <option value="description">Description</option>
-            <option value="author">Author</option>
-        </select>
-        <button type="submit">Search</button>
-    </form>
-</hr>
-
+<form action="forum2.php" method="get">
+    <input type="text" name="search_query" placeholder="Search...">
+    <select name="search_criteria">
+        <option value="title">Title</option>
+        <option value="description">Description</option>
+        <option value="author">Author</option>
+    </select>
+    <button type="submit">Search</button>
+    <button type="submit" name="clear_search">Clear Search</button>
+</form>
+<hr>
 <?php
 // Display forum titles and descriptions
 /*
@@ -41,36 +41,46 @@ while ($row = mysqli_fetch_assoc($result)) {
 }
 */
     // PHP Logic for Handling Search
-    if(isset($_GET['search_query']) && !empty($_GET['search_query'])) {
-        $search_query = $_GET['search_query'];
-        $search_criteria = $_GET['search_criteria'];
+if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
+    $search_query = $_GET['search_query'];
+    $search_criteria = $_GET['search_criteria'];
 
-        // SQL query to retrieve forums based on search criteria
-        $sql = "SELECT * FROM forums WHERE $search_criteria LIKE '%$search_query%'";
-        $result = $conn->query($sql);
+    // SQL query to retrieve forums based on search criteria
+    $sql = "SELECT * FROM Forum WHERE $search_criteria LIKE '%$search_query%'";
+    $result = $conn->query($sql);
 
-        if($result->num_rows > 0) {
-            // Display matching forums
-            while($row = $result->fetch_assoc()) {
-                // Display forum details
-            }
-        } else {
-            echo "No forums found.";
+    if ($result->num_rows > 0) {
+        // Display matching forums
+        while ($row = $result->fetch_assoc()) {
+            // Display forum details
+            echo "<div class='forum-item'>";
+            echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-title'>{$row['Title']}</a><br>";
+            echo "<p class='forum-description'>{$row['Description']}</p>";
+            echo "</div>";
         }
     } else {
-        // Default display: All forums
-        $sql = "SELECT * FROM forums";
-        $result = $conn->query($sql);
-
-        if($result->num_rows > 0) {
-            // Display all forums
-            while($row = $result->fetch_assoc()) {
-                // Display forum details
-            }
-        } else {
-            echo "No forums available.";
-        }
+        echo "No forums found.";
     }
+} elseif (isset($_GET['clear_search'])) {
+    // Clear the search
+    header("Location: forum2.php");
+    exit();
+} else {
+    // Default display: All forums
+    $sql = "SELECT * FROM Forum";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // Display all forums
+        while ($row = $result->fetch_assoc()) {
+            // Display forum details
+            echo "<div class='forum-item'>";
+            echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-title'>{$row['Title']}</a><br>";
+            echo "<p class='forum-description'>{$row['Description']}</p>";
+            echo "</div>";
+        }
+    } else {
+        echo "No forums available.";
+    }
+}
 ?>
-
-
