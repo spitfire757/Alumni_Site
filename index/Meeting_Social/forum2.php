@@ -18,8 +18,8 @@ $result = mysqli_query($conn, $query);
         <button type = "button">Create a Forum</button>
     </a>
 <hr>
-    <form action="forum2.php" method="GET">
-        <input type="text" name="search_query" placeholder="Search">
+    <form action="forum2.php" method="get">
+        <input type="text" name="search_query" placeholder="Search...">
         <select name="search_criteria">
             <option value="title">Title</option>
             <option value="description">Description</option>
@@ -40,37 +40,35 @@ while ($row = mysqli_fetch_assoc($result)) {
     echo "</div>";
 }
 */
-    if(isset($_GET['search_query']) && isset($_GET['search_criteria'])) {
-        // Retrieve Search Query and Criteria
+    // PHP Logic for Handling Search
+    if(isset($_GET['search_query']) && !empty($_GET['search_query'])) {
         $search_query = $_GET['search_query'];
         $search_criteria = $_GET['search_criteria'];
 
-        // Construct SQL Query
-        $sql = "SELECT * FROM forums WHERE ";
-
-        // Add WHERE clause based on selected criteria
-        if ($search_criteria === 'title') {
-            $sql .= "title LIKE '%$search_query%'";
-        } elseif ($search_criteria === 'description') {
-            $sql .= "description LIKE '%$search_query%'";
-        } elseif ($search_criteria === 'author') {
-            $sql .= "author LIKE '%$search_query%'";
-        }
-
-        // Execute SQL Query
+        // SQL query to retrieve forums based on search criteria
+        $sql = "SELECT * FROM forums WHERE $search_criteria LIKE '%$search_query%'";
         $result = $conn->query($sql);
 
-        // Display Search Results
-        if ($result->num_rows > 0) {
-            echo "<h2>Search Results:</h2>";
-            while ($row = $result->fetch_assoc()) {
-                // Display search results here
-                echo "<p>Title: {$row['title']}</p>";
-                echo "<p>Description: {$row['description']}</p>";
-                echo "<p>Author: {$row['author']}</p>";
+        if($result->num_rows > 0) {
+            // Display matching forums
+            while($row = $result->fetch_assoc()) {
+                // Display forum details
             }
         } else {
-            echo "No results found.";
+            echo "No forums found.";
+        }
+    } else {
+        // Default display: All forums
+        $sql = "SELECT * FROM forums";
+        $result = $conn->query($sql);
+
+        if($result->num_rows > 0) {
+            // Display all forums
+            while($row = $result->fetch_assoc()) {
+                // Display forum details
+            }
+        } else {
+            echo "No forums available.";
         }
     }
 ?>
