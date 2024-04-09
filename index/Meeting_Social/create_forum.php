@@ -7,14 +7,27 @@
     $username = "mysql_user";
     $password = "r00tpassw0rd/";
     $dbname = "DB";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    $username = $_SESSION['username'];
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    
     ?>
-    <a href = "forum2.php">Return to Forums</a>
     <hr>
+    <h3>Create Forum</h3>
+    <a href = "forum2.php"> Return to PCSE Forum</a>
     <form action='create_forum.php' method='post'>
         <input type='text' name='title' placeholder='Title' maxlength='64'><br>
         <textarea name='description' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
         <button type='submit' name='reply'>Reply</button>
     </form>
+    <hr>
+    <h3>PCSE Fourms</h3>
     <?php
     if(isset($_POST['reply'])) {
         $forumID = substr(hash('sha256', $_POST['title']), 0, 16);
