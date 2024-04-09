@@ -32,9 +32,8 @@
     <?php
     while ($row = $result->fetch_assoc()) {
         // Display user details
-        echo "<div class='user-item'>";
-        echo "<a href='view_user.php?UserID={$row['UserID']}> {$row['Fname']} {$row['LName']}</a>";
-        echo "</div>";
+        #echo "<a href='view_user.php?UserID={$row['UserID']}> {$row['Fname']} {$row['LName']}</a>";
+        echo "testing";
     }
 // Display user titles and descriptions
     // PHP Logic for Handling Search
