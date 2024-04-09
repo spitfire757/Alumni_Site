@@ -112,7 +112,8 @@ $todaysDate = date('Y-m-d H:i:s');
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
             if ($row['Date'] >= $todaysDate) {
-                $dateWithoutSeconds = substr($row['Date'], 0, -3);
+                $date = substr($row['Date']);
+                $formattedDate = $date->format('F j, Y g:iA');
                 $userId = $row['User_ID'];
                 $innerSql = "SELECT * FROM User WHERE UserID=?";
                 $stmt = $conn->prepare($innerSql);
@@ -124,7 +125,7 @@ if ($result->num_rows > 0) {
                 $lname = $userRow['LName'];
                 ?>
                 <div class="event-details">
-                    <?php echo $dateWithoutSeconds . " - " . $row['Data'] . "<br>"; ?>
+                    <?php echo $formattedDate . " - " . $row['Data'] . "<br>"; ?>
                     <?php echo "Posted by user: " . $fname . " " . $lname . "<br><br>"; ?>
                 </div>
                 <?php
