@@ -94,7 +94,7 @@
         echo "<div style='margin-right: 10px;'>"; // Left column for voting system
         echo "<form method='post'>";
         // Upvote button
-        echo "<button type='submit' name='vote[{$row['ResponseID']}_up]' value='up' style='padding: 20px;'>↑</button>";
+        echo "<button type='submit' name='vote[{$row['ResponseID']}_up]' value='up' style='padding: 5px; spacing: 15px;'>↑</button>";
         echo $row['votes'];
         echo "</form>";
         echo "</div>";
