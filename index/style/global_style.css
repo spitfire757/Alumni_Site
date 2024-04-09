@@ -86,3 +86,89 @@ body {
 .back-to-forum:hover {
     text-decoration: underline;
 }
+
+/* Global styles */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Styles for tabs */
+
+.tabs {
+    display: flex;
+    background-color: #305A8C; /* Updated color code, feel free to change it*/
+    color: white;
+}
+
+.tab {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.tab:hover {
+    background-color: #2A4C7D;
+}
+
+/* Styles for content */
+
+.content {
+    padding: 20px;
+}
+
+/* Styles for buttons */
+
+.buttons {
+    margin-top: 20px;
+    display: none; 
+    justify-content: center;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #305A8C;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #2A4C7D;
+}
+
+/* Additional button style under #buttons */
+
+#buttons button {
+    padding: 10px 20px;
+    background-color: #305A8C;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 10px;
+}
+
+#buttons button:hover {
+    background-color: #2A4C7D;
+}
+
+/* Styles for input and textarea */
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+}
+
