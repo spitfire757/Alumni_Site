@@ -13,6 +13,12 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 $query = "SELECT * FROM Forum";
 $result = mysqli_query($conn, $query);
 ?>
+
+<?php
+$cssFilePath = "Alumni_Site/index/style/global_style.css";
+?>
+<link rel='stylesheet' type='text/css' href='<?php echo $cssFilePath; ?>'>
+
 <hr>
 <a href="create_forum.php">
     <button type="button">Create a Forum</button>
