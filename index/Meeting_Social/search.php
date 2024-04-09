@@ -32,13 +32,15 @@
     <?php
     while ($row = $result->fetch_assoc()) {
         // Display user details
-        echo "<a href='view_user.php>{$row['UserID']} • {$row['Fname']}</a>";
+        echo "<a href='view_user.php>{$row['Fname']} {$row['LName']}</a><hr>";
 
         #echo "<a href='view_user.php?userid={$row['UserID']."}>".$row['Fname']."".$row['LName']."</a><br>'";
+        /*
         echo $row['Major'];
         echo $row['Minor'];
         echo $row['intended_grad_year'];
         echo $row['type'];
+        */
         #echo "<a href='view_user.php?UserID={$row['UserID']}> {$row['Fname']} {$row['LName']}</a>";
     }
 // Display user titles and descriptions
