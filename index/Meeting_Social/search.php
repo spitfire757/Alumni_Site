@@ -12,7 +12,8 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
+    $query = "SELECT * FROM User;";
+    $result = mysqli_query($conn, $query);
     ?>
     <hr>
     <form action="search.php" method="get">
@@ -65,7 +66,7 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
         while ($row = $result->fetch_assoc()) {
             // Display forum details
             echo "<div class='user-item'>";
-            echo "<a href='view_user.php?UserID={$row['UserID']}> {$row['Fname']} {$row['LName']}</a>";
+            #echo "<a href='view_user.php?UserID={$row['UserID']}> {$row['Fname']} {$row['LName']}</a>";
             #echo "<p class='user-description'>{$row['Description']}</p>";
             echo "</div>";
         }
