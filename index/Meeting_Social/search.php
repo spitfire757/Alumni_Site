@@ -29,27 +29,26 @@
     </form>
     <hr>
     <?php
-// Display forum titles and descriptions
+// Display user titles and descriptions
     // PHP Logic for Handling Search
 if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
     $search_query = $_GET['search_query'];
     $search_criteria = $_GET['search_criteria'];
 
-    // SQL query to retrieve forums based on search criteria
+    // SQL query to retrieve users based on search criteria
     $sql = "SELECT * FROM User WHERE $search_criteria LIKE '%$search_query%'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        // Display matching forums
+        // Display matching users
         while ($row = $result->fetch_assoc()) {
-            // Display forum details
+            // Display user details
             echo "<div class='user-item'>";
-            echo "<a href='view_user.php?forumID={$row['UserID']}> {$row['Fname']} {$row['LName']}</a>";
-            #echo "<p class='user-description'>{$row['Description']}</p>";
+            echo "<a href='view_user.php?UserID={$row['UserID']}> {$row['Fname']} {$row['LName']}</a>";
             echo "</div>";
         }
     } else {
-        echo "No forums found.";
+        echo "No users found.";
     }
 } elseif (isset($_GET['clear_search'])) {
     // Clear the search
@@ -57,7 +56,7 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
     exit();
 } else {
     // Default display: All forums
-    $sql = "SELECT * FROM Forum";
+    $sql = "SELECT * FROM User";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -65,12 +64,12 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
         while ($row = $result->fetch_assoc()) {
             // Display forum details
             echo "<div class='user-item'>";
-            echo "<a href='view_user.php?forumID={$row['UserID']}> {$row['Fname']} {$row['LName']}</a>";
+            echo "<a href='view_user.php?UserID={$row['UserID']}> {$row['Fname']} {$row['LName']}</a>";
             #echo "<p class='user-description'>{$row['Description']}</p>";
             echo "</div>";
         }
     } else {
-        echo "No forums available.";
+        echo "No users found.";
     }
 }
 
