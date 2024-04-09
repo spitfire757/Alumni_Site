@@ -54,7 +54,7 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
         while ($row = $result->fetch_assoc()) {
             // Display forum details
             echo "<div class='forum-item'>";
-            echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-title'>{$row['Title']}</a><br>";
+            echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-title'>{$row['Title']}</a><p> • ".$row['userID']."</p>";
             echo "<p class='forum-description'>{$row['Description']}</p>";
             echo "</div>";
         }
