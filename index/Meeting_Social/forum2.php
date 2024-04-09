@@ -31,15 +31,6 @@ $result = mysqli_query($conn, $query);
 <hr>
 <?php
 // Display forum titles and descriptions
-/*
-while ($row = mysqli_fetch_assoc($result)) {
-    // Link to response.php with Forum Contents in Link for each forum
-    echo "<div class='forum-item'>";
-    echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-title'>{$row['Title']}</a><br>";
-    echo "<p class='forum-description'>{$row['Description']}</p>";
-    echo "</div>";
-}
-*/
     // PHP Logic for Handling Search
 if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
     $search_query = $_GET['search_query'];
@@ -54,7 +45,7 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
         while ($row = $result->fetch_assoc()) {
             // Display forum details
             echo "<div class='forum-item'>";
-            echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-title'>{$row['Title']}</a><p> • ".$row['userID']."</p>";
+            echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-title'>{$row['Title']} • {$row['userID']}</a>";
             echo "<p class='forum-description'>{$row['Description']}</p>";
             echo "</div>";
         }
