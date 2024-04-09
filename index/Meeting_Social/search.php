@@ -57,11 +57,13 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
 } else {
     // Default display: All forums
     $sql = "SELECT * FROM User";
+    echo "made it to defualt";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         // Display matching forums
         while ($row = $result->fetch_assoc()) {
+            echo "made it to loading users";
             // Display forum details
             echo "<div class='user-item'>";
             echo "<a href='view_user.php?UserID={$row['UserID']}> {$row['Fname']} {$row['LName']}</a>";
