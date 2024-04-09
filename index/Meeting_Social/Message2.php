@@ -297,7 +297,8 @@ if (isset($_SESSION['username'])) {
     </div>
     <div id="forum" class="content" style="display: none;">
         <h2>Captain's Dock - Forum Tab</h2>
-        <iframe src="forum2.php" width="100%" height="400px" frameborder="0"></iframe><br>
+        <iframe src="create_forum.php" width="100%" height="200px" frameborder="0"></iframe><br>
+        <iframe src="forum2.php" width="100%" height="800px" frameborder="0"></iframe><br>
     </div>
 
     <div id="calendar" class="content" style="display: none;">

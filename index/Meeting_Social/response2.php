@@ -119,7 +119,6 @@
 
         // Insert the response into Forum_Response table
         $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', NOW(), $vtes);";
-        echo $sql;
         $result = $conn->query($sql); 
 
         header("Location: response2.php?forumID=$forum_ID&forumTitle=$forum_Title&forumDescription=$forum_Description");
