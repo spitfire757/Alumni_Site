@@ -26,7 +26,6 @@
         <button type='submit' name='reply'>Reply</button>
     </form>
     <hr>
-    <h3>PCSE Fourms</h3>
     <?php
     if(isset($_POST['reply'])) {
         $forumID = substr(hash('sha256', $_POST['title']), 0, 16);
