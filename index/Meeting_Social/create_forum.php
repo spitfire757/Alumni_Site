@@ -1,4 +1,5 @@
 <?php
+echo "this is create_forum";
 if (isset($_SESSION['username'])) {
     // Connect to SQL Database
     session_start();

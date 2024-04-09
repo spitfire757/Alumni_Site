@@ -123,7 +123,7 @@ if (isset($_SESSION['username'])) {
     $stmt->close();
     $conn->close();
 } else {
-    echo "No user signed in, unable to connect to DB, sign in or contact DB admin";
+    echo "";
 }
 ?>
 
