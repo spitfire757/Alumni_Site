@@ -56,7 +56,7 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
     exit();
 } else {
     // Default display: All forums
-    $sql = "SELECT * FROM User;";
+    $sql = "SELECT * FROM Forum;";
     echo $sql;
     $result = $conn->query($sql);
     echo $result;
