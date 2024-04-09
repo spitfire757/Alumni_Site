@@ -36,7 +36,7 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
     $search_criteria = $_GET['search_criteria'];
 
     // SQL query to retrieve forums based on search criteria
-    $sql = "SELECT * FROM Forum WHERE $search_criteria LIKE '%$search_query%'";
+    $sql = "SELECT * FROM User WHERE $search_criteria LIKE '%$search_query%'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -53,7 +53,7 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
     }
 } elseif (isset($_GET['clear_search'])) {
     // Clear the search
-    header("Location: forum2.php");
+    header("Location: search.php");
     exit();
 } else {
     // Default display: All forums
