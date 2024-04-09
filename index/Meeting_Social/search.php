@@ -32,8 +32,14 @@
     <?php
     while ($row = $result->fetch_assoc()) {
         // Display user details
+        echo $row['UserID'];
+        echo $row['Fname'];
+        echo $row['LName'];
+        echo $row['Major'];
+        echo $row['Minor'];
+        echo $row['intended_grad_year'];
+        echo $row['type'];
         #echo "<a href='view_user.php?UserID={$row['UserID']}> {$row['Fname']} {$row['LName']}</a>";
-        echo "testing";
     }
 // Display user titles and descriptions
     // PHP Logic for Handling Search
