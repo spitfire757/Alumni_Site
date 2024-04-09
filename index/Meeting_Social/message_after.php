@@ -212,7 +212,7 @@ else {
 
 
     <div id="messages" class="content" style="display: none;">
-    <?php include 'message_app.php'; ?>
+    <?php include 'new_message_app.php'; ?>
 <?php
 
 

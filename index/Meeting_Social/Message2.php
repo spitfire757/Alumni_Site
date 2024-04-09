@@ -321,18 +321,16 @@ if (isset($_SESSION['username'])) {
 	<?php include 'profile_content.php'; ?>
     </div>
 
-<<<<<<< HEAD
     <div id="connect" class="content" style="display: none;">
         <h2>Captain's Dock - Connect Tab</h2>
         <p>This is the content for the Connect Tab.</p>
         <iframe src="search.php" width="100%" height="800px" frameborder="0"></iframe><br>
         <?php include 'profile_content.php'; ?>
     </div>
-=======
 
 
 
->>>>>>> f485150ebb05964eca08dff6b3a38ac9d5b4d81d
+
 
     <script>
         function showTab(tabId) {
