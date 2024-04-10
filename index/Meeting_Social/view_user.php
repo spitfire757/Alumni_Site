@@ -85,7 +85,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Contact: <?php echo $email; ?></td>
+                <td>Contact: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></td>
             </tr>
             <tr>
                 <td>Experience: <?php echo $exp; ?></td>
