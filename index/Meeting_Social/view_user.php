@@ -65,9 +65,12 @@
     <table>
         <tbody>
             <tr>
+                <?php echo "1";?>
                 <!--td rowspan="4"><img src="<?php #echo $row['profile_image']; ?>" alt="Profile Picture" class="profile-pic"></td-->
+                <?php echo "2";?>
                 <td class="info-section">
                     <div class="info-details">
+                        <?php echo "3";?>
                         <strong><?php echo $row['Fname'] . ' ' . $row['LName']; ?></strong><br>
                         <?php echo $row['type'] . ', ' . $row['intended_grad_year'] . ', ' . $row['Major'] . '/' . $row['Minor']; ?>
                     </div>
