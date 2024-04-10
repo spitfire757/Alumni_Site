@@ -31,10 +31,7 @@
         echo "Error: " . $conn->error;
     }
 
-    echo "testing";
-
     while ($row = $result->fetch_assoc()) {
-        echo "testing3";
         $pic = $row['email_auth'];
         $fname = $row['Fname'];
         $lname = $row['LName'];
@@ -46,11 +43,6 @@
         $exp = $row['experience'];
         $res = $row['resume'];
     }
-
-    echo "testing2";
-
-    echo $fname;
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,19 +83,19 @@
                 <td class="info-section">
                     <div class="info-details">
                         <?php echo "3";?>
-                        <strong><?php echo $row['Fname'] . ' ' . $row['LName']; ?></strong><br>
-                        <?php echo $row['type'] . ', ' . $row['intended_grad_year'] . ', ' . $row['Major'] . '/' . $row['Minor']; ?>
+                        <strong><?php $fname . ' ' . $lname; ?></strong><br>
+                        <?php echo $account . ', ' . $grad . ', ' . $major . '/' . $minor; ?>
                     </div>
                 </td>
             </tr>
             <tr>
-                <td>Contact: <?php echo $row['email']; ?></td>
+                <td>Contact: <?php echo $email; ?></td>
             </tr>
             <tr>
-                <td>Experience: <?php echo $row['experience']; ?></td>
+                <td>Experience: <?php echo $experience; ?></td>
             </tr>
             <tr>
-                <td>Resume: <?php echo $row['resume']; ?></td>
+                <td>Resume: <?php echo $res; ?></td>
             </tr>
         </tbody>
     </table>
