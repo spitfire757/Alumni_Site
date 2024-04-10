@@ -65,7 +65,7 @@
     <table>
         <tbody>
             <tr>
-                <!--td rowspan="4"><img src="<?php echo $row['profile_image']; ?>" alt="Profile Picture" class="profile-pic"></td-->
+                <!--td rowspan="4"><img src="<?php #echo $row['profile_image']; ?>" alt="Profile Picture" class="profile-pic"></td-->
                 <td class="info-section">
                     <div class="info-details">
                         <strong><?php echo $row['Fname'] . ' ' . $row['LName']; ?></strong><br>
