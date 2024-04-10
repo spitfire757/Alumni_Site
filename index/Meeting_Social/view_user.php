@@ -30,9 +30,21 @@
         echo "Error: " . $conn->error;
     }
 
-    $row = $result->fetch_assoc();
-    echo $row['$User_ID'];
-    echo $row['Fname'];
+    while ($row = $result->fetch_assoc()) {
+        $pic = $row['email_auth'];
+        $fname = $row['Fname'];
+        $lname = $row['LName'];
+        $account = $row['type'];
+        $grad = $row['intended_grad_year'];
+        $major = $row['Major'];
+        $minor = $row['Minor'];
+        $email = $row['email'];
+        $exp = $row['experience'];
+        $res = $row['resume'];
+    }
+
+    echo $fname;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
