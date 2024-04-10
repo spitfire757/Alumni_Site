@@ -64,7 +64,8 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
         // Display matching users
         while ($row = $result->fetch_assoc()) {
             // Display user details
-            echo "<a href='view_user.php?userid={$row['UserID']}'>{$row['Fname']} {$row['LName']}</a><br>'";
+            echo "<a href='view_user.php?userid={$row['UserID']}'>{$row['Fname']} {$row['LName']}</a><br>";
+            
             $dec = "";
             if($row['type'] != ""){
                 $dec .= "Account: ".$row['type']." ";
@@ -78,11 +79,14 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
             if($row['Minor'] != ""){
                 $dec .= "Minor: ".$row['Minor']." ";
             }
+            $dec = $dec."<br><hr>"; 
+            echo $dec;
         }
-    } else {
+    }
+} else {
         echo "No users found.";
     }
-} elseif (isset($_GET['clear_search'])) {
+if (isset($_GET['clear_search'])) {
     // Clear the search
     header("Location: search.php");
     exit();
