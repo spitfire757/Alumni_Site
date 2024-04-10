@@ -23,7 +23,7 @@
     $User_ID = $_SESSION["UserID"];
 
     // Fetch data from Response Table for the selected user
-    $query = "SELECT * FROM User WHERE UserID = '".$User_ID."'";
+    $query = "SELECT * FROM User WHERE UserID = $User_ID'";
     echo $query;
     $result = $conn->query($query);
 
