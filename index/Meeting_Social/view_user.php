@@ -24,7 +24,6 @@
 
     // Fetch data from Response Table for the selected user
     $query = "SELECT * FROM User WHERE UserID = $User_ID";
-    echo $query;
     $result = $conn->query($query);
 
     if (!$result) {
@@ -77,12 +76,9 @@
     <table>
         <tbody>
             <tr>
-                <?php echo "1";?>
                 <!--td rowspan="4"><img src="<?php #echo $row['profile_image']; ?>" alt="Profile Picture" class="profile-pic"></td-->
-                <?php echo "2";?>
                 <td class="info-section">
                     <div class="info-details">
-                        <?php echo "3";?>
                         <strong><?php $fname . ' ' . $lname; ?></strong><br>
                         <?php echo $account . ', ' . $grad . ', ' . $major . '/' . $minor; ?>
                     </div>
@@ -92,7 +88,7 @@
                 <td>Contact: <?php echo $email; ?></td>
             </tr>
             <tr>
-                <td>Experience: <?php echo $experience; ?></td>
+                <td>Experience: <?php echo $exp; ?></td>
             </tr>
             <tr>
                 <td>Resume: <?php echo $res; ?></td>
