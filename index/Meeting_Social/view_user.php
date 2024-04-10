@@ -33,6 +33,7 @@
     echo "testing";
 
     while ($row = $result->fetch_assoc()) {
+        echo "testing3";
         $pic = $row['email_auth'];
         $fname = $row['Fname'];
         $lname = $row['LName'];
