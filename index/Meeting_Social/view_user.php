@@ -16,7 +16,7 @@
     }
 
     // Get forumID from session
-    if(isset($_GET['UserID'])){
+    if(isset($_GET['userid'])){
         $_SESSION["UserID"] = $_GET['userid'];
     }
 
