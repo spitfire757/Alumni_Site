@@ -103,16 +103,16 @@ if (isset($_GET['clear_search'])) {
             echo "<a href='view_user.php?userid={$row['UserID']}'>{$row['Fname']} {$row['LName']}</a><br>'";
             $dec = "";
             if($row['type'] != ""){
-                $dec .= "Account: ".$row['type']." ";
+                $dec .= "Account: ".mb_convert_case($row['type'],MB_CASE_TITLE, "UTF-8")." ";
             }
             if($row['intended_grad_year'] != ""){
-                $dec .= "Graduation: ".$row['intended_grad_year']." ";
+                $dec .= "Graduation: ".mb_convert_case($row['intended_grad_year'],MB_CASE_TITLE, "UTF-8")." ";
             }
             if($row['Major'] != ""){
-                $dec .= "Major: ".$row['Major']." ";
+                $dec .= "Major: ".mb_convert_case($row['Major'],MB_CASE_TITLE, "UTF-8")." ";
             }
             if($row['Minor'] != ""){
-                $dec .= "Minor: ".$row['Minor']." ";
+                $dec .= "Minor: ".mb_convert_case($row['Minor'],MB_CASE_TITLE, "UTF-8")." ";
             }
         }
     } else {
