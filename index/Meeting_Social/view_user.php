@@ -31,6 +31,8 @@
     }
 
     $row = $result->fetch_assoc();
+    echo $row['$User_ID'];
+    echo $row['Fname'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
