@@ -23,12 +23,14 @@
     $User_ID = $_SESSION["UserID"];
 
     // Fetch data from Response Table for the selected user
-    $query = "SELECT * FROM User WHERE UserID = '$User_ID'";
+    $query = "SELECT * FROM User WHERE UserID = '".$User_ID."'";
     $result = $conn->query($query);
 
     if (!$result) {
         echo "Error: " . $conn->error;
     }
+
+    echo "testing";
 
     while ($row = $result->fetch_assoc()) {
         $pic = $row['email_auth'];
