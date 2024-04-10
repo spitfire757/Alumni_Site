@@ -33,6 +33,7 @@
     while ($row = $result->fetch_assoc()) {
         // Display user details
         echo "<a href='view_user.php?userid={$row['UserID']}'>{$row['Fname']} {$row['LName']}</a><br>'";
+        /*
         $dec = "";
         if($row['type'] != ""){
             $dec .= "Account: ".$row['type']." ";
@@ -46,6 +47,7 @@
         if($row['Minor'] != ""){
             $dec .= "Minor: ".$row['Minor']." ";
         }
+        */
         /*
         echo $row['Major'];
         echo $row['Minor'];
