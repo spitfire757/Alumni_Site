@@ -77,6 +77,7 @@
         <tbody>
             <tr>
                 <!--td rowspan="4"><img src="<?php #echo $row['profile_image']; ?>" alt="Profile Picture" class="profile-pic"></td-->
+                <td rowspan="4"><img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fvector%2Fno-picture-available-placeholder-thumbnail-icon-illustration-design-gm1409329028-459910308&psig=AOvVaw1wXG3Do2rLj82kFOLZKHtT&ust=1712849237953000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCNjYt-T6t4UDFQAAAAAdAAAAABAE" alt="Profile Picture" class="profile-pic"></td>
                 <td class="info-section">
                     <div class="info-details">
                         <strong><?php echo $fname . ' ' . $lname; ?></strong><br>
