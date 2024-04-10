@@ -17,13 +17,13 @@
 
     // Get forumID from session
     if(isset($_GET['UserID'])){
-        $_SESSION["UserID"] = $_GET['UserID'];
+        $_SESSION["UserID"] = $_GET['userid'];
     }
 
     $User_ID = $_SESSION["UserID"];
 
     // Fetch data from Response Table for the selected user
-    $query = "SELECT * FROM User WHERE UserID = $User_ID'";
+    $query = "SELECT * FROM User WHERE UserID = $User_ID";
     echo $query;
     $result = $conn->query($query);
 
