@@ -79,13 +79,13 @@
                 <!--td rowspan="4"><img src="<?php #echo $row['profile_image']; ?>" alt="Profile Picture" class="profile-pic"></td-->
                 <td class="info-section">
                     <div class="info-details">
-                        <strong><?php $fname . ' ' . $lname; ?></strong><br>
+                        <strong><?php echo $fname . ' ' . $lname; ?></strong><br>
                         <?php echo $account . ', ' . $grad . ', ' . $major . '/' . $minor; ?>
                     </div>
                 </td>
             </tr>
             <tr>
-                <td>Contact: <?php echo $email; ?></td>
+                <td>Contact: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></td>
             </tr>
             <tr>
                 <td>Experience: <?php echo $exp; ?></td>
