@@ -32,9 +32,20 @@
     <?php
     while ($row = $result->fetch_assoc()) {
         // Display user details
-        echo "<a href='view_user.php>{$row['Fname']} {$row['LName']}</a><hr>";
-
-        #echo "<a href='view_user.php?userid={$row['UserID']."}>".$row['Fname']."".$row['LName']."</a><br>'";
+        echo "<a href='view_user.php?userid={$row['UserID']}'>{$row['Fname']} {$row['LName']}</a><br>'";
+        $dec = "";
+        if($row['type'] != ""){
+            $dec .= "Account: ".$row['type']." ";
+        }
+        if($row['intended_grad_year'] != ""){
+            $dec .= "Graduation: ".$row['intended_grad_year']." ";
+        }
+        if($row['Major'] != ""){
+            $dec .= "Major: ".$row['Major']." ";
+        }
+        if($row['Minor'] != ""){
+            $dec .= "Minor: ".$row['Minor']." ";
+        }
         /*
         echo $row['Major'];
         echo $row['Minor'];
@@ -57,9 +68,20 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
         // Display matching users
         while ($row = $result->fetch_assoc()) {
             // Display user details
-            echo "<div class='user-item'>";
-            echo "<a href='view_user.php?UserID={$row['UserID']}> {$row['Fname']} {$row['LName']}</a>";
-            echo "</div>";
+            echo "<a href='view_user.php?userid={$row['UserID']}'>{$row['Fname']} {$row['LName']}</a><br>'";
+            $dec = "";
+            if($row['type'] != ""){
+                $dec .= "Account: ".$row['type']." ";
+            }
+            if($row['intended_grad_year'] != ""){
+                $dec .= "Graduation: ".$row['intended_grad_year']." ";
+            }
+            if($row['Major'] != ""){
+                $dec .= "Major: ".$row['Major']." ";
+            }
+            if($row['Minor'] != ""){
+                $dec .= "Minor: ".$row['Minor']." ";
+            }
         }
     } else {
         echo "No users found.";
@@ -70,18 +92,28 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
     exit();
 } else {
     // Default display: All forums
-    $sql = "SELECT * FROM Forum;";
+    $sql = "SELECT * FROM User;";
     echo $sql;
     $result = $conn->query($sql);
     echo $result;
     if ($result->num_rows > 0) {
         // Display matching forums
         while ($row = $result->fetch_assoc()) {
-            // Display forum details
-            echo "<div class='user-item'>";
-            #echo "<a href='view_user.php?UserID={$row['UserID']}> {$row['Fname']} {$row['LName']}</a>";
-            #echo "<p class='user-description'>{$row['Description']}</p>";
-            echo "</div>";
+            // Display user details
+            echo "<a href='view_user.php?userid={$row['UserID']}'>{$row['Fname']} {$row['LName']}</a><br>'";
+            $dec = "";
+            if($row['type'] != ""){
+                $dec .= "Account: ".$row['type']." ";
+            }
+            if($row['intended_grad_year'] != ""){
+                $dec .= "Graduation: ".$row['intended_grad_year']." ";
+            }
+            if($row['Major'] != ""){
+                $dec .= "Major: ".$row['Major']." ";
+            }
+            if($row['Minor'] != ""){
+                $dec .= "Minor: ".$row['Minor']." ";
+            }
         }
     } else {
         echo "No users found.";
