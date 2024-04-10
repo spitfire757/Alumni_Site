@@ -45,6 +45,8 @@
         $res = $row['resume'];
     }
 
+    echo "testing2";
+
     echo $fname;
 
 ?>
