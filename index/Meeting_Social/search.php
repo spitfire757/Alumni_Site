@@ -38,10 +38,6 @@
         if($row['type'] != ""){
             $dec .= "Account: ".$row['type']." ";
         }
-
-        echo $dec;
-
-        /*
         if($row['intended_grad_year'] != ""){
             $dec .= "Graduation: ".$row['intended_grad_year']." ";
         }
@@ -50,15 +46,9 @@
         }
         if($row['Minor'] != ""){
             $dec .= "Minor: ".$row['Minor']." ";
-        }*/
-        
-        /*
-        echo $row['Major'];
-        echo $row['Minor'];
-        echo $row['intended_grad_year'];
-        echo $row['type'];
-        */
-        #echo "<a href='view_user.php?UserID={$row['UserID']}> {$row['Fname']} {$row['LName']}</a>";
+        }
+        $dec = $dec."<br><hr>"; 
+        echo $dec;
     }
 // Display user titles and descriptions
     // PHP Logic for Handling Search
