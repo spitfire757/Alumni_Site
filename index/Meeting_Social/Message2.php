@@ -226,17 +226,14 @@ else {
         </table>
     </div>
 -->
-<div id="home" class="content" style="font-family: Arial, sans-serif;">
-    <img src="../images/christopher-newport-university-jerry-gammon.jpeg" height="200px" style="margin-bottom: 20px;">
+<div id="home" class="content" style="font-family: Trajan Pro, sans-serif;">
+    <img src="../images/christopher-newport-university-jerry-gammon.jpeg" height="400px" style="margin-bottom: 20px;">
     <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0;">Captain's Dock</h2>
     <p style="font-size: 1rem; margin-bottom: 20px;">"Welcome to Captains Dock, the vibrant hub for Christopher Newport University alumni! Here, you'll connect with fellow Captains, explore career opportunities, and stay updated on all things CNU. Engage in meaningful discussions, mentorship programs, and alumni events tailored to your interests. Join us in celebrating the legacy of excellence and camaraderie that defines our beloved CNU community. Dive into Captains Dock today and embark on an exciting journey of networking, growth, and lifelong connections."</p>
     <table style="margin-bottom: 20px;">
         <tr>
             <td>
                 <iframe src="../Event_Scheduling/calendar.php" width="100%" height="200px" frameborder="0" style="border: none;"></iframe>
-            </td>
-            <td>
-                <iframe src="search.php" width="100%" height="200px" frameborder="0" style="border: none;"></iframe>
             </td>
         </tr>
         <tr>
@@ -246,8 +243,7 @@ else {
                     <!-- Instagram Embed Code -->
                 </blockquote>
                 <script async src="//www.instagram.com/embed.js"></script>
-            </td>
-            <td>
+           
                 <h2 style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">PCSE LinkedIn</h2>
                 <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7112093059823116290" height="707" width="504" frameborder="0" allowfullscreen="" title="Embedded post" style="border: none;"></iframe>
             </td>
