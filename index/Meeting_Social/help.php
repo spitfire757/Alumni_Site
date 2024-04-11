@@ -26,13 +26,13 @@
             </tr>
             <tr>
                 <td>
-               The CNU help page has places for you to submit housing/facilites maintenance requests, change your CNU password, and much more
+               The CNU help page has places for you to submit housing/facilites maintenance requests, change your CNU password, and much more <br>
                 <a href="https://cnu.edu/help/" target="_blank">CNU Help Page</a>
                 </td>
             </tr>
             <tr>
                 <td>
-               Confluence has step by step guides for several tech issues students may have like installing PrintAnywhere or Microsoft Office
+               Confluence has step by step guides for several tech issues students may have like installing PrintAnywhere or Microsoft Office <br>
                 <a href="https://confluence.cnu.edu" target="_blank">Confluence</a>
             </td>
             </tr>
