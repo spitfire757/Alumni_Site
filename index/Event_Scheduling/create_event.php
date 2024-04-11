@@ -39,7 +39,7 @@ input[type="date"] {
 </head>
 
 <body>
-
+    <center>
     <h3>Create an Event</h3>
     <form action="calendar.php" method="POST">
         <label for="datepicker">Enter the date of your event:<br></label>
@@ -49,7 +49,7 @@ input[type="date"] {
         <label for="bio"><br>Enter event description:<br></label>
         <input type="text" id="bio" name="bio" required><br>
         <input type="submit" value="Create">
-    </form>
+    </form></center>
 <p style="text-align:center"><a href="calendar.php">Cancel Event Creation</a></p>
 </body>
 </html>
