@@ -42,6 +42,7 @@
         $exp = $row['experience'];
         $res = $row['resume'];
     }
+    echo $pic;
 ?>
 <!DOCTYPE html>
 <html lang="en">
