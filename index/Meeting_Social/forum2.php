@@ -115,10 +115,10 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
     if ($result->num_rows > 0) {
         // Display matching forums
         while ($row = $result->fetch_assoc()) {
-            // Display forum details
             echo "<div class='forum-item'>";
-            echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-title'>{$row['Title']} • {$row['userID']}</a>";
+            echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-title-smaller'>{$row['Title']} • {$row['userID']}</a>";
             echo "<p class='forum-description'>{$row['Description']}</p>";
+            echo "<hr>";
             echo "</div>";
         }
     } else {
