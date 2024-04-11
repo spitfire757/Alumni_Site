@@ -12644,10 +12644,6 @@ HUB ARTICLE
   font-style: italic;
   font-size: 0.963rem; }
 
-.HUB article.story hr {
-  border: 1px solid #bs221-mdblue;
-  margin: 2rem 0; }
-
 .HUB article.story figure {
   float: right;
   display: inline-block;
@@ -14069,14 +14065,14 @@ a.nav-link:hover, a.nav-link:active, a.nav-link:focus {
 }
  */
 .skipNav {
-  display: inline-block;
-  float: left;
-  color: transparent;
-  position: absolute;
-  background: transparent;
-  border: none; }
-  .skipNav:focus, .skipNav:hover, .skipNav:active, .skipNav:visited {
-    color: #f2f2f2; }
+    display: inline-block;
+    float: left;
+    color: transparent;
+    position: absolute;
+    background: transparent;
+    border: none; }
+    .skipNav:focus, .skipNav:hover, .skipNav:active, .skipNav:visited {
+        color: #f2f2f2; }
 
 .navbar-dark .navbar-toggler {
   border-color: #fafafa !important; }
