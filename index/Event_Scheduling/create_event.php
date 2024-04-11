@@ -10,7 +10,7 @@ input[type="text"], textarea {
     width: 50%;
     height: 40px;
     padding: 10px;
-    margin: 5px 0;
+    margin: 5px auto;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -21,7 +21,7 @@ input[type="date"] {
     width: 8%;
     height: 20px;
     padding: 10px;
-    margin: 5px 0;
+    margin: 5px auto;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -39,7 +39,6 @@ input[type="date"] {
 </head>
 
 <body>
-    <br>
 
     <h3>Create an Event</h3>
     <form action="calendar.php" method="POST">
@@ -51,7 +50,7 @@ input[type="date"] {
         <input type="text" id="bio" name="bio" required><br>
         <input type="submit" value="Create">
     </form>
-    <p style="text-align:center"><a href="calendar.php">Cancel Event Creation</a></p>
+<p style="text-align:center"><a href="calendar.php">Cancel Event Creation</a></p>
 </body>
 </html>
 
