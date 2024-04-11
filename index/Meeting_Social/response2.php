@@ -68,8 +68,99 @@
     ?>
     <!DOCTYPE html>
     <html>
-    <body>
+    <head>
+    <style>
+    /* Your PHP-generated CSS here */
+    /* Add your custom styles below */
 
+    /* Forum Title */
+    h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    /* Forum Description */
+    p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+
+    /* Back to Forum Link */
+    a {
+        color: #007bff;
+        text-decoration: none;
+        font-size: 1rem;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /* Horizontal Rule */
+    hr {
+        border-top: 1px solid #ccc;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    /* Response Form */
+    form {
+        margin-bottom: 20px;
+    }
+
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    /* Response Item */
+    .forum-response {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .forum-response-content {
+        flex-grow: 1;
+    }
+
+    /* Vote Button */
+    .vote-button {
+        margin-right: 10px;
+        padding: 5px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .vote-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+    </head>
+    <body>
+        
     <form action='response2.php' method='post'>
         <textarea id='response' name='response' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
         <button type='submit' name='reply'>Reply</button>

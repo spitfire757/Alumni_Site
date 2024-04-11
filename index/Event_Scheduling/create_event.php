@@ -4,54 +4,6 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
-
-        .tabs {
-            display: flex;
-            background-color: #305A8C; /* Updated color code, feel free to change it*/
-            color: white;
-        }
-
-        .tab {
-            flex: 1;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .tab:hover {
-            background-color: #2A4C7D;
-        }
-
-        .content {
-            padding: 20px;
-        }
-
-        .buttons {
-            margin-top: 20px;
-            justify-content: center;
-        }
-
-        .button {
-            padding: 10px 20px;
-            background-color: #305A8C;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .button:hover {
-            background-color: #2A4C7D;
-        }
-
-        /* Style for input and textarea */
 input[type="text"], textarea {
     width: 50%;
 height: 40px;

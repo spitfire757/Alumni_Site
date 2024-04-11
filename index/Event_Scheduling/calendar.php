@@ -51,15 +51,10 @@ if (isset($_SESSION['username'])) {
         $_SESSION['userID'] = $userID;
     } else {
         echo "User not found for the given email/username: $currentUser";
-        // You may want to handle this case appropriately, like redirecting to a login page
     }
-
-    // Close the statement
     $stmt->close();
 
-    // If the form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Get other form data
         $eventDate = date('Y-m-d', strtotime($_POST["date"]));
         $eventTime = $_POST["time"];
         $eventTime = $eventTime . ":00";
@@ -93,8 +88,6 @@ if (isset($_SESSION['username'])) {
         }
 
     }
-
-    // Close the database connection
     $conn->close();
 }
 
