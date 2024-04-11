@@ -46,25 +46,60 @@ $result = mysqli_query($conn, $query);
             padding: 10px;
             text-align: center;
         }
+        .separator {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.search-form {
+    margin-bottom: 20px;
+}
+
+.search-input,
+.search-select {
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.search-input::placeholder {
+    color: #999;
+}
+
+.forum-title-smaller {
+    font-size: 0.9rem; /* Adjust the font size as needed */
+    /* Add any additional styles here if necessary */
+}
+
     </style>
 <body style="text-align: center; font-family: Trajan Pro, sans-serif;">
 
-<hr>
-<a href="create_forum.php">
-    <button type="button">Create a Forum</button>
-</a>
-<hr>
-<form action="forum2.php" method="get">
-    <input type="text" name="search_query" placeholder="Search...">
-    <select name="search_criteria">
+<hr class="separator">
+    <a href="create_forum.php" class="btn">Create a Forum</a>
+<hr class="separator">
+<form action="forum2.php" method="get" class="search-form">
+    <input type="text" name="search_query" placeholder="Search..." class="search-input">
+    <select name="search_criteria" class="search-select">
         <option value="title">Title</option>
         <option value="Description">Description</option>
         <option value="userID">Author</option>
     </select>
-    <button type="submit">Search</button>
-    <button type="submit" name="clear_search">Clear Search</button>
+    <button type="submit" class="btn">Search</button>
+    <button type="submit" name="clear_search" class="btn">Clear Search</button>
 </form>
-<hr>
+<hr class="separator">
 </body>
 <?php
 // Display forum titles and descriptions
@@ -103,7 +138,7 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
         while ($row = $result->fetch_assoc()) {
             // Display forum details
             echo "<div class='forum-item'>";
-            echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-title'>{$row['Title']} • {$row['userID']}</a>";
+            echo "<a href='response2.php?forumID={$row['ForumID']}&forumTitle={$row['Title']}&forumDescription={$row['Description']}' class='forum-title-smaller'>{$row['Title']} • {$row['userID']}</a>";
             echo "<p class='forum-description'>{$row['Description']}</p>";
             echo "<hr>";
             echo "</div>";
