@@ -1,4 +1,5 @@
-<link rel='stylesheet' type='text/css' href='Alumni_Site/index/style/global_style.css'>
+
+<link rel='stylesheet' type='text/css' href='../style/global_style.css'>
 <?php
 // Connect to SQL Database
 session_start();
@@ -14,10 +15,39 @@ $query = "SELECT * FROM Forum";
 $result = mysqli_query($conn, $query);
 ?>
 
-<?php
-$cssFilePath = "Alumni_Site/index/style/global_style.css";
-?>
-<link rel='stylesheet' type='text/css' href='<?php echo $cssFilePath; ?>'>
+<style>
+        /* Button styles */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        /* Table styles */
+        table {
+            margin: auto;
+            width: 80%;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+<body style="text-align: center; font-family: Trajan Pro, sans-serif;">
 
 <hr>
 <a href="create_forum.php">
@@ -35,6 +65,7 @@ $cssFilePath = "Alumni_Site/index/style/global_style.css";
     <button type="submit" name="clear_search">Clear Search</button>
 </form>
 <hr>
+</body>
 <?php
 // Display forum titles and descriptions
     // PHP Logic for Handling Search
