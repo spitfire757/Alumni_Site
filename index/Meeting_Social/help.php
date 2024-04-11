@@ -88,7 +88,7 @@
         <table>
             <tr>
                 <td>
-                    <img src="Alumni_Site/index/images/department-stacked.jpg" height="200px" style="margin-bottom: 20px;">
+                    <img src="../images/department-stacked.jpg" height="200px" style="margin-bottom: 20px;">
                     <a href="https://cnu.edu/its/" target="_blank" class="btn">CNU IT Services</a>
                 </td>
                 <td>
