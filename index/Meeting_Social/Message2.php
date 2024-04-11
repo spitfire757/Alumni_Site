@@ -251,13 +251,17 @@ else {
     </table>
 </div>
 
-
+    <!--
     <div id="helppage" class="content" style="display: none;">
         <h2>Captain's Dock - Help Page Tab</h2>
-<iframe src="help.php" width="100%" height="800px" frameborder="0"></iframe><br>
+    <iframe src="help.php" width="100%" height="800px" frameborder="0"></iframe><br>
     </div>
+                -->
 
-
+    <div id="helppage" class="content" style="display: none; text-align: center;">
+        <h2 style="font-family: Trajan Pro, sans-serif;">Captain's Dock - Help Page Tab</h2>
+        <iframe src="help.php" width="100%" height="800px" frameborder="0"></iframe><br>
+    </div>
 
     <div id="messages" class="content" style="display: none;">
         <h2>Captain's Dock - Messages Tab</h2>
