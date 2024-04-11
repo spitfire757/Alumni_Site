@@ -88,21 +88,22 @@
         <table>
             <tr>
                 <td>
+                    <img src="../images/department-stacked.jpg" height="200px" style="margin-bottom: 20px;">
                     <a href="https://cnu.edu/its/" target="_blank" class="btn">CNU IT Services</a>
                 </td>
-            </tr>
-            <tr>
                 <td>
+                    <img src="../images/download.jpeg" height="200px" style="margin-bottom: 20px;">
                     <a href="https://my.cnu.edu" target="_blank" class="btn">My CNU</a>
                 </td>
             </tr>
             <tr>
                 <td>
+                    <img src="../images/maxresdefault (1).jpg" height="200px" style="margin-bottom: 20px;">
                     <a href="https://cnu.edu/help/" target="_blank" class="btn">CNU Help Page</a>
                 </td>
-            </tr>
-            <tr>
                 <td>
+                    <img src="../images/inset-landscape.jpg" height="200px" style="margin-bottom: 20px;">
+
                     <a href="https://confluence.cnu.edu" target="_blank" class="btn">Confluence</a>
                 </td>
             </tr>
