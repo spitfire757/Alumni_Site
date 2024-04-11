@@ -199,14 +199,19 @@ else {
         <div class="tab" onclick="showTab('profile')">Profile</div>
 	<div class="tab" onclick="showTab('search')">Search</div>
     </div>
-
+    <!--
     <div id="home" class="content">
-        <h2>Welcome to the Captain's Dock - Home Page</h2>
-        <p>This is the content for the Home Page tab.</p>
+        <img src="../images/christopher-newport-university-jerry-gammon.jpeg" height= "200px">
+        <h2>Captain's Dock</h2>
+        <p>"Welcome to Captains Dock, the vibrant hub for Christopher Newport University alumni! Here, you'll connect with fellow Captains, explore career opportunities, and stay updated on all things CNU. Engage in meaningful discussions, mentorship programs, and alumni events tailored to your interests. Join us in celebrating the legacy of excellence and camaraderie that defines our beloved CNU community. Dive into Captains Dock today and embark on an exciting journey of networking, growth, and lifelong connections."</p>
         <table>
             <tr>
-                <td col>
+                <td>
                 <iframe src="../Event_Scheduling/calendar.php" width="100%" height="200px" frameborder="0"></iframe><br>
+            </tr>
+            <tr>
+                <td>
+                <iframe src="search.php" width="100%" height="200px" frameborder="0"></iframe><br>
             </tr>
             <tr>
                 <td>
@@ -220,6 +225,36 @@ else {
             </tr>
         </table>
     </div>
+-->
+<div id="home" class="content" style="font-family: Arial, sans-serif;">
+    <img src="../images/christopher-newport-university-jerry-gammon.jpeg" height="200px" style="margin-bottom: 20px;">
+    <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0;">Captain's Dock</h2>
+    <p style="font-size: 1rem; margin-bottom: 20px;">"Welcome to Captains Dock, the vibrant hub for Christopher Newport University alumni! Here, you'll connect with fellow Captains, explore career opportunities, and stay updated on all things CNU. Engage in meaningful discussions, mentorship programs, and alumni events tailored to your interests. Join us in celebrating the legacy of excellence and camaraderie that defines our beloved CNU community. Dive into Captains Dock today and embark on an exciting journey of networking, growth, and lifelong connections."</p>
+    <table style="margin-bottom: 20px;">
+        <tr>
+            <td>
+                <iframe src="../Event_Scheduling/calendar.php" width="100%" height="200px" frameborder="0" style="border: none;"></iframe>
+            </td>
+            <td>
+                <iframe src="search.php" width="100%" height="200px" frameborder="0" style="border: none;"></iframe>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h2 style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">PCSE Instagram</h2>
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/cnupcse/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%; width:-webkit-calc(100% - 2px); width:calc(100% - 2px);">
+                    <!-- Instagram Embed Code -->
+                </blockquote>
+                <script async src="//www.instagram.com/embed.js"></script>
+            </td>
+            <td>
+                <h2 style="font-size: 1.5rem; font-weight: bold; margin-top: 20px;">PCSE LinkedIn</h2>
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7112093059823116290" height="707" width="504" frameborder="0" allowfullscreen="" title="Embedded post" style="border: none;"></iframe>
+            </td>
+        </tr>
+    </table>
+</div>
+
 
     <div id="helppage" class="content" style="display: none;">
         <h2>Captain's Dock - Help Page Tab</h2>
