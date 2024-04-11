@@ -226,10 +226,10 @@ else {
         </table>
     </div>
 -->
-<div id="home" class="content" style="font-family: Trajan Pro, sans-serif;">
+<div id="home" class="content" style="font-family: Trajan Pro, sans-serif; display: flex; justify-content: center; align-items: center; flex-direction: column;">
     <img src="../images/christopher-newport-university-jerry-gammon.jpeg" height="400px" style="margin-bottom: 20px;">
     <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 0;">Captain's Dock</h2>
-    <p style="font-size: 1rem; margin-bottom: 20px;">"Welcome to Captains Dock, the vibrant hub for Christopher Newport University alumni! Here, you'll connect with fellow Captains, explore career opportunities, and stay updated on all things CNU. Engage in meaningful discussions, mentorship programs, and alumni events tailored to your interests. Join us in celebrating the legacy of excellence and camaraderie that defines our beloved CNU community. Dive into Captains Dock today and embark on an exciting journey of networking, growth, and lifelong connections."</p>
+    <p style="font-size: 1rem; margin-bottom: 20px;">Welcome to Captains Dock, the vibrant hub for Christopher Newport University alumni! Here, you'll connect with fellow Captains, explore career opportunities, and stay updated on all things CNU. Engage in meaningful discussions, mentorship programs, and alumni events tailored to your interests. Join us in celebrating the legacy of excellence and camaraderie that defines our beloved CNU community. Dive into Captains Dock today and embark on an exciting journey of networking, growth, and lifelong connections.</p>
     <table style="margin-bottom: 20px;">
         <tr>
             <td>
