@@ -241,7 +241,7 @@ $dbname = "DB";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-$query = "SELECT * FROM Users";
+$query = "SELECT * FROM User";
 $result = mysqli_query($conn, $query);
 ?>
 
@@ -313,7 +313,7 @@ $result = mysqli_query($conn, $query);
     /* Add any additional styles here if necessary */
 }
 
-    </style>
+</style>
 <body style="text-align: center; font-family: Trajan Pro, sans-serif;">
 
 <hr class="separator">
