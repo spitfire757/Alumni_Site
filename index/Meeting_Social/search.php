@@ -320,12 +320,12 @@ $result = mysqli_query($conn, $query);
     <input type="text" name="search_query" placeholder="Search..." class="search-input">
     <br>
     <select name="search_criteria" class="search-select">
-        <option value="first_name">First Name</option>
-        <option value="last_name">Last Name</option>
-        <option value="account_type">Account Type</option>
-        <option value="major">Major</option>
-        <option value="minor">Minor</option>
-        <option value="grad_year">Graduation Year</option>
+        <option value="Fname">First Name</option>
+        <option value="LName">Last Name</option>
+        <option value="Major">Major</option>
+        <option value="Minor">Minor</option>
+        <option value="intended_grad_year">Graduation</option>
+        <option value="type">Account Type</option>
     </select>
     <button type="submit" class="btn">Search</button>
     <button type="submit" name="clear_search" class="btn">Clear Search</button>
