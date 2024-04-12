@@ -15,6 +15,77 @@
     $query = "SELECT * FROM User;";
     $result = mysqli_query($conn, $query);
     ?>
+    <head>
+    <style>
+        /* Button styles */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        /* Table styles */
+        table {
+            margin: auto;
+            width: 80%;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+        .separator {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.search-form {
+    margin-bottom: 20px;
+}
+
+.search-input,
+.search-select {
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.search-input::placeholder {
+    color: #999;
+}
+
+.forum-title-smaller {
+    font-size: 1.3rem; /* Adjust the font size as needed */
+    /* Add any additional styles here if necessary */
+}
+
+    </style>
+    </head>
     <hr>
     <link rel="stylesheet" href="../style/global_style.css">
     <form action="search.php" method="get">
