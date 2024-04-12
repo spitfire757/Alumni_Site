@@ -206,8 +206,34 @@ echo $pic;
                     <td rowspan="4"><img src="<?php echo $pic; ?>" alt="Profile Picture" class="profile-pic"></td>
                     <td class="info-section">
                         <div class="info-details">
-                            <strong><?php echo $fname . ' ' . $lname; ?></strong><br>
-                            <?php echo $account . ', ' . $grad . ', ' . $major . '/' . $minor; ?>
+                            <strong><?php echo ucwords($fname) . ' ' . ucwords($lname); ?></strong><br>
+                            <?php
+                            $pic = $row['email_auth'];
+                            $fname = $row['Fname'];
+                            $lname = $row['LName'];
+                            $account = $row['type'];
+                            $grad = $row['intended_grad_year'];
+                            $major = $row['Major'];
+                            $minor = $row['Minor'];
+                            $email = $row['email'];
+                            $exp = $row['experience'];
+                            $res = $row['resume'];
+                                $dec = "";
+                                if($account != ""){
+                                    $dec .= ucwords($account).", ";
+                                }
+                                if($grad != ""){
+                                    $dec .= ucwords($grad).", ";
+                                }
+                                if($major != ""){
+                                    $dec .= ucwords($major);
+                                }
+                                if($minor != ""){
+                                    $dec .= "/".ucwords($major);
+                                }
+                                $dec = $dec."<hr>"; 
+                                echo $dec;
+                            ?>
                         </div>
                     </td>
                 </tr>
@@ -215,7 +241,7 @@ echo $pic;
                     <td>Contact: <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></td>
                 </tr>
                 <tr>
-                    <td>Experience: <?php echo $exp; ?></td>
+                    <td>Experience: <?php echo "<br><br>".$exp; ?></td>
                 </tr>
                 <tr>
                     <td>Resume: <?php echo $res; ?></td>
