@@ -118,16 +118,16 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
             
             $dec = "";
             if($row['type'] != ""){
-                $dec .= "Account: ".$row['type']." ";
+                $dec .= "Account: ".ucwords($row['type'])."<br>";
             }
             if($row['intended_grad_year'] != ""){
-                $dec .= "Graduation: ".$row['intended_grad_year']." ";
+                $dec .= "Graduation: ".$row['intended_grad_year']."<br>";
             }
             if($row['Major'] != ""){
-                $dec .= "Major: ".$row['Major']." ";
+                $dec .= "Major: ".ucwords($row['Major'])."<br>";
             }
             if($row['Minor'] != ""){
-                $dec .= "Minor: ".$row['Minor']." ";
+                $dec .= "Minor: ".ucwords($row['Minor'])."<br>";
             }
             $dec = $dec."<br><hr>"; 
             echo $dec;
@@ -151,16 +151,16 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
             
             $dec = "";
             if($row['type'] != ""){
-                $dec .= "Account: ".$row['type']." ";
+                $dec .= "Account: ".ucwords($row['type'])."<br>";
             }
             if($row['intended_grad_year'] != ""){
-                $dec .= "Graduation: ".$row['intended_grad_year']." ";
+                $dec .= "Graduation: ".$row['intended_grad_year']."<br>";
             }
             if($row['Major'] != ""){
-                $dec .= "Major: ".$row['Major']." ";
+                $dec .= "Major: ".ucwords($row['Major'])."<br>";
             }
             if($row['Minor'] != ""){
-                $dec .= "Minor: ".$row['Minor']." ";
+                $dec .= "Minor: ".ucwords($row['Minor'])."<br>";
             }
             $dec = $dec."<br><hr>"; 
             echo $dec;
