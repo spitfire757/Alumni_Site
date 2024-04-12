@@ -96,6 +96,7 @@ echo $pic;
     </style>
 </head>
 <body>
+    <a href='search.php'>Back to Search</a>
     <div class="container">
         <table>
             <tbody>
