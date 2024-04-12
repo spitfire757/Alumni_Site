@@ -205,36 +205,27 @@ echo $pic;
                 <tr>
                     <td rowspan="4"><img src="<?php echo $pic; ?>" alt="Profile Picture" class="profile-pic"></td>
                     <td class="info-section">
-                        <div class="info-details">
-                            <strong><?php echo ucwords($fname) . ' ' . ucwords($lname); ?></strong><br>
-                            <?php
-                            $pic = $row['email_auth'];
-                            $fname = $row['Fname'];
-                            $lname = $row['LName'];
-                            $account = $row['type'];
-                            $grad = $row['intended_grad_year'];
-                            $major = $row['Major'];
-                            $minor = $row['Minor'];
-                            $email = $row['email'];
-                            $exp = $row['experience'];
-                            $res = $row['resume'];
-                                $dec = "";
-                                if($account != ""){
-                                    $dec .= ucwords($account).", ";
-                                }
-                                if($grad != ""){
-                                    $dec .= ucwords($grad).", ";
-                                }
-                                if($major != ""){
-                                    $dec .= ucwords($major);
-                                }
-                                if($minor != ""){
-                                    $dec .= "/".ucwords($major);
-                                }
-                                $dec = $dec."<hr>"; 
-                                echo $dec;
-                            ?>
-                        </div>
+                    <div class="info-details">
+                        <strong><?php echo ucwords($fname) . ' ' . ucwords($lname); ?></strong><br>
+                        <?php
+                        $dec = "";
+                        if ($account != "") {
+                            $dec .= ucwords($account) . ", ";
+                        }
+                        if ($grad != "") {
+                            $dec .= ucwords($grad) . ", ";
+                        }
+                        if ($major != "") {
+                            $dec .= ucwords($major);
+                        }
+                        if ($minor != "") {
+                            $dec .= "/" . ucwords($minor);
+                        }
+                        // Removed unnecessary line break
+                        $dec .= "<hr>"; // Moved the line break inside the $dec string
+                        echo $dec;
+                        ?>
+                    </div>
                     </td>
                 </tr>
                 <tr>
