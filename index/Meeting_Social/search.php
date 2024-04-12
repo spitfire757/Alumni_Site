@@ -338,6 +338,7 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
     $search_criteria = $_GET['search_criteria'];
 
     $sql = "SELECT * FROM User WHERE $search_criteria LIKE '%$search_query%'";
+    echo $sql;
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
