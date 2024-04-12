@@ -122,6 +122,7 @@ echo $pic;
                             echo $dec;
                             ?>
                         </div>
+                        <br>
                         <img src="<?php echo $pic; ?>" alt="Profile Picture" class="profile-pic">
 
                     </td>
