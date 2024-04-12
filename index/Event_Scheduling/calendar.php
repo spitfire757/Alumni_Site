@@ -171,6 +171,4 @@ else {
 $conn->close();
 
 ?>
-
-
 </html>
