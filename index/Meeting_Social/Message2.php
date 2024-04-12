@@ -359,8 +359,8 @@ if (isset($_SESSION['username'])) {
 
 
   <div id="search" class="content" style="display: none;">
-        <h2>Welcome to the Captain's Dock - Connect Page</h2>
-        <p>This is the content for the connect  Page tab.</p>
+        <h2>User Search</h2>
+        <p>"The Captains Dock search tool offers a comprehensive way to connect with a diverse range of Christopher Newport University members, including alumni, faculty, administrators, and students from all majors. Easily locate individuals within the PCSE community to network, collaborate, and engage in meaningful conversations. Whether you're seeking mentorship, career opportunities, or simply looking to expand your professional circle, our search tool provides the platform to find and connect with the right people. Join us in fostering connections across disciplines and building a stronger PCSE community."</p>
         <iframe src="search.php" width="100%" height="800px" frameborder="0"></iframe><br>
     </div>
 

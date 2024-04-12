@@ -96,6 +96,7 @@ echo $pic;
     </style>
 </head>
 <body>
+    <a href='search.php'>Back to Search</a>
     <div class="container">
         <table>
             <tbody>
@@ -122,6 +123,7 @@ echo $pic;
                             echo $dec;
                             ?>
                         </div>
+                        <br>
                         <img src="<?php echo $pic; ?>" alt="Profile Picture" class="profile-pic">
 
                     </td>
