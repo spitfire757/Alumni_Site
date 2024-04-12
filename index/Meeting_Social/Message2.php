@@ -18,8 +18,12 @@ if (isset($_SESSION['username'])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
+    
     $receiverUsername = $_SESSION['username'];
-    echo $receiverUsername;
+    echo "<h1>Captains Dock</h1>";
+    echo "<p style='text-align: center; font-family: Trajan Pro, sans-serif;'>$receiverUsername</p>";
+
+
     // Retrieve user ID from the current user's username
     $sqlUserID = "SELECT UserID FROM User WHERE email = ?";
     $stmtUserID = $conn->prepare($sqlUserID);

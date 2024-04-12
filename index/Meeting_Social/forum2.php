@@ -79,7 +79,7 @@ $result = mysqli_query($conn, $query);
 }
 
 .forum-title-smaller {
-    font-size: 0.9rem; /* Adjust the font size as needed */
+    font-size: 1.3rem; /* Adjust the font size as needed */
     /* Add any additional styles here if necessary */
 }
 
