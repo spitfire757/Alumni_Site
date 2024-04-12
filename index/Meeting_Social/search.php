@@ -16,6 +16,7 @@
     $result = mysqli_query($conn, $query);
     ?>
     <hr>
+    <link href="../style/global_style.css">
     <form action="search.php" method="get">
         <input type="text" name="search_query" placeholder="Search...">
         <select name="search_criteria">
