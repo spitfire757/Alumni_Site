@@ -327,6 +327,7 @@ $result = mysqli_query($conn, $query);
         <option value="intended_grad_year">Graduation</option>
         <option value="type">Account Type</option>
     </select>
+    <br>
     <button type="submit" class="btn">Search</button>
     <button type="submit" name="clear_search" class="btn">Clear Search</button>
 </form>
