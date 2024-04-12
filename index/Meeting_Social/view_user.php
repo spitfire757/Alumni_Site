@@ -118,7 +118,7 @@ echo $pic;
                                 $dec .= "/" . ucwords($minor);
                             }
                             // Removed unnecessary line break
-                            $dec .= "<hr>"; // Moved the line break inside the $dec string
+                            $dec .= "<hr><br>"; // Moved the line break inside the $dec string
                             echo $dec;
                             ?>
                         </div>
