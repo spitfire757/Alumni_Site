@@ -316,11 +316,9 @@ $result = mysqli_query($conn, $query);
 </style>
 <body style="text-align: center; font-family: Trajan Pro, sans-serif;">
 
-<hr class="separator">
-    <a href="create_user.php" class="btn">Create a User</a>
-<hr class="separator">
 <form action="search.php" method="get" class="search-form">
     <input type="text" name="search_query" placeholder="Search..." class="search-input">
+    <br>
     <select name="search_criteria" class="search-select">
         <option value="first_name">First Name</option>
         <option value="last_name">Last Name</option>
@@ -339,41 +337,67 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
     $search_query = $_GET['search_query'];
     $search_criteria = $_GET['search_criteria'];
 
-    $sql = "SELECT * FROM Users WHERE $search_criteria LIKE '%$search_query%'";
+    $sql = "SELECT * FROM User WHERE $search_criteria LIKE '%$search_query%'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
+        // Display matching users
         while ($row = $result->fetch_assoc()) {
-            echo "<div class='forum-item'>";
-            echo "<p class='forum-title-smaller'>{$row['first_name']} {$row['last_name']} • {$row['account_type']}</p>";
-            echo "<p class='forum-description'>Major: {$row['major']}</p>";
-            echo "<p class='forum-description'>Minor: {$row['minor']}</p>";
-            echo "<p class='forum-description'>Graduation Year: {$row['grad_year']}</p>";
-            echo "<hr>";
-            echo "</div>";
+            // Display user details
+            echo "<a href='view_user.php?userid={$row['UserID']}'>{$row['Fname']} {$row['LName']}</a><br>";
+            
+            $dec = "";
+            if($row['type'] != ""){
+                $dec .= "Account: ".$row['type']." ";
+            }
+            if($row['intended_grad_year'] != ""){
+                $dec .= "Graduation: ".$row['intended_grad_year']." ";
+            }
+            if($row['Major'] != ""){
+                $dec .= "Major: ".$row['Major']." ";
+            }
+            if($row['Minor'] != ""){
+                $dec .= "Minor: ".$row['Minor']." ";
+            }
+            $dec = $dec."<br><hr>"; 
+            echo $dec;
         }
-    } else {
-        echo "No users found.";
+    }
+    else {
+            echo "No users found.";
     }
 } elseif (isset($_GET['clear_search'])) {
     header("Location: search.php");
     exit();
 } else {
-    $sql = "SELECT * FROM Users";
+    $sql = "SELECT * FROM User";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
+        // Display matching users
         while ($row = $result->fetch_assoc()) {
-            echo "<div class='forum-item'>";
-            echo "<p class='forum-title-smaller'>{$row['first_name']} {$row['last_name']} • {$row['account_type']}</p>";
-            echo "<p class='forum-description'>Major: {$row['major']}</p>";
-            echo "<p class='forum-description'>Minor: {$row['minor']}</p>";
-            echo "<p class='forum-description'>Graduation Year: {$row['grad_year']}</p>";
-            echo "<hr>";
-            echo "</div>";
+            // Display user details
+            echo "<a href='view_user.php?userid={$row['UserID']}'>{$row['Fname']} {$row['LName']}</a><br>";
+            
+            $dec = "";
+            if($row['type'] != ""){
+                $dec .= "Account: ".$row['type']." ";
+            }
+            if($row['intended_grad_year'] != ""){
+                $dec .= "Graduation: ".$row['intended_grad_year']." ";
+            }
+            if($row['Major'] != ""){
+                $dec .= "Major: ".$row['Major']." ";
+            }
+            if($row['Minor'] != ""){
+                $dec .= "Minor: ".$row['Minor']." ";
+            }
+            $dec = $dec."<br><hr>"; 
+            echo $dec;
         }
-    } else {
-        echo "No users available.";
+    }
+    else {
+        echo "No users found.";
     }
 }
 ?>
