@@ -35,57 +35,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['username'])) {
     
     
     // Upload and process image file
-    $targetDir = "uploads/"; // Directory where images will be stored
-    $targetFile = $targetDir . basename($_FILES["image"]["name"]); // Path to the uploaded file
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+     if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
+        $targetDir = "/home/ubuntu/Downloads/image/"; // Directory where images will be stored
+        $imageFileType = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+        $newFileName = $userId . '_' . time() . '.' . $imageFileType; // Creating a unique file name
+        $targetFile = $targetDir . $newFileName;
 
-    // Check if image file is a actual image or fake image
-    if(isset($_POST["submit"])) {
-        $check = getimagesize($_FILES["image"]["tmp_name"]);
-        if($check !== false) {
-            echo "File is an image - " . $check["mime"] . ".";
-            $uploadOk = 1;
+        // Validate file size and type
+        if ($_FILES['image']['size'] > 500000) {
+            echo "Sorry, your file is too large.";
+        } elseif (!in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
+            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
         } else {
-            echo "File is not an image.";
-            $uploadOk = 0;
+            if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)) {
+                echo "The file has been uploaded.";
+
+                // Save file path to the 'images' table in the database
+                $sql = "INSERT INTO images (image_id, image_path) VALUES (?, ?) ON DUPLICATE KEY UPDATE image_path=?";
+                $stmt = $conn->prepare($sql);
+                if ($stmt === false) {
+                    die("MySQL prepare error: " . $conn->error);
+                }
+                $stmt->bind_param("iss", $userId, $targetFile, $targetFile);
+                $stmt->execute();
+                if ($stmt->error) {
+                    echo "Error storing image path in database: " . $stmt->error;
+                }
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
         }
     }
-    // Check file size
-    if ($_FILES["image"]["size"] > 500000) {
-        echo "Sorry, your file is too large.";
-        $uploadOk = 0;
-    }
-    // Allow certain file formats
-    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-    && $imageFileType != "gif" ) {
-        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-        $uploadOk = 0;
-    }
-    // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-        echo "Sorry, your file was not uploaded.";
-	// if everything is ok, try to upload file
-    } else {
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-            echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
-            // Save file path to database for the user
-            // Update the query to include the file path
-            // $sql = "UPDATE User SET Major=?, Minor=?, Experience=?, security=?, picture=? WHERE email=?";
-            // Bind parameters and execute query
-            // ...
-        } else {
-            echo "Sorry, there was an error uploading your file.";
-        }
-    }
-
 
     $stmt->close();
     $conn->close();
 } else {
-    echo "Invalid request or no user signed in, unable to connect to DB, sign in or contact DB admin";
+    echo "Invalid request or no user signed in.";
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -237,6 +226,25 @@ if (isset($_SESSION['username'])) {
     echo "";
 }
 ?>
+
+<?php
+if (isset($_SESSION['username'])) {
+    // Code to fetch user information
+    $stmt = $conn->prepare("SELECT image_path FROM images WHERE image_id = ?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $imagePath = $row['image_path'];
+        echo "<img src='" . htmlspecialchars($imagePath) . "' alt='Profile Image'>";
+    } else {
+        echo "<div style='width:150px;height:150px;background-color:grey;'>No Image</div>";
+    }
+}
+?>
+
+
+
 
 <script>
     document.getElementById('updateBtn').addEventListener('click', function() {
