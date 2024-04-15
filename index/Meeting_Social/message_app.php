@@ -23,32 +23,62 @@ $stmt->bind_param("ss", $currentUserEmail, $currentUserEmail);
 $stmt->execute();
 $result = $stmt->get_result();
 
+
+
+// Grab user connections 
 $connections = [];
 while ($row = $result->fetch_assoc()) {
     $connections[$row['id']] = $row['user_1'] == $currentUserEmail ? $row['user_2'] : $row['user_1'];
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['connectionId'], $_POST['message'])) {
-    $connectionId = $_POST['connectionId'];
-    $message = $_POST['message'];
 
-    $sql = "INSERT INTO messages (id, message_text) VALUES (?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("is", $connectionId, $message);
-    $stmt->execute();
+// Grab message history please work 
+$messageHistory = [];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['connectionId'], $_POST['message'])) {
+        $connectionId = $_POST['connectionId'];
+        $message = $_POST['message'];
 
-    if ($stmt->error) {
-        echo "Error sending message: " . $stmt->error;
-    } else {
-        echo "Message sent successfully!";
+        $sql = "INSERT INTO messages (id, message_text) VALUES (?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("is", $connectionId, $message);
+        $stmt->execute();
+
+        if ($stmt->error) {
+            echo "Error sending message: " . $stmt->error;
+        } else {
+            echo "Message sent successfully!";
+        }
     }
 }
+
+// Fetching message history for the selected connection
+    if (isset($_POST['connectionId'])) {
+        $connectionId = $_POST['connectionId'];
+        $sql = "SELECT message_text FROM messages WHERE id = ? ORDER BY message_text"; // Assuming the `message_text` column should be used for ordering
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $connectionId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while ($row = $result->fetch_assoc()) {
+            $messageHistory[] = $row['message_text'];
+        }
+    }
+
+
+
+
+
+
 
 $stmt->close();
 $conn->close();
 ?>
 
+
+// Include AJAX (WHY!!??!?) 
 <h2>Captain's Dock - Messages Tab</h2>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div style="display: flex;">
     <div id="firstContactForm" style="width: 60%; margin-right: 20px;">
         <h3>Send a Message:</h3>
@@ -63,17 +93,52 @@ $conn->close();
         </form>
     </div>
 
-    <div style="width: 30%; display: flex; flex-direction: column; align-items: flex-end;">
-        <button onclick="document.getElementById('connectionsContainer').style.display = 'block';">Show Connections</button>
-        <div id="connectionsContainer" style="display:none;">
-            <h3>Your Connections:</h3>
-            <ul>
-                <?php foreach ($connections as $email): ?>
-                    <li><?= htmlspecialchars($email); ?></li>
-                <?php endforeach; ?>
-            </ul>
+
+<!-- Dropdown for selecting connection to view message history -->
+    <div style="width: 30%; padding-left: 20px;">
+        <h3>View Message History:</h3>
+        <select id="historyConnectionId" required>
+            <option value="">Select a Connection...</option>
+            <?php foreach ($connections as $id => $email): ?>
+                <option value="<?= $id; ?>"><?= htmlspecialchars($email); ?></option>
+            <?php endforeach; ?>
+        </select><br>
+        <button onclick="fetchHistory()">Fetch History</button>
+        <div id="historyContent" style="display: none;">
+            <h4>History:</h4>
+            <ul id="messageList"></ul>
         </div>
     </div>
+</div>
+
+
+<script>
+function fetchHistory() {
+    var connectionId = $('#historyConnectionId').val();
+    if (connectionId) {
+        $.ajax({
+            url: 'fetch_history.php', // This will be your PHP file that processes the request
+            type: 'POST',
+            data: {connectionId: connectionId},
+            success: function(data) {
+                $('#messageList').html(data);
+                $('#historyContent').show();
+            },
+            error: function() {
+                $('#messageList').html('<li>Error loading messages.</li>');
+                $('#historyContent').show();
+            }
+        });
+    }
+}
+
+function toggleConnections() {
+    var container = document.getElementById('connectionsContainer');
+    container.style.display = container.style.display === 'none' ? 'block' : 'none';
+}
+</script>
+
+
 
 
  <!-- Toggle connections and display them -->
