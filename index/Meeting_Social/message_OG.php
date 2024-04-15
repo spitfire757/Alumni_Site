@@ -10,69 +10,54 @@ $username = "mysql_user";
 $password = "r00tpassw0rd/";
 $dbname = "DB";
 
+// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
 $currentUserEmail = $_SESSION['username'];
 
-$sql = "SELECT id, user_1, user_2 FROM load_contacts WHERE user_1 = ? OR user_2 = ?";
+// Fetch connections from the database
+$sql = "SELECT * FROM load_contacts WHERE user_1 = ? OR user_2 = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $currentUserEmail, $currentUserEmail);
 $stmt->execute();
 $result = $stmt->get_result();
 
-$connections = [];
-while ($row = $result->fetch_assoc()) {
-    $connections[$row['id']] = $row['user_1'] == $currentUserEmail ? $row['user_2'] : $row['user_1'];
-}
+$connections = array();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['connectionId'], $_POST['message'])) {
-    $connectionId = $_POST['connectionId'];
-    $message = $_POST['message'];
-
-    $sql = "INSERT INTO messages (id, message_text) VALUES (?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("is", $connectionId, $message);
-    $stmt->execute();
-
-    if ($stmt->error) {
-        echo "Error sending message: " . $stmt->error;
-    } else {
-        echo "Message sent successfully!";
+// Check if there are rows returned
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        if ($row['user_1'] == $currentUserEmail) {
+            $connections[] = $row['user_2'];
+        } else {
+            $connections[] = $row['user_1'];
+        }
     }
+} else {
+    echo "No connections found.";
 }
-
 $stmt->close();
 $conn->close();
 ?>
 
 <h2>Captain's Dock - Messages Tab</h2>
+<p>This is the content for the Messages Tab.</p>
 <div style="display: flex;">
-    <div id="firstContactForm" style="width: 60%; margin-right: 20px;">
-        <h3>Send a Message:</h3>
-        <form method="post">
-            <select name="connectionId" required>
-                <?php foreach ($connections as $id => $email): ?>
-                    <option value="<?= $id; ?>"><?= htmlspecialchars($email); ?></option>
-                <?php endforeach; ?>
-            </select><br>
-            <textarea name="message" rows="4" required></textarea><br>
-            <button type="submit">Send</button>
+    <!-- Message box area (left side) -->
+	<div id="firstContactForm" style="width: 60%; margin-right: 20px;">
+        <h3>Who are you trying to reach?</h3>
+        <form>
+            <label for="firstName">Email (Username):</label><br>
+            <input type="text" id="username" name="Email (Username)" required><br>
+            <label for="message">Enter Message:</label><br>
+            <textarea id="message" name="message" rows="4" required></textarea><br><br>
+            <button class="button" type="submit">Send</button>
         </form>
-    </div>
-
-    <div style="width: 30%; display: flex; flex-direction: column; align-items: flex-end;">
-        <button onclick="document.getElementById('connectionsContainer').style.display = 'block';">Show Connections</button>
-        <div id="connectionsContainer" style="display:none;">
-            <h3>Your Connections:</h3>
-            <ul>
-                <?php foreach ($connections as $email): ?>
-                    <li><?= htmlspecialchars($email); ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
     </div>
 
 
