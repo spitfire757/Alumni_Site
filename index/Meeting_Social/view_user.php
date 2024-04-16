@@ -74,10 +74,7 @@ while ($row = $result->fetch_assoc()) {
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
-        .profile-pic {
-            max-width: 100px;
-            max-height: 100px;
-        }
+        
         .info-section {
             display: flex;
             align-items: center;
@@ -123,8 +120,6 @@ while ($row = $result->fetch_assoc()) {
                             ?>
                         </div>
                         <br>
-                        <img src="<?php echo $pic; ?>" alt="Profile Picture" class="profile-pic">
-
                     </td>
                 </tr>
                 <tr>
@@ -132,9 +127,6 @@ while ($row = $result->fetch_assoc()) {
                 </tr>
                 <tr>
                     <td>Experience: <?php echo "<br><br>".$exp; ?></td>
-                </tr>
-                <tr>
-                    <td>Resume: <?php echo $res; ?></td>
                 </tr>
             </tbody>
         </table>
