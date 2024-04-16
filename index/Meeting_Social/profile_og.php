@@ -84,11 +84,7 @@ $conn->close();
         }
     </style>
 </head>
-    <h3>User Profile for: </h3>
-    <?php
-echo $currentUserEmail;
-echo '<br> </br>';
-    ?>
+    <h3>User Profile</h3>
 <body>
 <div class='container'>
     <form method='post'>

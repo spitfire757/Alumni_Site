@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
 <head>
     <title>Register</title>
@@ -26,10 +26,10 @@
             font-size: 18px;
             display: block;
         }
-        input[type="text"], input[type="password"], select, input[type="submit"], select {
+        input[type="text"], input[type="password"], select, input[type="submit"] {
             padding: 10px;
             margin-bottom: 20px;
-            width: 250px; /* Ensures all inputs and selects are the same width */
+            width: 250px;
             border-radius: 5px;
             border: 1px solid #61dafb; /* Robotic blue */
             background-color: #282c34; /* Dark background */
@@ -46,11 +46,15 @@
             background-color: #1e90ff; /* Darker blue on hover */
         }
         select {
-            appearance: none; /* Removes default system dropdown arrow */
-            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2212%22%20height%3D%2210%22%20viewBox%3D%220%200%2012%2010%22%20xmlns%3D%22http://www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M6.6%2C10%20L12%2C0.75%20L1.2%2C0.75%20L6.6%2C10%20Z%22%20fill%3D%22%23c0c0c0%22%3E%3C/path%3E%3C/svg%3E'); /* Custom arrow */
-            background-repeat: no-repeat;
-            background-position: right 10px center; /* Arrow position */
-            background-size: 12px; /* Size of the custom arrow */
+            display: inline-block;
+            width: 100%;
+            height: 35px;
+            padding: 4px 10px;
+            line-height: 25px;
+            background: #282c34;
+            color: #c0c0c0;
+            border-radius: 5px;
+            border: 1px solid #61dafb;
         }
     </style>
 </head>

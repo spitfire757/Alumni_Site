@@ -21,7 +21,6 @@ if (isset($_SESSION['username'])) {
     
     $receiverUsername = $_SESSION['username'];
     echo "<h1>Captains Dock</h1>";
-    echo "<p style='text-align: center; font-family: Trajan Pro, sans-serif;'>$receiverUsername</p>";
 
 
     // Retrieve user ID from the current user's username
@@ -325,11 +324,12 @@ if (isset($_SESSION['username'])) {
     </div>
 
 
-    <div id="profile" class="content" style="display: none;">
-        <h2>Captain's Dock - Profile Tab</h2>
-        <p>This is the content for the Profile Tab.</p>
+
+ <div id="profile" class="content" style="display: none;">
 	<?php include 'profile_content.php'; ?>
     </div>
+
+
 
     <div id="connect" class="content" style="display: none;">
         <h2>Captain's Dock - Connect Tab</h2>

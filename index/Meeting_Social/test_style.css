@@ -1,0 +1,56 @@
+/* Overall layout settings */
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* Styling for the message sending section */
+.message-send {
+    flex: 1;
+    margin-right: 20px; /* Adjusts spacing between the columns */
+}
+
+/* Styling for the message history section */
+.message-history {
+    flex: 1;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Styling for the friend request section */
+.friend-requests {
+    flex: 1;
+    padding-left: 20px; /* Additional padding for spacing */
+}
+
+/* Utility classes for UI elements */
+ul, form {
+    width: 100%;
+}
+
+select, textarea, input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px; /* Spacing between form elements */
+}
+
+button {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Specific styles for visibility toggles */
+#historyContent, #connectionsContainer, #friendRequestsContainer {
+    display: none;
+}
+
