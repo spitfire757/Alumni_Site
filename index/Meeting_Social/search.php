@@ -107,7 +107,7 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
     $search_query = $_GET['search_query'];
     $search_criteria = $_GET['search_criteria'];
 
-    $sql = "SELECT * FROM User WHERE $search_criteria LIKE '%$search_query%'";
+    $sql = "SELECT * FROM User WHERE $search_criteria LIKE '%$search_query%' AND security = BINARY '0'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -140,7 +140,7 @@ if (isset($_GET['search_query']) && !empty($_GET['search_query'])) {
     header("Location: search.php");
     exit();
 } else {
-    $sql = "SELECT * FROM User";
+    $sql = "SELECT * FROM User WHERE security = BINARY '0';";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {

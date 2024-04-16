@@ -42,7 +42,6 @@ while ($row = $result->fetch_assoc()) {
     $exp = $row['experience'];
     $res = $row['resume'];
 }
-echo $pic;
 ?>
 <!DOCTYPE html>
 <html lang="en">
