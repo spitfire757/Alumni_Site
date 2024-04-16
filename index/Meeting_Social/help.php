@@ -1,48 +1,3 @@
-<!--
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="../style/global_style.css">
-    </head>
-    <body>
-        <?php
-
-        ?>
-        <div>
-            <h2>Tools to Lead a Life of Significance</h2>
-        </div>
-        <div>
-        <table>
-            <tr>
-                <td>
-                    Having issues with your laptop or need to contact the help desk?<br>
-                    <a href="https://cnu.edu/its/" target="_blank">CNU IT Services</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <br>My CNU has many student resources such as access to CNU live and the housing portal<br>
-                    <a href="https://my.cnu.edu" target="_blank">My CNU</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-               <br>The CNU help page has places for you to submit housing/facilites maintenance requests, change your CNU password, and much more <br>
-                <a href="https://cnu.edu/help/" target="_blank">CNU Help Page</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-               <br>Confluence has step by step guides for several tech issues students may have like installing PrintAnywhere or Microsoft Office <br>
-                <a href="https://confluence.cnu.edu" target="_blank">Confluence</a>
-            </td>
-            </tr>
-        </table>
-        </div>
-    </body>
-</html>
--->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,29 +40,32 @@
         <h2>Tools to Lead a Life of Significance</h2>
     </div>
     <div>
-        <table>
-            <tr>
-                <td>
-                    <img src="../images/department-stacked.jpg" height="200px" style="margin-bottom: 20px;">
-                    <a href="https://cnu.edu/its/" target="_blank" class="btn">CNU IT Services</a>
-                </td>
-                <td>
-                    <img src="../images/download.jpeg" height="200px" style="margin-bottom: 20px;">
-                    <a href="https://my.cnu.edu" target="_blank" class="btn">My CNU</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="../images/maxresdefault (1).jpg" height="200px" style="margin-bottom: 20px;">
-                    <a href="https://cnu.edu/help/" target="_blank" class="btn">CNU Help Page</a>
-                </td>
-                <td>
-                    <img src="../images/inset-landscape.jpg" height="200px" style="margin-bottom: 20px;">
-
-                    <a href="https://confluence.cnu.edu" target="_blank" class="btn">Confluence</a>
-                </td>
-            </tr>
-        </table>
+    <table style="margin: auto;">
+        <tr>
+            <td style="text-align: center;">
+                <img src="../images/department-stacked.jpg" height="200px" style="margin-bottom: 20px;">
+                <br>
+                <a href="https://cnu.edu/its/" target="_blank" class="btn">CNU IT Services</a>
+            </td>
+            <td style="text-align: center;">
+                <img src="../images/download.jpeg" height="200px" style="margin-bottom: 20px;">
+                <br>
+                <a href="https://my.cnu.edu" target="_blank" class="btn">My CNU</a>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                <img src="../images/maxresdefault (1).jpg" height="200px" style="margin-bottom: 20px;">
+                <br>
+                <a href="https://cnu.edu/help/" target="_blank" class="btn">CNU Help Page</a>
+            </td>
+            <td style="text-align: center;">
+                <img src="../images/inset-landscape.jpg" height="200px" style="margin-bottom: 20px;">
+                <br>
+                <a href="https://confluence.cnu.edu" target="_blank" class="btn">Confluence</a>
+            </td>
+        </tr>
+    </table>
     </div>
 </body>
 </html>
