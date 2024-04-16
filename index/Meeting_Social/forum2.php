@@ -62,6 +62,7 @@ $result = mysqli_query($conn, $query);
     });
 </script>
 
+
 <style>
         /* Button styles */
         .btn {
