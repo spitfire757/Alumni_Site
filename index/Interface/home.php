@@ -19,6 +19,7 @@
             background-color: #0A2240; /* Dark background */
             color: #c0c0c0; /* Light grey text */
             text-align: center;
+            align-content: center;
             padding: 50px;
             margin: 0;
         }
