@@ -84,7 +84,9 @@
 
         // Insert the response into Forum table
         $sql = "INSERT INTO Forum VALUES ('$forumID', '$userID', '$description', '$title', NOW());";
-        $result = $conn->query($sql); 
+        $result = $conn->query($sql);
+
+        echo $sql;
 
         // Check if the insert was successful
         if($result) {
