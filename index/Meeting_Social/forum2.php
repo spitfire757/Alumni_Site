@@ -90,12 +90,12 @@ $result = mysqli_query($conn, $query);
     <a href="create_forum.php" class="btn">Create a Forum</a>
 <hr class="separator">
 <form action="forum2.php" method="get" class="search-form">
-    <input type="text" name="search_query" placeholder="Search..." class="search-input">
+    <input type="text" name="search_query" placeholder="Search..." class="search-input"><br>
     <select name="search_criteria" class="search-select">
         <option value="title">Title</option>
         <option value="Description">Description</option>
         <option value="userID">Author</option>
-    </select>
+    </select><br>
     <button type="submit" class="btn">Search</button>
     <button type="submit" name="clear_search" class="btn">Clear Search</button>
 </form>
