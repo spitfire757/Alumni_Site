@@ -15,67 +15,67 @@
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #0A2240; /* Dark background */
-            color: #c0c0c0; /* Light grey text */
-            text-align: center;
-            align-content: center;
-            padding: 50px;
-            margin: 0;
-        }
+    font-family: 'Roboto', sans-serif;
+    background-color: #0A2240; /* Dark background */
+    color: #c0c0c0; /* Light grey text */
+    text-align: center;
+    padding: 50px;
+    margin: 0;
+}
 
-        h1 {
-            color: #E97451; /* Robotic blue */
-        }
+h1 {
+    color: #E97451; /* Robotic blue */
+}
 
-        p {
-            margin-bottom: 20px;
-            font-size: 18px;
-            line-height: 1.6;
-            font-family: 'Press Start 2P', sans-serif; /* Applying the Press Start 2P font */
-        }
+p {
+    margin-bottom: 20px;
+    font-size: 18px;
+    line-height: 1.6;
+    font-family: 'Press Start 2P', sans-serif; /* Applying the Press Start 2P font */
+}
 
-        .register-tab, .login-tab {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+.register-login-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
 
-        .register-tab a, .login-tab a {
-            color: #4CBB17; /* Robotic orange */
-            text-decoration: none;
-            padding: 10px;
-            margin: 0 10px;
-            border: 1px solid #4CBB17; /* Robotic orange */
-            border-radius: 3px;
-            transition: background-color 0.3s;
-            font-weight: bold;
-        }
+.register-tab a, .login-tab a {
+    color: #4CBB17; /* Robotic orange */
+    text-decoration: none;
+    padding: 10px 20px; /* Adjusted padding for better spacing */
+    margin: 0 10px;
+    border: 1px solid #4CBB17; /* Robotic orange */
+    border-radius: 3px;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
 
-        .register-tab a:hover, .login-tab a:hover {
-            background-color: #a0522d; /* Darker brown on hover */
-        }
+.register-tab a:hover, .login-tab a:hover {
+    background-color: #a0522d; /* Darker brown on hover */
+}
+
     </style>
 </head>
 <body>
-    <h1> Welcome o the CNU alumni system! </h1> 
+    <h1>Welcome to the CNU alumni system!</h1> 
     <p>
         Can you conquer Technopoliz? Technopoliz is an empire with flags that need to be captured!!
         Can you solve the challenges to conquer the empire of Technopoliz, where you shall be the ruler?
         We dare you to try!
     </p>
 
-    <div class="register-tab">
-        <p>Don't have an account?</p>
-        <a href="register.php">Register</a>
-    </div>
+    <div class="register-login-container">
+        <div class="register-tab">
+            <p>Don't have an account?</p>
+            <a href="register.php">Register</a>
+        </div>
 
-    <div class="login-tab">
-        <p>Already have an account?</p>
-	<a href="login.php" >Log In</a>
+        <div class="login-tab">
+            <p>Already have an account?</p>
+            <a href="login.php">Log In</a>
+        </div>
     </div>
-    
-
 </body>
+
 </html>
