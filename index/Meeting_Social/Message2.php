@@ -262,9 +262,9 @@ else {
     </div>
 
     <div id="messages" class="content" style="display: none;">
+	<h2>PCSE Messaging System</h2>
         <div style="display: flex;">
-            <!-- Message box area (left side) -->
-            <div id="firstContactForm" style="width: 60%; margin-right: 20px;">
+            <!--<div id="firstContactForm" style="width: 60%; margin-right: 20px;">-->
 		<?php include 'message_app.php'; ?>
                 </div>
 <?php
