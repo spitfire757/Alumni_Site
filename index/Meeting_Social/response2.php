@@ -1,194 +1,96 @@
 <?php
+session_start();
 
-    session_start();
+$servername = "localhost";
+$username = "mysql_user";
+$password = "r00tpassw0rd/";
+$dbname = "DB";
 
-    $servername = "localhost";
-    $username = "mysql_user";
-    $password = "r00tpassw0rd/";
-    $dbname = "DB";
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
+$username = $_SESSION['username'];
 
-    $username = $_SESSION['username'];
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+if(isset($_GET['forumID']) && isset($_GET['forumTitle']) && isset($_GET['forumDescription'])) {
+    $_SESSION["forumID"] = $_GET['forumID'];
+    $_SESSION["forumTitle"] = $_GET['forumTitle'];
+    $_SESSION["forumDescription"] = $_GET['forumDescription'];
+}
+
+$forum_ID = $_SESSION["forumID"];
+$forum_Title = $_SESSION["forumTitle"];
+$forum_Description = $_SESSION["forumDescription"];
+
+$sort_by = "Datetime DESC";
+
+if (isset($_GET['sort_by'])) {
+    switch ($_GET['sort_by']) {
+        case 'datetime_desc':
+            $sort_by = "Datetime DESC";
+            break;
+        case 'datetime_asc':
+            $sort_by = "Datetime ASC";
+            break;
+        case 'popularity_desc':
+            $sort_by = "votes DESC";
+            break;
+        case 'popularity_asc':
+            $sort_by = "votes ASC";
+            break;
+        default:
+            $sort_by = "Datetime DESC";
+            break;
     }
+}
 
-    // Get forumID from session
-    if(isset($_GET['forumID']) && isset($_GET['forumTitle']) && isset($_GET['forumDescription'])) {
-        $_SESSION["forumID"] = $_GET['forumID'];
-        $_SESSION["forumTitle"] = $_GET['forumTitle'];
-        $_SESSION["forumDescription"] = $_GET['forumDescription'];
-    }
+$query = "SELECT * FROM Forum_Response WHERE ForumID = '$forum_ID' ORDER BY $sort_by;";
+$result = $conn->query($query);
 
-    $forum_ID = $_SESSION["forumID"];
-    $forum_Title = $_SESSION["forumTitle"];
-    $forum_Description = $_SESSION["forumDescription"];
+if (!$result) {
+    echo "Error: " . $conn->error;
+}
 
-    // Default sorting
-    $sort_by = "Datetime DESC";
+echo "<h2>".$forum_Title."</h2>";
+echo "<p>".$forum_Description."</p>";
+echo "<br><a href='forum2.php'>Back to Forum</a>";
+echo "<hr>";
 
-    // Check if sorting option is selected
-    if (isset($_GET['sort_by'])) {
-        switch ($_GET['sort_by']) {
-            case 'datetime_desc':
-                $sort_by = "Datetime DESC";
-                break;
-            case 'datetime_asc':
-                $sort_by = "Datetime ASC";
-                break;
-            case 'popularity_desc':
-                $sort_by = "votes DESC";
-                break;
-            case 'popularity_asc':
-                $sort_by = "votes ASC";
-                break;
-            default:
-                // Default sorting if invalid option is selected
-                $sort_by = "Datetime DESC";
-                break;
-        }
-    }
-
-    // Fetch data from Response Table for the selected forum
-    $query = "SELECT * FROM Forum_Response WHERE ForumID = '$forum_ID' ORDER BY $sort_by;";
-    $result = $conn->query($query);
-
-    if (!$result) {
-        echo "Error: " . $conn->error;
-    }
-
-    // Display forum title and description
-    echo "<h2>".$forum_Title."</h2>";
-    echo "<p>".$forum_Description."</p>";
-    echo "<br><a href='forum2.php'>Back to Forum</a>";
-    echo "<hr>";
-    ?>
-    <!DOCTYPE html>
-    <html>
-    <head>
+?>
+<!DOCTYPE html>
+<html>
+<head>
     <style>
-    /* Your PHP-generated CSS here */
-    /* Add your custom styles below */
+        /* Your PHP-generated CSS here */
+    </style>
+</head>
+<body>
+    <div id="responseContent"></div>
+    <script>
+        $(document).ready(function() {
+            function fetchResponseData() {
+                $.ajax({
+                    url: 'fetch_response.php',
+                    type: 'GET',
+                    success: function(data) {
+                        $('#responseContent').html(data);
+                    },
+                    error: function() {
+                        $('#responseContent').html('<p>Error loading responses.</p>');
+                    }
+                });
+            }
+            fetchResponseData();
+        });
+    </script>
 
-    /* Forum Title */
-    h2 {
-        font-size: 1.5rem;
-        font-weight: bold;
-        margin-top: 20px;
-    }
-
-    /* Forum Description */
-    p {
-        font-size: 1rem;
-        margin-bottom: 20px;
-    }
-
-    /* Back to Forum Link */
-    a {
-        color: #007bff;
-        text-decoration: none;
-        font-size: 1rem;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-
-    /* Horizontal Rule */
-    hr {
-        border-top: 1px solid #ccc;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-
-    /* Response Form */
-    form {
-        margin-bottom: 20px;
-    }
-
-    textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        margin-bottom: 10px;
-    }
-
-    button[type="submit"] {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    button[type="submit"]:hover {
-        background-color: #0056b3;
-    }
-
-    /* Response Item */
-    .forum-response {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .forum-response-content {
-        flex-grow: 1;
-    }
-
-    /* Vote Button */
-    .vote-button {
-        margin-right: 10px;
-        padding: 5px;
-        border: none;
-        border-radius: 4px;
-        background-color: #007bff;
-        color: #fff;
-        cursor: pointer;
-    }
-
-    .vote-button:hover {
-        background-color: #0056b3;
-    }
-</style>
-<div id="responseContent"></div>
-
-<script>
-    $(document).ready(function() {
-        // Function to fetch response data using AJAX
-        function fetchResponseData() {
-            $.ajax({
-                url: 'fetch_response.php', // PHP file to fetch response data
-                type: 'GET',
-                success: function(data) {
-                    $('#responseContent').html(data); // Update response content
-                },
-                error: function() {
-                    $('#responseContent').html('<p>Error loading responses.</p>'); // Display error message
-                }
-            });
-        }
-
-        // Call fetchResponseData function on page load
-        fetchResponseData();
-    });
-</script>
-
-    </head>
-    <body>
-        
     <form action='response2.php' method='post'>
         <textarea id='response' name='response' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
         <button type='submit' name='reply'>Reply</button>
     </form>
 
-    <!-- Sorting Methods-->
     <form action="response2.php" method="get">
         <select name="sort_by">
             <option value="datetime_desc">Datetime Added (Newest to Oldest)</option>
@@ -220,7 +122,6 @@
 
     echo "<hr>";
 
-   // If the form is submitted, add the content to the Forum_Response table
     if(isset($_POST['reply'])) {
         $responseID = substr(hash('sha256', $_POST['response']), 0, 16);
         $userID = $username;
@@ -228,16 +129,13 @@
         $dateTime = date("Y-m-d H:i:s");
         $vtes = 0;
 
-        // Insert the response into Forum_Response table
         $sql = "INSERT INTO Forum_Response VALUES ('$responseID', '$forum_ID', '$userID', '$response', NOW(), $vtes);";
         $result = $conn->query($sql); 
 
         header("Location: response2.php?forumID=$forum_ID&forumTitle=$forum_Title&forumDescription=$forum_Description");
         exit();
 
-        // Check if the insert was successful [this section was generated by ChatGPT to help with functionality]
         if($result) {
-            // Redirect to refresh the page
             header("Location: response2.php?forumID=$forum_ID&forumTitle=$forum_Title&forumDescription=$forum_Description");
             exit();
         } else {
@@ -245,22 +143,15 @@
         }
     }
 
-    // Handle up vote increment
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['vote'])) {
         foreach ($_POST['vote'] as $response_vote => $vote_direction) {
-            // Extract the response ID from the name attribute
             $responseID = substr($response_vote, 0, -3);
-            // Extract the vote direction (up or down)
             $vote_type = substr($response_vote, -3);
 
-            // Check if it's an up vote
             if ($vote_direction == 'up') {
-                echo "up";
-                // Update the votes in the database
                 $sql = "UPDATE Forum_Response SET votes = votes + 1 WHERE ResponseID = '$responseID'";
                 $result = $conn->query($sql);
 
-                // Check if the update was successful
                 if (!$result) {
                     echo "Error: " . $conn->error;
                 }
@@ -268,22 +159,17 @@
         }
     }
 
-    // Redirect after processing votes
     header("Location: response2.php?forumID=$forum_ID&sort_by=$sort_by");
     exit();
-
 
     if (!$result) {
         echo "Error: " . $conn->error;
     }
-
-    // Display forum responses
-    while ($row = $result->fetch_assoc()) {
-        // Display each response
-    }
-?>
+    ?>
+</body>
 <link rel='stylesheet' type='text/css' href='Alumni_Site/index/style/global_style.css'>
 <form action='response2.php' method='post'>
     <textarea id='response' name='response' placeholder='Insert Your Response Here' rows='4' cols='50' maxlength='255'></textarea><br>    
     <button type='submit' name='submit'>Reply</button>
 </form>
+</html>
