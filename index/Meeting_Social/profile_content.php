@@ -1,3 +1,4 @@
+User
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['username'])) {
@@ -29,11 +30,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_SESSION['username'])) {
     if ($stmt === false) {
         die("Error in preparing the statement: " . $conn->error);
     }
-   
+
     $stmt->bind_param("sssis", $major, $minor, $experience, $security, $currentUser);
     $stmt->execute();
-    
-    
+
+
     // Upload and process image file
     $targetDir = "uploads/"; // Directory where images will be stored
     $targetFile = $targetDir . basename($_FILES["image"]["name"]); // Path to the uploaded file
@@ -261,4 +262,3 @@ if (isset($_SESSION['username'])) {
 </script>
 </body>
 </html>
-

@@ -212,7 +212,7 @@ else {
 
 
     <div id="messages" class="content" style="display: none;">
-    <?php include 'message_app.php'; ?>
+    <?php include 'new_message_app.php'; ?>
 <?php
 
 
@@ -267,7 +267,7 @@ if (isset($_SESSION['username'])) {
   <div id="search" class="content" style="display: none;">
         <h2>Welcome to the Captain's Dock - Connect Page</h2>
         <p>This is the content for the connect  Page tab.</p>
-	<?php include 'search.php'; ?> 
+	<iframe src="search.php" width="100%" height="800px" frameborder="0"></iframe><br>
     </div>
 
 

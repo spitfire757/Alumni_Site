@@ -75,10 +75,7 @@ $stmt->close();
 $conn->close();
 ?>
 
-
-// Include AJAX (WHY!!??!?) 
 <h2>Captain's Dock - Messages Tab</h2>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <div style="display: flex;">
     <div id="firstContactForm" style="width: 60%; margin-right: 20px;">
         <h3>Send a Message:</h3>
@@ -92,52 +89,6 @@ $conn->close();
             <button type="submit">Send</button>
         </form>
     </div>
-
-
-<!-- Dropdown for selecting connection to view message history -->
-    <div style="width: 30%; padding-left: 20px;">
-        <h3>View Message History:</h3>
-        <select id="historyConnectionId" required>
-            <option value="">Select a Connection...</option>
-            <?php foreach ($connections as $id => $email): ?>
-                <option value="<?= $id; ?>"><?= htmlspecialchars($email); ?></option>
-            <?php endforeach; ?>
-        </select><br>
-        <button onclick="fetchHistory()">Fetch History</button>
-        <div id="historyContent" style="display: none;">
-            <h4>History:</h4>
-            <ul id="messageList"></ul>
-        </div>
-    </div>
-</div>
-
-
-<script>
-function fetchHistory() {
-    var connectionId = $('#historyConnectionId').val();
-    if (connectionId) {
-        $.ajax({
-            url: 'fetch_history.php', // This will be your PHP file that processes the request
-            type: 'POST',
-            data: {connectionId: connectionId},
-            success: function(data) {
-                $('#messageList').html(data);
-                $('#historyContent').show();
-            },
-            error: function() {
-                $('#messageList').html('<li>Error loading messages.</li>');
-                $('#historyContent').show();
-            }
-        });
-    }
-}
-
-function toggleConnections() {
-    var container = document.getElementById('connectionsContainer');
-    container.style.display = container.style.display === 'none' ? 'block' : 'none';
-}
-</script>
-
 
 
 

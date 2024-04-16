@@ -262,51 +262,11 @@ else {
     </div>
 
     <div id="messages" class="content" style="display: none;">
-        <h2>Captain's Dock - Messages Tab</h2>
-        <p>This is the content for the Messages Tab.</p>
         <div style="display: flex;">
             <!-- Message box area (left side) -->
             <div id="firstContactForm" style="width: 60%; margin-right: 20px;">
-                <h3>Who are you trying to reach?</h3>
-                <form>
-                    <label for="firstName">Email (Username):</label><br>
-                    <input type="text" id="username" name="Email (Username)" required><br>
-                    <label for="message">Enter Message:</label><br>
-                    <textarea id="message" name="message" rows="4" required></textarea><br><br>
-                    <button class="button" type="submit">Send</button>
-		</form>
 		<?php include 'message_app.php'; ?>
                 </div>
-    <!-- </div> !>
-
-
-
-
-            <!-- Content from first_contact.php (right side) -->
-            <div style="width: 30%; display: flex; flex-direction: column; align-items: flex-end;">
-<h3> Enter the account email </h3>
-<form action="contact.php" method="post">
-    <table>
-        <tr>
-            <td><label for="accountName">Account Email:</label></td>
-            <td><input type="text" id="accountName" name="accountName" required></td>
-        </tr>
-    </table>
-    <button type="submit">Submit</button>
-</form>
-<!-- Inside message.php -->
-<button id="toggleFriendRequestsBtn" onclick="toggleFriendRequests()">Toggle Friend Requests</button>
-<div id="friendRequestsContainer" style="display:none;">
-    <iframe id="friendRequestsFrame" src="view_requests.php"></iframe>
-</div>
-
-<script>
-    function toggleFriendRequests() {
-        var container = document.getElementById('friendRequestsContainer');
-        container.style.display = container.style.display === 'none' ? 'block' : 'none';
-    }
-</script>
-
 <?php
 
 
@@ -324,7 +284,7 @@ if (isset($_SESSION['username'])) {
 
     // Get the sender's username and user ID from sessio
     $senderUsername = $_SESSION['username'];
-    echo "Current User : ", $senderUsername;
+     // echo "Current User : ", $senderUsername;
     // <-- WORKING 4/1/2024 --> 
     //Working on message, checking for current accepted requests first, will check both the reciever and sender username(email) 
     //So that we can pull any conversation from request_id 
@@ -371,17 +331,15 @@ if (isset($_SESSION['username'])) {
 	<?php include 'profile_content.php'; ?>
     </div>
 
-<<<<<<< HEAD
     <div id="connect" class="content" style="display: none;">
         <h2>Captain's Dock - Connect Tab</h2>
         <p>This is the content for the Connect Tab.</p>
         <?php include 'profile_content.php'; ?>
     </div>
-=======
 
 
 
->>>>>>> f485150ebb05964eca08dff6b3a38ac9d5b4d81d
+
 
     <script>
         function showTab(tabId) {
