@@ -157,6 +157,28 @@
         background-color: #0056b3;
     }
 </style>
+<div id="responseContent"></div>
+
+<script>
+    $(document).ready(function() {
+        // Function to fetch response data using AJAX
+        function fetchResponseData() {
+            $.ajax({
+                url: 'fetch_response.php', // PHP file to fetch response data
+                type: 'GET',
+                success: function(data) {
+                    $('#responseContent').html(data); // Update response content
+                },
+                error: function() {
+                    $('#responseContent').html('<p>Error loading responses.</p>'); // Display error message
+                }
+            });
+        }
+
+        // Call fetchResponseData function on page load
+        fetchResponseData();
+    });
+</script>
 
     </head>
     <body>
