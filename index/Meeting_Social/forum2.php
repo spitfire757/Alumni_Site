@@ -14,6 +14,53 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 $query = "SELECT * FROM Forum";
 $result = mysqli_query($conn, $query);
 ?>
+<!-- Include jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- HTML structure for forum content -->
+<div id="forumContent"></div>
+
+<script>
+    $(document).ready(function() {
+        // Function to fetch forum data using AJAX
+        function fetchForumData() {
+            $.ajax({
+                url: 'fetch_forum.php', // PHP file to fetch forum data
+                type: 'GET',
+                success: function(data) {
+                    $('#forumContent').html(data); // Update forum content
+                },
+                error: function() {
+                    $('#forumContent').html('<p>Error loading forums.</p>'); // Display error message
+                }
+            });
+        }
+
+        // Call fetchForumData function on page load
+        fetchForumData();
+
+        // Handle form submission to avoid page reload
+        $('form.search-form').submit(function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get form data
+            var formData = $(this).serialize();
+
+            // AJAX request to fetch filtered forum data
+            $.ajax({
+                url: 'fetch_forum.php', // PHP file to fetch forum data
+                type: 'GET',
+                data: formData,
+                success: function(data) {
+                    $('#forumContent').html(data); // Update forum content
+                },
+                error: function() {
+                    $('#forumContent').html('<p>Error loading forums.</p>'); // Display error message
+                }
+            });
+        });
+    });
+</script>
 
 <style>
         /* Button styles */
