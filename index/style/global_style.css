@@ -421,6 +421,187 @@ body {
             background-color: #0056b3;
         }
 
+    /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Forum Title */
+.forum-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Forum Description */
+.forum-description {
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+/* Back to Forum Link */
+.back-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Horizontal Rule */
+.hr {
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+/* Response Form */
+.response-form {
+    margin-bottom: 20px;
+}
+
+.response-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.response-form button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.response-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Response Item */
+.response-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.response-item-content {
+    flex-grow: 1;
+}
+
+/* Vote Button */
+.vote-button {
+    margin-right: 10px;
+    padding: 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.vote-button:hover {
+    background-color: #0056b3;
+}
+
+
+    /* Forum Title */
+    h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    /* Forum Description */
+    p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+
+    /* Back to Forum Link */
+    a {
+        color: #007bff;
+        text-decoration: none;
+        font-size: 1rem;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /* Horizontal Rule */
+    hr {
+        border-top: 1px solid #ccc;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    /* Response Form */
+    form {
+        margin-bottom: 20px;
+    }
+
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    /* Response Item */
+    .forum-response {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .forum-response-content {
+        flex-grow: 1;
+    }
+
+    /* Vote Button */
+    .vote-button {
+        margin-right: 10px;
+        padding: 5px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .vote-button:hover {
+        background-color: #0056b3;
+    }
 
     
 
